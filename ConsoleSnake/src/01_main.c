@@ -88,8 +88,6 @@ int main() {
 
         georginasCookies(&segmentPtr, &x_food, &y_food, &points,&snakeSize, x_buffer, y_buffer);
 
-        pointsDisplay(points, 110, 8, numbers);
-
         updateSnake(segmentPtr);
   
         drawSnake(segmentPtr);

@@ -28,8 +28,7 @@ void georginasCookies(snake** segmentPtr, int* x_food, int* y_food, int* points,
 void controls(snake* segment, int* direction,bool* pause)
 {
     //Arrow keys are observed and whenever one is pressed it changes x and y coordinates of the snakes head accordingly
-    if ((GetAsyncKeyState(VK_LEFT) & 0x8000))
-    {
+    if ((GetAsyncKeyState(VK_LEFT) & 0x8000))   {
         *direction = 1;
     }
     if ((GetAsyncKeyState(VK_RIGHT) & 0x8000))

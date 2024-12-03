@@ -15,30 +15,30 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="01_main.c">
+    <ClCompile Include="src\01_main.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="03_snake.c">
+    <ClCompile Include="src\02_game.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="snake.h">
-      <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="game.h">
-      <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="02_game.c">
+    <ClCompile Include="src\03_snake.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="04_utils.c">
+    <ClCompile Include="src\04_utils.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="utils.h">
+    <ClInclude Include="include\utils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="art.h">
+    <ClInclude Include="include\art.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\game.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\snake.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

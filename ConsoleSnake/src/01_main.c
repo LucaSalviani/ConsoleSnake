@@ -216,6 +216,7 @@ NULL
 
     }
 
+    //Need to change this
     printf("You loose!");
     freeSnakesMemory(segmentPtr);
     while (1)

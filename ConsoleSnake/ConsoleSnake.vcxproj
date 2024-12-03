@@ -70,6 +70,10 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <SourcePath>$(VC_SourcePath);</SourcePath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -104,6 +108,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>D:\Users\Luca\Desktop\Archivos\Proyectos\ConsoleSnake_1.0\ConsoleSnake_1.0\ConsoleSnake\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -118,6 +123,9 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>D:\Users\Luca\Desktop\Archivos\Proyectos\ConsoleSnake_1.0\ConsoleSnake_1.0\ConsoleSnake\include</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -125,18 +133,21 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PostBuildEvent>
+      <Command>echo $(ProjectDir)</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="02_game.c" />
-    <ClCompile Include="game.h" />
-    <ClCompile Include="01_main.c" />
-    <ClCompile Include="03_snake.c" />
-    <ClCompile Include="snake.h" />
-    <ClCompile Include="04_utils.c" />
+    <ClCompile Include="src\01_main.c" />
+    <ClCompile Include="src\02_game.c" />
+    <ClCompile Include="src\03_snake.c" />
+    <ClCompile Include="src\04_utils.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="art.h" />
-    <ClInclude Include="utils.h" />
+    <ClInclude Include="include\art.h" />
+    <ClInclude Include="include\game.h" />
+    <ClInclude Include="include\snake.h" />
+    <ClInclude Include="include\utils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

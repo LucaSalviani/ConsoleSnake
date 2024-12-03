@@ -56,7 +56,7 @@ int main() {
     while (gameStart())
     {
         printf("\x1b[10;0H \x1b[22m %s  %s", ANSI_COLOR_DARK_ORANGE, SNAKE_LOGO);
-        printf("\x1b[20;50H Hold the arrows to play %s", ANSI_RESET_STYLE);
+        printf("\x1b[20;55H Hold the arrows to play %s", ANSI_RESET_STYLE);
         Sleep(300);
         printf("\x1b[1G \x1b[0K");
         Sleep(300);
@@ -82,18 +82,18 @@ int main() {
         }
 
         //Clears snake trail
-        printf("\x1b[%d;%dH ", y_buffer, x_buffer);
+        printf("\x1b[%d;%dH  ", y_buffer, x_buffer);
 
         controls(segment, &snakeDirection,&pause);
 
-        georginasCookies(&segmentPtr, &x_food, &y_food, &points,&snakeSize, x_buffer, y_buffer);
+        georginasCookies(&segment,&segmentPtr, &x_food, &y_food, &points,&snakeSize, x_buffer, y_buffer,snakeDirection);
 
         updateSnake(segmentPtr);
   
         drawSnake(segmentPtr);
 
         // Controls how often game ticks happen
-        Sleep(34);
+        Sleep(35);
 
         //Gives 5 ticks head start before activating collision so that the snake can unroll itself
         if (ticks > 6)
@@ -108,7 +108,7 @@ int main() {
         ticks++;
 
         //Prints food
-        printf("\x1b[%d;%dHX", y_food, x_food);
+        printf("\x1b[%d;%dHG", y_food, x_food);
 
     }
 

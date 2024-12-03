@@ -80,8 +80,5 @@ void get_console_font_size(int *FontSizeY, int* FontSizeX)
         printf("\x1b[HError al obtener la fuente de la consola.\n");
         Sleep(1000);
         printf("\033[J\033[H");
-        
     }
-
-  
 }

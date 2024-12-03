@@ -8,12 +8,13 @@
 #include <math.h>
 
 //Food function (The snake eats my gf cookies ;])
-void georginasCookies(snake** segmentPtr, int* x_food, int* y_food, int* points,int* snakeSize, int x_buffer, int y_buffer)
+void georginasCookies(snake** segment,snake** segmentPtr, int* x_food, int* y_food, int* points,int* snakeSize, int x_buffer, int y_buffer, int snakesDirection)
 {
-    if ((*segmentPtr)->x_pos == *x_food && (*segmentPtr)->y_pos == *y_food)
+    //IMPORTANT this if statemnt has 2 parts the second part of the OR || is because i made my snake aeshtetically not common, it has 2 pieces to itself
+    if (((*segment)->x_pos == *x_food && (*segment)->y_pos == *y_food) || ((snakesDirection == 3 || snakesDirection == 4) && (((*segment)->x_pos+1) == *x_food && (*segment)->y_pos == *y_food)))
     {
         (*points)++;
-        pointsDisplay(*points, 110, 8, numbers);
+        pointsDisplay(*points, 130, 6, numbers);
         (*snakeSize)++;
         ////Adds a snake segment
 
@@ -143,7 +144,6 @@ void pointsDisplay(int points,int xPos,int yPos,const char ** text[])
         placeValue = points / divisor;
        
         currentValue = round((points % divisor) / (divisor/10));
-        printf("\033[HPoints: %i, PlaceValue: %i, Divider: %i, Cycles: %i, CurrentValue: %i", points, placeValue, divisor, cycles,currentValue);
         textPositioning(text[currentValue], xPos-(7*cycles), yPos);
          divisor *= 10;
     } while (placeValue > 0);

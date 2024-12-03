@@ -1,6 +1,7 @@
 #ifndef ART_H
 #define ART_H
 
+//First art style, simpler to write MUCH more difficult if you want to move the art in the X axis, good for big static images like titles, or that are already right aligned
 #define SNAKE_LOGO "\n\
   _______________________________________________________________________________________________________________________\n\
  /                                                                                                                       \\\n\
@@ -79,6 +80,7 @@
 |\\------------------------------------------------------------------------------------------\\--------------------------------------/|\n\
 +---------------------------------------------------------------------------------------------------------------------------------- - +\n"
 
+//Trying different ascii art formats. This one is a little bit more difficult to define the art in itself, you have to also make another .c file with the art definitions, but way easier to move in X axis and also easier to make dynamic (provided you have a function that does that for you as i have). I think the easiest format might be to use a text file read from that and apply the changes to the text to move it on its axis on the go, only problem is you wont have a nice executable and it wont all be contained on your code, and youd need external resources so not one file executable.
 
 extern const char* points_art[];
 extern const char* number_0[];

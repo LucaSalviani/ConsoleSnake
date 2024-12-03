@@ -70,7 +70,7 @@ void drawSnake(snake* segmentPtr)
     }
 
     // Draws this segment
-    printf("\x1b[%d;%dHO", segmentPtr->y_pos, segmentPtr->x_pos);
+    printf("\x1b[%d;%dH[]", segmentPtr->y_pos, segmentPtr->x_pos);
 
     // Calls the function recursively on itself to draw the snake
     drawSnake(segmentPtr->next);

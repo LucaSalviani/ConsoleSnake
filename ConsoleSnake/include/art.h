@@ -79,6 +79,21 @@
 |\\------------------------------------------------------------------------------------------\\--------------------------------------/|\n\
 +---------------------------------------------------------------------------------------------------------------------------------- - +\n"
 
+
+extern const char* points_art[];
+extern const char* number_0[];
+extern const char* number_1[];
+extern const char* number_2[];
+extern const char* number_3[];
+extern const char* number_4[];
+extern const char* number_5[];
+extern const char* number_6[];
+extern const char* number_7[];
+extern const char* number_8[];
+extern const char* number_9[];
+extern const char** numbers[];
+
+
 #define RIGHT_ALIGN "\x1b[98G"
 
 

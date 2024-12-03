@@ -1,6 +1,7 @@
 #include "game.h"
 #include "utils.h"
 #include "snake.h"
+#include "art.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <windows.h>
@@ -12,6 +13,7 @@ void georginasCookies(snake** segmentPtr, int* x_food, int* y_food, int* points,
     if ((*segmentPtr)->x_pos == *x_food && (*segmentPtr)->y_pos == *y_food)
     {
         (*points)++;
+        //pointsDisplay(points, 110, 8, numbers);
         (*snakeSize)++;
         ////Adds a snake segment
 

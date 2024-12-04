@@ -2,6 +2,7 @@
 #include "art.h"
 #include <windows.h>
 #include <stdlib.h>
+#include <math.h>
 
 int randomBetween(int min, int max)
 {
@@ -81,4 +82,26 @@ void get_console_font_size(int *FontSizeY, int* FontSizeX)
         Sleep(1000);
         printf("\033[J\033[H");
     }
+}
+
+void textColorRandomizer(int ticks)
+{
+    if ((int)(ticks%2) == 0)
+  {
+       int randomColorR = (int)(rand() % (255 + 1));
+       int randomColorG = (int)(rand() % (255 + 1));
+       int randomColorB = (int)(rand() % (255 + 1));
+
+       printf("\033[38;2;%i;%i;%im", randomColorR,randomColorG,randomColorB);
+  }
+}
+
+void textBreathEfect(int ticks)
+{
+    int R = (128 + 127 * sin(ticks * 0.1));
+    int G = (128 + 127 * sin(ticks * 0.1 + 2));
+    int B = (128 + 127 * sin(ticks * 0.1 + 4));
+
+
+    printf("\033[38;2;%d;%d;%dm", R, G, B);
 }

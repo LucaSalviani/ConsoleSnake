@@ -10,11 +10,11 @@
 //Food function (The snake eats my gf cookies ;])
 void georginasCookies(snake** segment,snake** segmentPtr, int* x_food, int* y_food, int* points,int* snakeSize, int x_buffer, int y_buffer, int snakesDirection)
 {
-    //IMPORTANT this if statemnt has 2 parts the second part of the OR || is because i made my snake aeshtetically not common, it has 2 pieces to itself
+    //IMPORTANT this if statemnt has 2 parts the second part of the OR || is because i made my snake aeshtetically not common, it has 2 pieces to itself so when vertical needs to compare two spaces
     if (((*segment)->x_pos == *x_food && (*segment)->y_pos == *y_food) || ((snakesDirection == 3 || snakesDirection == 4) && (((*segment)->x_pos+1) == *x_food && (*segment)->y_pos == *y_food)))
     {
         (*points)++;
-        pointsDisplay(*points, 130, 6, numbers);
+        pointsDisplay(*points, 130, 7, numbers);
         (*snakeSize)++;
         ////Adds a snake segment
 
@@ -27,11 +27,58 @@ void georginasCookies(snake** segment,snake** segmentPtr, int* x_food, int* y_fo
 }
 
 
+
+//Waits for the first key to be pressed
+bool gameStart()
+{
+    if (!((GetAsyncKeyState(VK_LEFT) & 0x8000 ||
+        GetAsyncKeyState(VK_RIGHT) & 0x8000 ||
+        GetAsyncKeyState(VK_DOWN) & 0x8000 ||
+        GetAsyncKeyState(VK_UP) & 0x8000)))
+    {
+        return true;
+    }
+    return false;
+}
+   
+//Forced pause, its useful if you want to check for memory leaks
+void forcedPause(bool* pause)
+{
+    *pause = true;
+    while (*pause == true)
+    {
+
+        if (GetAsyncKeyState(VK_SPACE) & 0x8000)
+        {
+            *pause = false;
+            Sleep(100);
+        }
+    }
+}
+
+void pointsDisplay(int points,int xPos,int yPos,const char ** text[])
+{
+    int placeValue;
+    int currentValue;
+    int cycles = 0;
+    int divisor = 10;
+    do 
+    {
+        cycles++;
+        placeValue = points / divisor;
+        printf("%s",ANSI_COLOR_DARK_ORANGE);
+        currentValue = round((points % divisor) / (divisor/10));
+        textPositioning(text[currentValue], xPos-(7*cycles), yPos);
+         divisor *= 10;
+    } while (placeValue > 0);
+}
+
+
 // Controls, this includes : Arrow keys movement, game closing via Esc, and game pause via Spacebar.
-void controls(snake* segment, int* direction,bool* pause)
+void controls(snake* segment, int* direction, bool* pause)
 {
     //Arrow keys are observed and whenever one is pressed it changes x and y coordinates of the snakes head accordingly
-    if ((GetAsyncKeyState(VK_LEFT) & 0x8000))   {
+    if ((GetAsyncKeyState(VK_LEFT) & 0x8000)) {
         *direction = 1;
     }
     if ((GetAsyncKeyState(VK_RIGHT) & 0x8000))
@@ -101,50 +148,4 @@ void controls(snake* segment, int* direction,bool* pause)
             Sleep(100);
         }
     }
-}
-
-//Waits for the first key to be pressed
-bool gameStart()
-{
-    if (!((GetAsyncKeyState(VK_LEFT) & 0x8000 ||
-        GetAsyncKeyState(VK_RIGHT) & 0x8000 ||
-        GetAsyncKeyState(VK_DOWN) & 0x8000 ||
-        GetAsyncKeyState(VK_UP) & 0x8000)))
-    {
-        return true;
-    }
-    return false;
-}
-   
-//Forced pause, its useful if you want to check for memory leaks
-void forcedPause(bool* pause)
-{
-    *pause = true;
-    while (*pause == true)
-    {
-
-        if (GetAsyncKeyState(VK_SPACE) & 0x8000)
-        {
-            *pause = false;
-            Sleep(100);
-        }
-    }
-}
-
-void pointsDisplay(int points,int xPos,int yPos,const char ** text[])
-{
-
-    int placeValue;
-    int currentValue;
-    int cycles = 0;
-    int divisor = 10;
-    do 
-    {
-        cycles++;
-        placeValue = points / divisor;
-       
-        currentValue = round((points % divisor) / (divisor/10));
-        textPositioning(text[currentValue], xPos-(7*cycles), yPos);
-         divisor *= 10;
-    } while (placeValue > 0);
 }

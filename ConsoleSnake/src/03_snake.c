@@ -1,5 +1,6 @@
 #include "snake.h"
 #include "game.h"
+#include "art.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -70,6 +71,7 @@ void drawSnake(snake* segmentPtr)
     }
 
     // Draws this segment
+    printf("%s", ANSI_COLOR_BRIGHT_PINK);
     printf("\x1b[%d;%dH[]", segmentPtr->y_pos, segmentPtr->x_pos);
 
     // Calls the function recursively on itself to draw the snake

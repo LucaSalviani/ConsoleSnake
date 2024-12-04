@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <windows.h>
+#include <math.h>
 
 
 int main() {
@@ -64,9 +65,9 @@ int main() {
     }
 
 
-    printf("\x1b[H %s %s", ANSI_COLOR_DARK_BLUE, ARENA2);
+    printf("\x1b[H %s %s", ANSI_COLOR_DARK_ORANGE, ARENA2);
 
-    textPositioning(points_art, 97, 1);
+    textPositioning(points_art, 97, 2);
 
     while (1)
     {
@@ -106,7 +107,8 @@ int main() {
 
         //Counts game ticks
         ticks++;
-
+        textBreathEfect(ticks);
+    
         //Prints food
         printf("\x1b[%d;%dHG", y_food, x_food);
 

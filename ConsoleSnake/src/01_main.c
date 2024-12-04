@@ -14,30 +14,30 @@ int main() {
     int snakeSize = 0;
     int snakeDirection = 0;
     int ticks = 0;
+
     //Windows size, everything will be based on it
     const int consoleWidth = 1100;
     const int consoleHeight = 600;
+
     //Font size, set them up at the standard but will later be checked by a handle
     int FontSizeX = 8;
     int FontSizeY = 16;
+
     //A position buffer that will go behind the snakes head
     int x_buffer = 0;
     int y_buffer = 0;
+
     // Random food position
     int x_food = randomBetween(3, 47);
     int y_food = randomBetween(3, 27);
     bool pause = false;
 
     //Starts random seed
-    //srand(time(NULL));
     initializeRandomSeed();
+    
+    windowManagement(710, 290, consoleWidth, consoleHeight);//Manages console position and size
 
-    //Manages console position and size
-    windowManagement(710, 290, consoleWidth, consoleHeight);
-
-    //Hides cursor
-    printf("\033[?25l");
-    //forcedPause(&pause);
+    printf("\033[?25l");//Hides cursor
 
     //CREATES SNAKES HEAD SEGMENT AND A POINTER TO IT:
     snake* segmentPtr = NULL;
@@ -47,25 +47,35 @@ int main() {
         printf("Theres no space in memory to run the game");
         return 1;
     }
-    //Declares the position of the head of the snake 
+      //Declares the position of the head of the snake 
     segment->x_pos = 20;
     segment->y_pos = 20;
     segment->next = NULL;
-    //We get a head pointer
+      //We get a head pointer
     segmentPtr = segment;
     snakeSize++;
     
     while (gameStart(&snakeDirection))
     {
-        printf("\x1b[13;0H \x1b[22m  %s %s", ANSI_COLOR_DARK_ORANGE,SNAKE_LOGO);
-        printf("\033[0;109H\033[38;2;105;105;105m |_ Luca Salviani _|");
-        printf("\x1b[23;55H%s Hold the arrows to play %s",ANSI_COLOR_DARK_ORANGE,ANSI_RESET_STYLE);
+        
+        printf("\x1b[13;0H \x1b[22m  %s %s", ANSI_COLOR_DARK_ORANGE,SNAKE_LOGO);//Title
+        printf("\033[0;109H\033[38;2;105;105;105m |_ Luca Salviani _|");//Signature
+
+        //Controls
+        textPositioning(controls_text,7, 3);
+        textPositioning(game_keys, 50, 0);
+        printf("\033[11;56H MOVEMENT     PAUSE GAME");
+        
+        printf("\x1b[23;55H%s Hold the arrows to play %s",ANSI_COLOR_DARK_ORANGE,ANSI_RESET_STYLE);//Start buttons
         Sleep(300);
-        printf("\x1b[1G \x1b[0K");
+        printf("\x1b[1G \x1b[0K");//Restarts cursor position
         Sleep(300);
+
+        //This gives us the font size of the console, good for debugging it actives by pressing F.
         get_console_font_size(&FontSizeY,&FontSizeX);
         ticks++;
     }
+    //TITLE ERRASER EFFECT
     for (int i = 0; i < 126; i++)
     {
         for (int j = 0; j < 10; j++)
@@ -73,13 +83,14 @@ int main() {
             printf("\x1b[%d;%dH%s // ", 14 + j, i, ANSI_COLOR_DARK_ORANGE);
 
         }
-        Sleep(20);
+        Sleep(17);
     }
-
-    ticks = 0;
-    printf("\x1b[H %s %s", ANSI_COLOR_DARK_ORANGE, ARENA2);
-
-    textPositioning(points_art, 97, 2);
+   
+    ticks = 0; //Resets game ticks.
+    
+    printf("\x1b[H %s %s", ANSI_COLOR_DARK_ORANGE, ARENA2);//Prints the arena.
+    
+    textPositioning(points_art, 97, 2);//Prints the points text.
 
     while (1)
     {
@@ -94,8 +105,7 @@ int main() {
             snakeSize++;
         }
 
-        //Clears snake trail
-        printf("\x1b[%d;%dH  ", y_buffer, x_buffer);
+        printf("\x1b[%d;%dH  ", y_buffer, x_buffer);        //Clears snake trail
 
         controls(segment, &snakeDirection,&pause,0,91,0,34);
 
@@ -105,8 +115,7 @@ int main() {
   
         drawSnake(segmentPtr,false);
 
-        // Controls how often game ticks happen
-        Sleep(35);
+        Sleep(35);  // Controls how often game ticks happen
 
         //Gives 5 ticks head start before activating collision so that the snake can unroll itself
         if (ticks > 6)
@@ -117,21 +126,21 @@ int main() {
             }
         }
 
-        //Counts game ticks
-        ticks++;
 
-        textBreathEfect(ticks);
-        //Prints food
-        printf("\x1b[%d;%dHG", y_food, x_food);
+        ticks++;    //Counts game ticks
+
+        textBreathEfect(ticks);// Gives the food the Breathe colors effect
+        
+        printf("\x1b[%d;%dHG", y_food, x_food); //Prints food
 
     }
-    //Deletes the food
-    printf("\x1b[%d;%dH ", y_food, x_food);
-    //Deletes the snake
-    drawSnake(segmentPtr, true);
+   
+    printf("\x1b[%d;%dH ", y_food, x_food);     //Deletes the food
+   
+    drawSnake(segmentPtr, true);    //Deletes the snake by giving it a true value
     freeSnakesMemory(segmentPtr);
     float factor = 0;
-    int gameOverEffect = rand()%2;
+    int gameOverEffect = rand()%2;  //Randomizes which game over effect will be used
     while (1)
     {
         factor = (sin(ticks * 0.03) + 1) / 1.5;

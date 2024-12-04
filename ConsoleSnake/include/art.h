@@ -78,6 +78,10 @@ extern const char** numbers[];
 
 extern const char* game_over[];
 
+extern const char* game_keys[];
+
+extern const char* controls_text[];
+
 #define RIGHT_ALIGN "\x1b[98G"
 
 

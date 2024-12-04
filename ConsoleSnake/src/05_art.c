@@ -141,3 +141,16 @@ const char* controls_text[] = {
 "                                                ",
 NULL
 };
+
+void titleErasser()
+{
+    for (int i = 0; i < 126; i++)
+    {
+        for (int j = 0; j < 10; j++)
+        {
+            printf("\x1b[%d;%dH%s // ", 14 + j, i, ANSI_COLOR_DARK_ORANGE);
+
+        }
+        Sleep(17);
+    }
+}

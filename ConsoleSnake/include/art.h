@@ -1,6 +1,8 @@
 #ifndef ART_H
 #define ART_H
 
+void titleEraser();
+
 struct RGB
 {
 	int R;

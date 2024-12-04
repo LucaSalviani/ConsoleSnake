@@ -9,7 +9,7 @@
 
 
 int main() {
-    // VARIABLES INITILAZATION
+    ///////////// VARIABLES INITILAZATION
     int points = 0;
     int snakeSize = 0;
     int snakeDirection = 0;
@@ -38,7 +38,9 @@ int main() {
     printf("\033[?25l");//Hides cursor
     windowManagement(710, 290, consoleWidth, consoleHeight);//Manages console position and size
 
-    //CREATES SNAKES HEAD SEGMENT AND A POINTER TO IT:
+
+
+    ////////////CREATES SNAKES HEAD SEGMENT AND A POINTER TO IT:
     snake* segmentPtr = NULL;
     snake* segment = malloc(sizeof(snake));
     if (segment == NULL)
@@ -54,7 +56,9 @@ int main() {
     segmentPtr = segment;
     snakeSize++;
     
-    //GAME FRONT PAGE
+
+
+    /////////////GAME FRONT PAGE
     while (gameStart(&snakeDirection))
     {
         printf("\x1b[13;0H \x1b[22m  %s %s", ANSI_COLOR_DARK_ORANGE,SNAKE_LOGO);//Title
@@ -76,13 +80,14 @@ int main() {
     }
 
 
-    //GAME SETUP
+
+   ///////////////GAME SETUP
     titleErasser();
     printf("\x1b[H %s %s", ANSI_COLOR_DARK_ORANGE, ARENA2);//Prints the arena.
     textPositioning(points_art, 97, 2);//Prints the points text.
     ticks = 0; //Resets game ticks.
 
-    //GAME
+    ////////////////GAME
     while (1)
     {
         //The buffer follows the snakes head
@@ -126,14 +131,18 @@ int main() {
 
     }
    
-    //GAME OVER SETUP
+
+
+    ///////////////GAME OVER SETUP
     printf("\x1b[%d;%dH ", y_food, x_food);     //Deletes the food
     drawSnake(segmentPtr, true);    //Deletes the snake by giving it a true value
     freeSnakesMemory(segmentPtr);
     float factor = 0;
     int gameOverEffect = rand()%2;  //Randomizes which game over effect will be used
 
-    //GAME OVER
+
+
+    /////////////////GAME OVER
     while (1)
     {
         factor = (sin(ticks * 0.03) + 1) / 1.5;

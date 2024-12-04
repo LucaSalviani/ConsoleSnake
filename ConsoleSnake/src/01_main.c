@@ -14,6 +14,8 @@ int main() {
     int snakeSize = 0;
     int snakeDirection = 0;
     int ticks = 0;
+    int gameTalkerFase = 0;
+    int gameTalkerMap = 0;
 
     //Windows size, everything will be based on it
     const int consoleWidth = 1100;
@@ -106,6 +108,13 @@ int main() {
         controls(segment, &snakeDirection,&pause,0,91,0,34);
 
         georginasCookies(&segment,&segmentPtr, &x_food, &y_food, &points,&snakeSize, x_buffer, y_buffer,snakeDirection);
+
+        if (ticks% 100 == 0)
+        {
+            gameTalkerMap = 0;
+        }
+
+        gameTalker(segment, points, ticks, &gameTalkerFase, &gameTalkerMap);
 
         updateSnake(segmentPtr);
   

@@ -1,7 +1,7 @@
 #ifndef ART_H
 #define ART_H
 
-void titleEraser();
+void titleErasser();
 
 struct RGB
 {
@@ -83,6 +83,22 @@ extern const char* game_over[];
 extern const char* game_keys[];
 
 extern const char* controls_text[];
+
+extern const char* ouch[];
+
+extern const char* ouch_variant1[];
+
+extern const char* ouch_variant2[];
+
+extern const char* huh[];
+
+extern const char* huh_variant1[];
+
+extern const char* huh_variant2[];
+
+
+
+extern const char* blank[];
 
 #define RIGHT_ALIGN "\x1b[98G"
 

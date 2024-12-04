@@ -142,6 +142,101 @@ const char* controls_text[] = {
 NULL
 };
 
+const char* ouch[] = {
+"Ouch! Dont bite me you barbarian  ",
+"                                  ",
+"                                  ",
+"                                  ",
+"                                  ",
+"                                  ",
+"                                  ",
+"                                  ",
+"                                  ",
+NULL
+};
+
+const char* ouch_variant1[] = {
+"Hey! I'm fragile, not a chew toy!",
+"                                 ",
+"                                 ",
+"                                 ",
+"                                 ",
+"                                 ",
+"                                 ",
+"                                 ",
+"                                 ",
+NULL
+};
+
+const char* ouch_variant2[] = {
+"Yikes! That's no way to say hello!  ",
+"                                    ",
+"                                    ",
+"                                    ",
+"                                    ",
+"                                    ",
+"                                    ",
+"                                    ",
+"                                    ",
+NULL
+};
+
+const char* huh[] = {
+"Huh, at least you figured out   ",
+"how to move the snake.          ",
+"                                ",
+"                                ",
+"                                ",
+"                                ",
+"                                ",
+"                                ",
+"                                ",
+NULL
+};
+
+const char* huh_variant1[] = {
+"Wow, you managed to move it.    ",
+"A true snake whisperer.         ",
+"                                ",
+"                                ",
+"                                ",
+"                                ",
+"                                ",
+"                                ",
+"                                ",
+NULL
+};
+
+const char* huh_variant2[] = {
+"Not bad! The snake approves...  ",
+"for now.                        ",
+"                                ",
+"                                ",
+"                                ",
+"                                ",
+"                                ",
+"                                ",
+"                                ",
+NULL
+};
+
+
+const char* blank[] = {
+"                                  ",
+"                                  ",
+"                                  ",
+"                                  ",
+"                                  ",
+"                                  ",
+"                                  ",
+"                                  ",
+"                                  ",
+NULL
+};
+
+
+
+
 void titleErasser()
 {
     for (int i = 0; i < 126; i++)

@@ -164,3 +164,74 @@ void controls(snake* segment, int* direction, bool* pause,int xLeftBoundary,int 
         }
     }
 }
+
+void gameTalker(snake* segment,int points,int ticks,int* gameTalkerFase,int* gameTalkerMap) 
+{
+    int randText = rand() % 3;;
+    if ((segment->x_pos < 2 || segment->y_pos > 32 || segment->y_pos < 3) && *gameTalkerMap == 0)
+    {
+
+        if (randText == 0)
+        {
+            printf("%s", ANSI_COLOR_DARK_ORANGE);
+            textPositioning(ouch, 95, 16);
+            *gameTalkerMap = 1;
+        }
+        else if (randText == 1)
+        {
+            printf("%s", ANSI_COLOR_DARK_ORANGE);
+            textPositioning(ouch_variant1, 95, 16);
+            *gameTalkerMap = 1;
+        }
+        else if (randText == 2)
+        {
+            printf("%s", ANSI_COLOR_DARK_ORANGE);
+            textPositioning(ouch_variant2, 95, 16);
+            *gameTalkerMap = 1;
+        }
+    }
+    if (points >= 10 && *gameTalkerFase == 0 )
+    {
+        if (randText == 0)
+        {
+            printf("%s", ANSI_COLOR_DARK_ORANGE);
+            textPositioning(huh, 95, 16);
+            *gameTalkerFase = 1;
+        }
+        else if (randText == 1)
+        {
+            printf("%s", ANSI_COLOR_DARK_ORANGE);
+            textPositioning(huh_variant1, 95, 16);
+            *gameTalkerFase = 1;
+        }
+        else if (randText == 2)
+        {
+            printf("%s", ANSI_COLOR_DARK_ORANGE);
+            textPositioning(huh_variant2, 95, 16);
+            *gameTalkerFase = 1;
+        }
+    }
+    else if (points == 30)
+    {
+
+    }
+    else if (points == 50)
+    {
+
+    }
+    else if (points == 95)
+    {
+
+    }
+    else if (points == 100)
+    {
+
+    }
+    else if (points > 100 && (ticks % 2000))
+    {
+
+    }else if ((ticks % 120) == 0)
+    {
+        textPositioning(blank, 95, 16);
+    }
+}

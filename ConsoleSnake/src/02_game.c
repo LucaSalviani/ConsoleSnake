@@ -14,31 +14,46 @@ void georginasCookies(snake** segment,snake** segmentPtr, int* x_food, int* y_fo
     if (((*segment)->x_pos == *x_food && (*segment)->y_pos == *y_food) || ((snakesDirection == 3 || snakesDirection == 4) && (((*segment)->x_pos+1) == *x_food && (*segment)->y_pos == *y_food)))
     {
         (*points)++;
-        pointsDisplay(*points, 130, 7, numbers);
+        pointsDisplay(*points, 130, 10, numbers);
         (*snakeSize)++;
         ////Adds a snake segment
 
         addSegment(segmentPtr, x_buffer, y_buffer);
 
         //Randomizes foods location on screen
-        *x_food = randomBetween(3, 47);
-        *y_food = randomBetween(3, 27);
+        *x_food = randomBetween(3, 90);
+        *y_food = randomBetween(3, 30);
     }
 }
 
 
 
 //Waits for the first key to be pressed
-bool gameStart()
+bool gameStart(int* snakeDirection)
 {
-    if (!((GetAsyncKeyState(VK_LEFT) & 0x8000 ||
-        GetAsyncKeyState(VK_RIGHT) & 0x8000 ||
-        GetAsyncKeyState(VK_DOWN) & 0x8000 ||
-        GetAsyncKeyState(VK_UP) & 0x8000)))
+    if ((GetAsyncKeyState(VK_LEFT) & 0x8000))
     {
-        return true;
+        return false;
+        *snakeDirection = 1;
     }
-    return false;
+    else if ((GetAsyncKeyState(VK_RIGHT) & 0x8000)) 
+    {
+        *snakeDirection = 2;
+        return false;
+    }
+    else if ((GetAsyncKeyState(VK_UP) & 0x8000))
+    {
+        *snakeDirection = 3;
+        return false;
+    }
+    else if ((GetAsyncKeyState(VK_DOWN) & 0x8000)) 
+    {
+        *snakeDirection = 4;
+        return false;
+    }
+   
+
+    return true;
 }
    
 //Forced pause, its useful if you want to check for memory leaks
@@ -75,7 +90,7 @@ void pointsDisplay(int points,int xPos,int yPos,const char ** text[])
 
 
 // Controls, this includes : Arrow keys movement, game closing via Esc, and game pause via Spacebar.
-void controls(snake* segment, int* direction, bool* pause)
+void controls(snake* segment, int* direction, bool* pause,int xLeftBoundary,int xRightBoundary,int yUpBoundary,int yDownBoundary)
 {
     //Arrow keys are observed and whenever one is pressed it changes x and y coordinates of the snakes head accordingly
     if ((GetAsyncKeyState(VK_LEFT) & 0x8000)) {
@@ -98,33 +113,33 @@ void controls(snake* segment, int* direction, bool* pause)
     if (*direction == 1)
     {
         segment->x_pos--;
-        if (segment->x_pos < 0)
+        if (segment->x_pos < xLeftBoundary)
         {
-            segment->x_pos = 0;
+            segment->x_pos = xLeftBoundary;
         }
     }
     else if (*direction == 2)
     {
         segment->x_pos++;
-        if (segment->x_pos > 70)
+        if (segment->x_pos > xRightBoundary)
         {
-            segment->x_pos = 70;
+            segment->x_pos = xRightBoundary;
         }
     }
     else if (*direction == 3)
     {
         segment->y_pos--;
-        if (segment->y_pos < 0)
+        if (segment->y_pos < yUpBoundary)
         {
-            segment->y_pos = 0;
+            segment->y_pos = yUpBoundary;
         }
     }
     else if (*direction == 4)
     {
         segment->y_pos++;
-        if (segment->y_pos > 34)
+        if (segment->y_pos > yDownBoundary)
         {
-            segment->y_pos = 34;
+            segment->y_pos = yDownBoundary;
         }
     }
 

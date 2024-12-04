@@ -62,7 +62,7 @@ void addSegment(snake** segmentPtr, int x_buffer, int y_buffer)
 }
 
 //Draws the snake recursively 
-void drawSnake(snake* segmentPtr)
+void drawSnake(snake* segmentPtr,bool delete)
 {
     if (segmentPtr == NULL)
     {
@@ -72,10 +72,17 @@ void drawSnake(snake* segmentPtr)
 
     // Draws this segment
     printf("%s", ANSI_COLOR_BRIGHT_PINK);
-    printf("\x1b[%d;%dH[]", segmentPtr->y_pos, segmentPtr->x_pos);
+    if (delete != true)
+    {
+        printf("\x1b[%d;%dH[]", segmentPtr->y_pos, segmentPtr->x_pos);
+    }
+    else//deletes the snake
+    {
+        printf("\x1b[%d;%dH  ", segmentPtr->y_pos, segmentPtr->x_pos);
+    }
 
     // Calls the function recursively on itself to draw the snake
-    drawSnake(segmentPtr->next);
+    drawSnake(segmentPtr->next,delete);
 }
 
 //Frees snake's memory so that there are no memory leaks

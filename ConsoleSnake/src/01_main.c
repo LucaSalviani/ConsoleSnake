@@ -29,7 +29,8 @@ int main() {
     bool pause = false;
 
     //Starts random seed
-    srand(time(NULL));
+    //srand(time(NULL));
+    initializeRandomSeed();
 
     //Manages console position and size
     windowManagement(710, 290, consoleWidth, consoleHeight);
@@ -54,17 +55,28 @@ int main() {
     segmentPtr = segment;
     snakeSize++;
     
-    while (gameStart())
+    while (gameStart(&snakeDirection))
     {
-        printf("\x1b[10;0H \x1b[22m %s  %s", ANSI_COLOR_DARK_ORANGE, SNAKE_LOGO);
-        printf("\x1b[20;55H Hold the arrows to play %s", ANSI_RESET_STYLE);
+        printf("\x1b[13;0H \x1b[22m  %s %s", ANSI_COLOR_DARK_ORANGE,SNAKE_LOGO);
+        printf("\033[0;109H\033[38;2;105;105;105m |_ Luca Salviani _|");
+        printf("\x1b[23;55H%s Hold the arrows to play %s",ANSI_COLOR_DARK_ORANGE,ANSI_RESET_STYLE);
         Sleep(300);
         printf("\x1b[1G \x1b[0K");
         Sleep(300);
         get_console_font_size(&FontSizeY,&FontSizeX);
+        ticks++;
+    }
+    for (int i = 0; i < 126; i++)
+    {
+        for (int j = 0; j < 10; j++)
+        {
+            printf("\x1b[%d;%dH%s // ", 14 + j, i, ANSI_COLOR_DARK_ORANGE);
+
+        }
+        Sleep(20);
     }
 
-
+    ticks = 0;
     printf("\x1b[H %s %s", ANSI_COLOR_DARK_ORANGE, ARENA2);
 
     textPositioning(points_art, 97, 2);
@@ -85,13 +97,13 @@ int main() {
         //Clears snake trail
         printf("\x1b[%d;%dH  ", y_buffer, x_buffer);
 
-        controls(segment, &snakeDirection,&pause);
+        controls(segment, &snakeDirection,&pause,0,91,0,34);
 
         georginasCookies(&segment,&segmentPtr, &x_food, &y_food, &points,&snakeSize, x_buffer, y_buffer,snakeDirection);
 
         updateSnake(segmentPtr);
   
-        drawSnake(segmentPtr);
+        drawSnake(segmentPtr,false);
 
         // Controls how often game ticks happen
         Sleep(35);
@@ -107,19 +119,33 @@ int main() {
 
         //Counts game ticks
         ticks++;
+
         textBreathEfect(ticks);
-    
         //Prints food
         printf("\x1b[%d;%dHG", y_food, x_food);
 
     }
-
-    //Need to change this
-    printf("You loose!");
+    //Deletes the food
+    printf("\x1b[%d;%dH ", y_food, x_food);
+    //Deletes the snake
+    drawSnake(segmentPtr, true);
     freeSnakesMemory(segmentPtr);
+    float factor = 0;
+    int gameOverEffect = rand()%2;
     while (1)
     {
-
+        factor = (sin(ticks * 0.03) + 1) / 1.5;
+        breathingEffectToColor(ticks, pink, white);
+        if (gameOverEffect == 1)
+        {
+            textPositioning(game_over, 20, (30 * factor / 2) + 3);
+        }
+        else if (gameOverEffect == 0)
+        {
+            textPositioning(game_over, (29 * factor) + 2, 10);
+        }
+        ticks++;
+        Sleep(10);
     }
     return 0;
 }

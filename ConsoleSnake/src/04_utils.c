@@ -105,3 +105,21 @@ void textBreathEfect(int ticks)
 
     printf("\033[38;2;%d;%d;%dm", R, G, B);
 }
+
+void breathingEffectToColor(int ticks,struct RGB color1,struct RGB color2) 
+{
+    // Calculate the interpolation factor using a sine wave
+    float factor = (sin(ticks * 0.05) + 1) / 2.0; // Ranges between 0 and 1
+
+    // Interpolate each channel
+    int r = (int)(color1.R + factor * (color2.R - color1.R));
+    int g = (int)(color1.G + factor * (color2.G - color1.G));
+    int b = (int)(color1.B + factor * (color2.B - color1.B));
+
+    // Print the character with the interpolated color
+    printf("\033[38;2;%d;%d;%dm", r, g, b);
+}
+
+void initializeRandomSeed() {
+    srand(time(NULL));
+}

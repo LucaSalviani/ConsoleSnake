@@ -1,7 +1,11 @@
 #include "art.h"
+#include "utils.h"
 #include <stdio.h>
 #include <stdlib.h>
 
+struct RGB pink = { 255,105,180 };
+struct RGB white = { 255,255,255 };
+struct RGB dark_orange = { 255,140,0 };
 //Ogre font
 const char* points_art[] = {
 "             _       _         ",
@@ -104,4 +108,16 @@ number_6,
 number_7,
 number_8,
 number_9
+};
+
+//Slant font
+
+const char* game_over[] = {
+"                                                    ",
+"   ______                      ____                 ",
+"  / ____/___ _____ ___  ___   / __ \\_   _____  _____",
+" / / __/ __ `/ __ `__ \\/ _ \\ / / / / | / / _ \\/ ___/",
+"/ /_/ / /_/ / / / / / / __/ / /_/ /| |/ /  __/ /    ",
+"\\____/\\__,_/_/ /_/ /_/\\___/ \\____/ |___/\\___/_/     ",
+NULL
 };

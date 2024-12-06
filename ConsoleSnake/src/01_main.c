@@ -15,7 +15,9 @@ int main() {
     int snakeDirection = 0;
     int ticks = 0;
     int gameTalkerFase = 0;
+    int talkerFaseBuffer = 0;
     int gameTalkerMap = 0;
+    int internalTimer = 0;
 
     //Windows size, everything will be based on it
     const int consoleWidth = 1100;
@@ -109,12 +111,17 @@ int main() {
 
         georginasCookies(&segment,&segmentPtr, &x_food, &y_food, &points,&snakeSize, x_buffer, y_buffer,snakeDirection);
 
-        if (ticks% 100 == 0)
+        // GAME TALKER :
+        if (gameTalkerMap == 1 || gameTalkerFase > talkerFaseBuffer)
         {
-            gameTalkerMap = 0;
+            internalTimer++;
+        }
+        if (internalTimer == 50)
+        {
+            talkerFaseBuffer = gameTalkerFase;
         }
 
-        gameTalker(segment, points, ticks, &gameTalkerFase, &gameTalkerMap);
+        gameTalker(segment, points, ticks, &gameTalkerFase, &gameTalkerMap, &internalTimer);
 
         updateSnake(segmentPtr);
   
@@ -130,13 +137,12 @@ int main() {
                 break;
             }
         }
-
-
         ticks++;    //Counts game ticks
 
         textBreathEfect(ticks);// Gives the food the Breathe colors effect
         
         printf("\x1b[%d;%dHG", y_food, x_food); //Prints food
+
 
     }
    

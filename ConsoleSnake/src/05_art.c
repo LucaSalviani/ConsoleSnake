@@ -143,7 +143,7 @@ NULL
 };
 
 const char* ouch[] = {
-"Ouch! Dont bite me you barbarian  ",
+"Ouch! Dont bite me you barbarian. ",
 "                                  ",
 "                                  ",
 "                                  ",
@@ -169,56 +169,71 @@ NULL
 };
 
 const char* ouch_variant2[] = {
-"Yikes! That's no way to say hello!  ",
-"                                    ",
-"                                    ",
-"                                    ",
-"                                    ",
-"                                    ",
-"                                    ",
-"                                    ",
-"                                    ",
+"Yikes! That's no way to say hello!",
+"                                  ",
+"                                  ",
+"                                  ",
+"                                  ",
+"                                  ",
+"                                  ",
+"                                  ",
+"                                  ",
 NULL
 };
 
 const char* huh[] = {
-"Huh, at least you figured out   ",
-"how to move the snake.          ",
-"                                ",
-"                                ",
-"                                ",
-"                                ",
-"                                ",
-"                                ",
-"                                ",
+"Huh, at least you figured out    ",
+"the controls.                    ",
+"                                 ",
+"                                 ",
+"                                 ",
+"                                 ",
+"                                 ",
+"                                 ",
+"                                 ",
 NULL
 };
 
 const char* huh_variant1[] = {
-"Wow, you managed to move it.    ",
-"A true snake whisperer.         ",
-"                                ",
-"                                ",
-"                                ",
-"                                ",
-"                                ",
-"                                ",
-"                                ",
+"Wow, you managed to move the     ",
+"damn snake.                      ",
+"A true snake whisperer...        ",
+"                                 ",
+"                                 ",
+"                                 ",
+"                                 ",
+"                                 ",
+"                                 ",
 NULL
 };
 
 const char* huh_variant2[] = {
-"Not bad! The snake approves...  ",
-"for now.                        ",
-"                                ",
-"                                ",
-"                                ",
-"                                ",
-"                                ",
-"                                ",
-"                                ",
+"Not bad! The snake approves...   ",
+"for now.                         ",
+"                                 ",
+"                                 ",
+"                                 ",
+"                                 ",
+"                                 ",
+"                                 ",
+"                                 ",
 NULL
 };
+
+const char* not_that_bad[] = {
+"Hey not bad! Thats a.. lets say  ",
+"not mediocre score?              ",
+"                                 ",
+"                                 ",
+"                                 ",
+"                                 ",
+"                                 ",
+"                                 ",
+"                                 ",
+NULL
+};
+
+
 
 
 const char* blank[] = {

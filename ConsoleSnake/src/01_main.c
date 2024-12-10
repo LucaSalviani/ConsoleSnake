@@ -18,6 +18,7 @@ int main() {
     int talkerFaseBuffer = 0;
     int gameTalkerMap = 0;
     int internalTimer = 0;
+    int randText = rand() % 3;
 
     //Windows size, everything will be based on it
     const int consoleWidth = 1100;
@@ -112,16 +113,16 @@ int main() {
         georginasCookies(&segment,&segmentPtr, &x_food, &y_food, &points,&snakeSize, x_buffer, y_buffer,snakeDirection);
 
         // GAME TALKER :
-        if (gameTalkerMap == 1 || gameTalkerFase > talkerFaseBuffer)
+        if (gameTalkerMap == 1 || gameTalkerFase > talkerFaseBuffer) // activates when map is eaten or when gameTalkerFase changes
         {
             internalTimer++;
         }
-        if (internalTimer == 50)
+        if (internalTimer == 70) 
         {
             talkerFaseBuffer = gameTalkerFase;
         }
+          gameTalker(segment, points, ticks, &gameTalkerFase, &gameTalkerMap, &internalTimer,&randText);
 
-        gameTalker(segment, points, ticks, &gameTalkerFase, &gameTalkerMap, &internalTimer);
 
         updateSnake(segmentPtr);
   

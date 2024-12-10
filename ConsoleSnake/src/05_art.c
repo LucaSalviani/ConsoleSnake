@@ -196,8 +196,8 @@ NULL
 
 const char* huh_variant1[] = {
 "Wow, you managed to move the     ",
-"damn snake.                      ",
-"A true snake whisperer...        ",
+"damn snake.A true snake whisperer...",
+"                                 ",
 "                                 ",
 "                                 ",
 "                                 ",
@@ -221,8 +221,34 @@ NULL
 };
 
 const char* not_that_bad[] = {
-"Hey not bad! Thats a.. lets say  ",
-"not mediocre score?              ",
+"Hey, not bad! That's a... well,  ",
+"let's call it a *decent* score.  ",
+"                                 ",
+"                                 ",
+"                                 ",
+"                                 ",
+"                                 ",
+"                                 ",
+"                                 ",
+NULL
+};
+
+const char* not_that_bad_variant1[] = {
+"Alright, not too shabby!         ",
+"You might actually impress a worm.",
+"                                 ",
+"                                 ",
+"                                 ",
+"                                 ",
+"                                 ",
+"                                 ",
+"                                 ",
+NULL
+};
+
+const char* not_that_bad_variant2[] = {
+"Decent job! Let's just say it's  ",
+"better than my last attempt.     ",
 "                                 ",
 "                                 ",
 "                                 ",
@@ -234,18 +260,371 @@ NULL
 };
 
 
+const char* impressed[] = {
+"Alright, now we're getting       ",
+"somewhere. I'll admit, you have  ",
+"skills. Not quite at my level,   ",
+"but you're on your way.          ",
+"                                 ",
+"                                 ",
+"                                 ",
+"                                 ",
+"                                 ",
+NULL
+};
+
+
+const char* impressed_1[] = {
+"Impressive! I see you're no      ",
+"ordinary player. Still, I've     ",
+"seen better. Care to surprise    ",
+"me more?                         ",
+"                                 ",
+"                                 ",
+"                                 ",
+"                                 ",
+"                                 ",
+NULL
+};
+
+const char* impressed_cs50[] = {
+"Whoa, looks like you're          ",
+"channeling your inner CS50 pro!  ",
+"Impressive work, but remember,   ",
+"even David Malan had to practice.",
+"                                 ",
+"                                 ",
+"                                 ",
+"                                 ",
+"                                 ",
+NULL
+};
+
+const char* almost_there_comic_1[] = {
+"You're almost there! Imagine if  ",
+"you tripped now... embarrassing, ",
+"right? So, uh, don't do that.    ",
+"                                 ",
+"                                 ",
+"                                 ",
+"                                 ",
+"                                 ",
+"                                 ",
+NULL
+};
+
+const char* almost_there_comic_2[] = {
+"Wow, so close! If you mess up now,",
+"even my grandma will judge you. ",
+"She doesn't play games, but still.",
+"                                 ",
+"                                 ",
+"                                 ",
+"                                 ",
+"                                 ",
+"                                 ",
+NULL
+};
+
+const char* almost_there_comic_3[] = {
+"Almost there! The snakes are     ",
+"rooting for you... or maybe not. ",
+"Honestly, I can't tell.Keep going!",
+"                                 ",
+"                                 ",
+"                                 ",
+"                                 ",
+"                                 ",
+"                                 ",
+NULL
+};
+
+
+
+const char* worm1[] = {
+"                (o)(o)             ",
+"               /     \\    LISAN  AL",
+"              /       |      GAIB!",
+"             /   \\  * |   100 points",
+"_______     /    /\\__/          ",
+"       \\   /    /               ",
+" ____    \\_/    /               ",
+" /    \\         /               ",
+"/      \\       /                ",
+"        \\_____/                 ",
+NULL
+};
+
+const char* worm2[] = {
+"                (o)(-)  ",
+"               /     \\             ",
+"              /       |   <<Nice>>  ",
+"             /   \\  * |             ",
+"_______     /    /\\__/              ",
+"       \\   /    /               ",
+" ____    \\_/    /  Im proud of you.",
+" /    \\         /               ",
+"/      \\       /                ",
+"        \\_____/                 ",
+NULL
+};
+
+const char* worm3[] = {
+"                (o)(o)              ",
+"               /     \\             ",
+"              /       |  < <Nice> >",
+"             /   \\  * |             ",
+"_______     /    /\\__/              ",
+"       \\   /    /               ",
+" ____    \\_/    /  Im proud of you.",
+" /    \\         /               ",
+"/      \\       /                ",
+"        \\_____/                 ",
+NULL
+};
+
+const char* fireworks_1[] = {
+"                                  ",
+"                                  ",
+"                                  ",
+"                                  ",
+"                                  ",
+"                                  ",
+"                                  ",
+"                                  ",
+"                                  ",
+"                                  ",
+"                                  ",
+"        |        |                ",
+NULL
+};
+
+const char* fireworks_2[] = {
+"                                  ",
+"                                  ",
+"                                  ",
+"                                  ",
+"                                  ",
+"                                  ",
+"                                  ",
+"                                  ",
+"                                  ",
+"        |        |                ",
+"        |        |                ",
+"            |                     ",
+NULL
+};
+
+const char* fireworks_3[] = {
+"                                  ",
+"                                  ",
+"                                  ",
+"                                  ",
+"                                  ",
+"                                  ",
+"                                  ",
+"        |        |                ",
+"        |        |                ",
+"            |                     ",
+"                                  ",
+"                                  ",
+NULL
+};
+
+const char* fireworks_4[] = {
+"                                  ",
+"                                  ",
+"                                  ",
+"                                  ",
+"                                  ",
+"        |        |                ",
+"        |        |                ",
+"            |                     ",
+"                                  ",
+"                                  ",
+"                                  ",
+"                                  ",
+NULL
+};
+
+const char* fireworks_5[] = {
+"                                  ",
+"                                  ",
+"                                  ",
+"                                  ",
+"        **       |                ",
+"        *        |                ",
+"            |                     ",
+"                                  ",
+"                                  ",
+"                                  ",
+"                                  ",
+"                                  ",
+NULL
+};
+
+const char* fireworks_6[] = {
+"                                  ",
+"                                  ",
+"                 *                ",
+"        *       **                ",
+"      .***       |                ",
+"       ***. |                     ",
+"        *                         ",
+"                                  ",
+"                                  ",
+"                                  ",
+"                                  ",
+"                                  ",
+NULL
+};
+const char* fireworks_7[] = {
+"                                  ",
+"                                  ",
+"                .***.             ",
+"       . *     .*****.            ",
+"      .** **                      ",
+"      **  *. **                   ",
+"      . **   *                    ",
+"                                  ",
+"                                  ",
+"                                  ",
+"                                  ",
+"                                  ",
+NULL
+};
+
+const char* fireworks_8[] = {
+"                                  ",
+"                                  ",
+"               .******.           ",
+"       . *   .***....***....      ",
+"     .**  * **... ....  ***..     ",
+"  *.,  .   *. **vv      ...       ",
+" .  , . * *   v*v                 ",
+"       . *     v                  ",
+"   ,  ,  . ,                      ",
+"    ,   ,                         ",
+"                                  ",
+"                                  ",
+NULL
+};
+const char* fireworks_9[] = {
+"                                  ",
+"                                  ",
+"                                  ",
+"              ;;;;;;;;.           ",
+"       . .***..;;;;;..***....     ",
+"     ..* ,* **... ....  ***..     ",
+"   .,  .   *. **;;      ...       ",
+" .  , . . *   ;*;  v  ******      ",
+"    *  . *   v  v v      ,,,      ",
+"   ,  ,* . ,  v  v                ",
+"    ,   ,     ,  ,                ",
+"               v                  ",
+NULL
+};
+
+const char* fireworks_10[] = {
+"                                  ",
+"                                  ",
+"                                  ",
+"                                  ",
+"                                  ",
+"                                  ",
+"       .           , .. ..        ",
+"         ,. ;;. . . ..   * ..     ",
+"   ,  .   *. * ; ;      ...       ",
+"    . .     ; ;  `     ; ; ;      ",
+"     *  .     `  ` v       ,,,    ",
+"      ,* . ,  `  `                ",
+NULL
+};
+
+const char* fireworks_11[] = {
+"                                  ",
+"                                  ",
+"                                  ",
+"                                  ",
+"                                  ",
+"                                  ",
+"         !CONGRATULATIONS!        ",
+"            100 points            ",
+"       .           , .. ..        ",
+"         ,. ;;. . . ..   * ..     ",
+"   ,  .   *. * ; ;      ...       ",
+"    . .     ; ;  `     ; ; ;      ",
+NULL
+};
+const char* fireworks_12[] = {
+"                                  ",
+"                                  ",
+"                                  ",
+"                                  ",
+"                                  ",
+"                                  ",
+"      !!!!CONGRATULATIONS!!!!     ",
+"            100 points            ",
+"                                  ",
+"                                  ",
+"                                  ",
+"                                  ",
+NULL
+};
+
+
+const char* thumbs_up[] = {
+"         __                      ",
+"         ) )             You are! ",
+"         \\ =\\                   ",
+"         \\` __\\______          ",
+"    ----/ )    ((____)           ",
+"          __   ((____)           ",
+"              ((____)            ",
+"    ----\\_____((___)             ",
+NULL
+};
+
+const char* happy_face[] = {
+"    .oOOOOOOo.                     ",
+" oO'          'Oo   --- AWESOME--- ",
+"O'   O      O   'O    100 points   ",
+"O                O                 ",
+"O                O                 ",
+"O  Oo,      ,oO  O                 ",
+" O. 'OOOOOOOO' .O                  ",
+"  Yb.        .dP                   ",
+"    'YOOOOOOP'                     ",
+NULL
+};
+
+const char* happy_face_2[] = {
+"    .oOOOOOOo.                     ",
+" oO'          'Oo  - -- AWESOME-- -",
+"O'   O      __  'O    100 points  ",
+"O                O                 ",
+"O                O                 ",
+"O  Oo,      ,oO  O                 ",
+" O. 'OOOOOOOO' .O                  ",
+"  Yb.        .dP                   ",
+"    'YOOOOOOP'                     ",
+NULL
+};
 
 
 const char* blank[] = {
-"                                  ",
-"                                  ",
-"                                  ",
-"                                  ",
-"                                  ",
-"                                  ",
-"                                  ",
-"                                  ",
-"                                  ",
+"                                    ",
+"                                    ",
+"                                    ",
+"                                    ",
+"                                    ",
+"                                    ",
+"                                    ",
+"                                    ",
+"                                    ",
+"                                    ",
+"                                    ",
+"                                    ",
 NULL
 };
 

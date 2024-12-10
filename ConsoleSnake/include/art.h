@@ -96,6 +96,59 @@ extern const char* huh_variant1[];
 
 extern const char* huh_variant2[];
 
+extern const char* not_that_bad[];
+
+extern const char* not_that_bad_variant1[];
+
+extern const char* not_that_bad_variant2[];
+
+extern const char* impressed[];
+
+extern const char* impressed_1[];
+
+extern const char* impressed_cs50[];
+
+extern const char* almost_there_comic_1[];
+
+extern const char* almost_there_comic_2[];
+
+extern const char* almost_there_comic_3[];
+
+extern const char* worm1[];
+
+extern const char* worm2[];
+
+extern const char* worm3[];
+
+extern const char* thumbs_up[];
+
+extern const char* happy_face[];
+
+extern const char* happy_face_2[];
+
+extern const char* fireworks_1[];
+
+extern const char* fireworks_2[];
+
+extern const char* fireworks_3[];
+
+extern const char* fireworks_4[];
+
+extern const char* fireworks_5[];
+
+extern const char* fireworks_6[];
+
+extern const char* fireworks_7[];
+
+extern const char* fireworks_8[];
+
+extern const char* fireworks_9[];
+
+extern const char* fireworks_10[];
+
+extern const char* fireworks_11[];
+
+extern const char* fireworks_12[];
 
 
 extern const char* blank[];

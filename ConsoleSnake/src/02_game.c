@@ -561,11 +561,10 @@ void gameTalker(snake* segment, int points, int ticks, int* gameTalkerFase, int*
         showDialogue(dialogues[0][*randText], 95, 16);
         *gameTalkerMap = 1;
     }
-
-    /*
+    
     // Dialogue phases based on points
     if (*gameTalkerFase < 5) {
-        int thresholds[] = { 2, 5, 7, 10 };
+        int thresholds[] = { 2, 5, 7, 10 }; //This are the points you have to reach in order for a threshhold to be reached
         for (int i = 0; i < 4; i++) {
             if (points == thresholds[i] && *gameTalkerFase == i) {
                 showDialogue(dialogues[i + 1][*randText], 95, 16);
@@ -575,6 +574,7 @@ void gameTalker(snake* segment, int points, int ticks, int* gameTalkerFase, int*
         }
     }
     
+    /*
     // Special cases for phases 5-18
     if (*gameTalkerFase >= 5 && *gameTalkerFase <= 18) {
         int index = (*gameTalkerFase - 5) % 3;

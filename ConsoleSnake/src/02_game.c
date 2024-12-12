@@ -165,6 +165,8 @@ void controls(snake* segment, int* direction, bool* pause,int xLeftBoundary,int 
     }
 }
 
+
+
 void gameTalker(snake* segment,int points,int ticks,int* gameTalkerFase,int* gameTalkerMap,int* internalTimer,int *randText) 
 {
     if ((segment->x_pos < 2 || segment->y_pos > 32 || segment->y_pos < 3) && *gameTalkerMap == 0) //MAP EATEN
@@ -520,9 +522,68 @@ void gameTalker(snake* segment,int points,int ticks,int* gameTalkerFase,int* gam
         textPositioning(blank, 95, 16);
         *internalTimer = 0;
         *randText = rand() % 3;
-        *randText = 0;
+        *randText = 1;
 
         return;
     }
-    
  }
+ 
+
+
+
+const char** dialogues[][3] = {
+    { ouch ,  ouch_variant1 ,  ouch_variant2 },
+    { huh ,  huh_variant1 ,  huh_variant2 },
+    { not_that_bad ,  not_that_bad_variant1 ,  not_that_bad_variant2 },
+    { impressed ,  impressed_1 ,  impressed_cs50 },
+    { almost_there_comic_1 ,  almost_there_comic_2 ,  almost_there_comic_3 },
+    { worm1 ,  worm2 ,  worm3 },
+    { thumbs_up ,  happy_face ,  happy_face_2 },
+    { fireworks_1 ,  fireworks_2 ,  fireworks_3 }
+};
+
+
+/*
+void showDialogue(const char* text, int x, int y) {
+    printf("%s", ANSI_COLOR_DARK_ORANGE);
+    textPositioning(text, x, y);
+}
+
+void advancePhase(int* phase, int* timer) {
+    (*phase)++;
+    *timer = 0;
+}
+
+void gameTalker(snake* segment, int points, int ticks, int* gameTalkerFase, int* gameTalkerMap, int* internalTimer, int* randText) {
+    // MAP boundaries condition
+    if ((segment->x_pos < 2 || segment->y_pos > 32 || segment->y_pos < 3) && *gameTalkerMap == 0) {
+        showDialogue(dialogues[0][*randText], 95, 16);
+        *gameTalkerMap = 1;
+    }
+
+    // Dialogue phases based on points
+    if (*gameTalkerFase < 5) {
+        int thresholds[] = { 2, 5, 7, 10 };
+        for (int i = 0; i < 4; i++) {
+            if (points == thresholds[i] && *gameTalkerFase == i) {
+                showDialogue(dialogues[i + 1][*randText], 95, 16);
+                *gameTalkerFase = i + 1;
+                break;
+            }
+        }
+    }
+
+    // Special cases for phases 5-18
+    if (*gameTalkerFase >= 5 && *gameTalkerFase <= 18) {
+        int index = (*gameTalkerFase - 5) % 3;
+        showDialogue(dialogues[5 + index][*randText], 95, 16);
+        advancePhase(gameTalkerFase, internalTimer);
+    }
+
+    // Reset conditions based on internal timer
+    if (*internalTimer >= 70) {
+        advancePhase(gameTalkerFase, internalTimer);
+        *gameTalkerMap = 0;
+    }
+}
+*/

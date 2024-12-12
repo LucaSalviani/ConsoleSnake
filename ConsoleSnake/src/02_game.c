@@ -167,6 +167,7 @@ void controls(snake* segment, int* direction, bool* pause,int xLeftBoundary,int 
 
 
 
+/*
 void gameTalker(snake* segment,int points,int ticks,int* gameTalkerFase,int* gameTalkerMap,int* internalTimer,int *randText) 
 {
     if ((segment->x_pos < 2 || segment->y_pos > 32 || segment->y_pos < 3) && *gameTalkerMap == 0) //MAP EATEN
@@ -527,7 +528,7 @@ void gameTalker(snake* segment,int points,int ticks,int* gameTalkerFase,int* gam
         return;
     }
  }
- 
+ */
 
 
 
@@ -543,7 +544,7 @@ const char** dialogues[][3] = {
 };
 
 
-/*
+
 void showDialogue(const char* text, int x, int y) {
     printf("%s", ANSI_COLOR_DARK_ORANGE);
     textPositioning(text, x, y);
@@ -561,6 +562,7 @@ void gameTalker(snake* segment, int points, int ticks, int* gameTalkerFase, int*
         *gameTalkerMap = 1;
     }
 
+    /*
     // Dialogue phases based on points
     if (*gameTalkerFase < 5) {
         int thresholds[] = { 2, 5, 7, 10 };
@@ -572,18 +574,21 @@ void gameTalker(snake* segment, int points, int ticks, int* gameTalkerFase, int*
             }
         }
     }
-
+    
     // Special cases for phases 5-18
     if (*gameTalkerFase >= 5 && *gameTalkerFase <= 18) {
         int index = (*gameTalkerFase - 5) % 3;
         showDialogue(dialogues[5 + index][*randText], 95, 16);
         advancePhase(gameTalkerFase, internalTimer);
     }
+    */
 
     // Reset conditions based on internal timer
     if (*internalTimer >= 70) {
-        advancePhase(gameTalkerFase, internalTimer);
+        //advancePhase(gameTalkerFase, internalTimer);
+        *internalTimer = 0;
+        *randText = rand() % 3;
+        textPositioning(blank, 95, 16);
         *gameTalkerMap = 0;
     }
 }
-*/

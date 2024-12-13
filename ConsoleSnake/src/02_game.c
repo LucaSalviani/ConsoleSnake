@@ -580,14 +580,43 @@ void gameTalker(snake* segment, int points, int ticks, int* gameTalkerFase, int*
     if (points == 12 && *gameTalkerFase == 4) 
     {
         *gameTalkerFase = 5;
-        *randText = 2;
+        *randText = 0;
     }
     
     // Special cases for phases 5-17
     if (*gameTalkerFase >= 5 && *gameTalkerFase < 17) {
         int index = (*gameTalkerFase - 5);
         showDialogue(animations[*randText][index], 95, 16);
-        *internalTimer += 5; // Add Anidatade Ifs to control the speed of each animation.
+        //*internalTimer += 5; // Add Anidatade Ifs to control the speed of each animation.
+        if (*randText == 0)
+        {
+            if (*gameTalkerFase != 5)
+            {
+                *internalTimer += 5;
+            }
+            else
+            {
+                *internalTimer += 2;
+            }
+        }
+        else if (*randText == 1)
+        {
+            if (*gameTalkerFase != 5)
+            {
+                *internalTimer += 5;
+            }
+            else
+            {
+                *internalTimer += 2;
+            }
+        }
+        else if (*randText == 2)
+        {
+            if (*gameTalkerFase != 16)
+            {
+                *internalTimer += 20;
+            }
+        }
     }
     
 

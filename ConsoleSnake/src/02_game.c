@@ -587,7 +587,7 @@ void gameTalker(snake* segment, int points, int ticks, int* gameTalkerFase, int*
     if (*gameTalkerFase >= 5 && *gameTalkerFase < 17) {
         int index = (*gameTalkerFase - 5);
         showDialogue(animations[*randText][index], 95, 16);
-        *internalTimer += 5;
+        *internalTimer += 5; // Add Anidatade Ifs to control the speed of each animation.
     }
     
 

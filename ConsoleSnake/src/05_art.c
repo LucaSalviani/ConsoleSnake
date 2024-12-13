@@ -235,9 +235,9 @@ NULL
 
 const char* not_that_bad_variant1[] = {
 "Alright, not too shabby!         ",
-"You might actually impress a worm.",
-"                                 ",
-"                                 ",
+"You might actually impress a worm,",
+"which you know its not much, but ",
+"it's something!                  ",
 "                                 ",
 "                                 ",
 "                                 ",
@@ -248,8 +248,8 @@ NULL
 
 const char* not_that_bad_variant2[] = {
 "Decent job! Let's just say it's  ",
-"better than my last attempt.     ",
-"                                 ",
+"better than your last attempt.   ",
+"Probably(?                       ",
 "                                 ",
 "                                 ",
 "                                 ",

@@ -166,372 +166,6 @@ void controls(snake* segment, int* direction, bool* pause,int xLeftBoundary,int 
 }
 
 
-
-/*
-void gameTalker(snake* segment,int points,int ticks,int* gameTalkerFase,int* gameTalkerMap,int* internalTimer,int *randText) 
-{
-    if ((segment->x_pos < 2 || segment->y_pos > 32 || segment->y_pos < 3) && *gameTalkerMap == 0) //MAP EATEN
-    {
-        if (*randText == 0)
-        {
-            printf("%s", ANSI_COLOR_DARK_ORANGE);
-            textPositioning(ouch, 95, 16);
-            *gameTalkerMap = 1;
-
-        }
-        else if (*randText == 1)
-        {
-            printf("%s", ANSI_COLOR_DARK_ORANGE);
-            textPositioning(ouch_variant1, 95, 16);
-            *gameTalkerMap = 1;
-        }
-        else if (*randText == 2)
-        {
-            printf("%s", ANSI_COLOR_DARK_ORANGE);
-            textPositioning(ouch_variant2, 95, 16);
-            *gameTalkerMap = 1;
-        }
-    }
-    if (points == 2 && *gameTalkerFase == 0 ) // TALKERS FIRST FASE 10 p
-    {
-        if (*randText == 0)
-        {
-            printf("%s", ANSI_COLOR_DARK_ORANGE);
-            textPositioning(huh, 95, 16);
-            *gameTalkerFase = 1;
-        }
-        else if (*randText == 1)
-        {
-            printf("%s", ANSI_COLOR_DARK_ORANGE);
-            textPositioning(huh_variant1, 95, 16);
-            *gameTalkerFase = 1;
-        }
-        else if (*randText == 2)
-        {
-            printf("%s", ANSI_COLOR_DARK_ORANGE);
-            textPositioning(huh_variant2, 95, 16);
-            *gameTalkerFase = 1;
-        }
-    }
-    else if (points == 5 && *gameTalkerFase == 1)// TALKERS 2nd FASE 25 p
-    {
-        if (*randText == 0)
-        {
-            printf("%s", ANSI_COLOR_DARK_ORANGE);
-            textPositioning(not_that_bad, 95, 16);
-            *gameTalkerFase = 2;
-        }
-        else if (*randText == 1)
-        {
-
-            printf("%s", ANSI_COLOR_DARK_ORANGE);
-            textPositioning(not_that_bad_variant1, 95, 16);
-            *gameTalkerFase = 2;
-        }
-        else if (*randText == 2)
-        {
-
-            printf("%s", ANSI_COLOR_DARK_ORANGE);
-            textPositioning(not_that_bad_variant2, 95, 16);
-            *gameTalkerFase = 2;
-        }
-        
-    }
-    else if (points == 7 && *gameTalkerFase == 2)  // TALKERS 3rd FASE 50 p
-    {
-        if (*randText == 0)
-        {
-            printf("%s", ANSI_COLOR_DARK_ORANGE);
-            textPositioning(impressed, 95, 16);
-            *gameTalkerFase = 3;
-        }
-        else if (*randText == 1)
-        {
-            printf("%s", ANSI_COLOR_DARK_ORANGE);
-            textPositioning(impressed_1, 95, 16);
-            *gameTalkerFase = 3;
-        }
-        else if (*randText == 2)
-        {
-            printf("%s", ANSI_COLOR_DARK_ORANGE);
-            textPositioning(impressed_cs50, 95, 16);
-            *gameTalkerFase = 3;
-        }
-
-    }
-    else if (points == 10 && *gameTalkerFase == 3) // TALKERS 4th FASE 95 p
-    {
-
-        if (*randText == 0)
-        {
-            printf("%s", ANSI_COLOR_DARK_ORANGE);
-            textPositioning(almost_there_comic_1, 95, 16);
-            *gameTalkerFase = 4;
-        }
-        else if (*randText == 1)
-        {
-            printf("%s", ANSI_COLOR_DARK_ORANGE);
-            textPositioning(almost_there_comic_2, 95, 16);
-            *gameTalkerFase = 4;
-        }
-        else if (*randText == 2)
-        {
-            printf("%s", ANSI_COLOR_DARK_ORANGE);
-            textPositioning(almost_there_comic_3, 95, 16);
-            *gameTalkerFase = 4;
-        }
-    }
-    else if ((points == 12 && *gameTalkerFase == 4) || (*gameTalkerFase >= 5 && *gameTalkerFase <= 18)) // TALKERS 5th FASE 100 p
-    {
-
-        if (*randText == 0)
-        {
-            printf("%s", ANSI_COLOR_DARK_ORANGE);
-            if (*gameTalkerFase == 4) {
-                textPositioning(worm1, 95, 16);
-                *gameTalkerFase = 5;
-            }
-            else if (*gameTalkerFase == 6)
-            {
-                textPositioning(worm2, 95, 16);
-            }
-            else if (*gameTalkerFase == 7)
-            {
-                textPositioning(worm3, 95, 16);
-            }
-            else if (*gameTalkerFase == 8)
-            {
-                textPositioning(worm2, 95, 16);
-            }
-            else if (*gameTalkerFase == 9)
-            {
-                textPositioning(worm3, 95, 16);
-            }
-            else if (*gameTalkerFase == 10)
-            {
-                textPositioning(worm2, 95, 16);
-            }
-            else if (*gameTalkerFase == 11)
-            {
-                textPositioning(worm3, 95, 16);
-            }
-            else if (*gameTalkerFase == 11)
-            {
-                textPositioning(worm2, 95, 16);
-            }
-            else if (*gameTalkerFase == 12)
-            {
-                textPositioning(worm3, 95, 16);
-            }
-            else if (*gameTalkerFase == 13)
-            {
-                *gameTalkerFase = 18;
-            }
-        }
-        else if (*randText == 1)
-        {
-            printf("%s", ANSI_COLOR_DARK_ORANGE);
-            if (*gameTalkerFase == 4) {
-                textPositioning(thumbs_up, 95, 16);
-                *gameTalkerFase = 5;
-            }
-            else if (*gameTalkerFase == 6)
-            {
-                textPositioning(happy_face, 95, 16);
-            }
-            else if (*gameTalkerFase == 7)
-            {
-                textPositioning(happy_face_2, 95, 16);
-            }
-            else if (*gameTalkerFase == 8)
-            {
-                textPositioning(happy_face, 95, 16);
-            }
-            else if (*gameTalkerFase == 9)
-            {
-                textPositioning(happy_face_2, 95, 16);
-            }
-            else if (*gameTalkerFase == 10)
-            {
-                textPositioning(happy_face, 95, 16);
-            }
-            else if (*gameTalkerFase == 11)
-            {
-                textPositioning(happy_face_2, 95, 16);
-            }
-            else if (*gameTalkerFase == 12)
-            {
-                *gameTalkerFase = 18;
-            }
-        }
-        else if (*randText == 2)
-        {
-            printf("%s", ANSI_COLOR_DARK_ORANGE);
-            if (*gameTalkerFase == 4) {
-                textPositioning(fireworks_1, 95, 16);
-                (*internalTimer) += 20;
-                *gameTalkerFase = 5;
-            }
-            else if (*gameTalkerFase == 5)
-            {
-                (*internalTimer) += 20;
-            }
-            else if (*gameTalkerFase == 6)
-            {
-                (*internalTimer) += 20;
-                textPositioning(fireworks_2, 95, 16);
-            }
-            else if (*gameTalkerFase == 7)
-            {
-                (*internalTimer) += 20;
-                textPositioning(fireworks_3, 95, 16);
-            }
-            else if (*gameTalkerFase == 8)
-            {
-                (*internalTimer) += 20;
-                textPositioning(fireworks_4, 95, 16);
-            }
-            else if (*gameTalkerFase == 9)
-            {
-                (*internalTimer) += 20;
-                textPositioning(fireworks_5, 95, 16);
-            }
-            else if (*gameTalkerFase == 10)
-            {
-                (*internalTimer) += 20;
-                textPositioning(fireworks_6, 95, 16);
-            }
-            else if (*gameTalkerFase == 11)
-            {
-                (*internalTimer) += 20;
-                textPositioning(fireworks_7, 95, 16);
-            }
-            else if (*gameTalkerFase == 12)
-            {
-                (*internalTimer) += 20;
-
-                textPositioning(fireworks_8, 95, 16);
-            }
-            else if (*gameTalkerFase == 13)
-            {
-                (*internalTimer) += 20;
-                textPositioning(fireworks_9, 95, 16);
-            }
-            else if (*gameTalkerFase == 14)
-            {
-                (*internalTimer) += 20;
-                textPositioning(fireworks_10, 95, 16);
-            }
-            else if (*gameTalkerFase == 15)
-            {
-                (*internalTimer) += 20;
-                textPositioning(fireworks_11, 95, 16);
-            }
-            else if (*gameTalkerFase == 16)
-            {
-                textPositioning(fireworks_12, 95, 16);
-            }
-        }
-    }
-    else if (points > 100 && (ticks % 2000)) //TALKER 6th FASE 100+ p
-    {
-
-    }
-    if (*internalTimer >= 70) // BLANK
-    {
-
-        *gameTalkerMap = 0;
-        if (*gameTalkerFase == 5)
-        {
-            *gameTalkerFase = 6;
-            *internalTimer = 0;
-            return;
-        }
-        else if (*gameTalkerFase == 6)
-        {
-            *gameTalkerFase = 7;
-            *internalTimer = 0;
-            return;
-        }
-        else if (*gameTalkerFase == 7)
-        {
-            *gameTalkerFase = 8;
-            *internalTimer = 0;
-            return;
-        }
-        else if (*gameTalkerFase == 8)
-        {
-            *gameTalkerFase = 9;
-            *internalTimer = 0;
-            return;
-        }
-        else if (*gameTalkerFase == 9)
-        {
-            *gameTalkerFase = 10;
-            *internalTimer = 0;
-            return;
-        }
-        else if (*gameTalkerFase == 10)
-        {
-            *gameTalkerFase = 11;
-            *internalTimer = 0;
-            return;
-        }
-        else if (*gameTalkerFase == 11)
-        {
-            *gameTalkerFase = 12;
-            *internalTimer = 0;
-            return;
-        }
-        else if (*gameTalkerFase == 12)
-        {
-            *gameTalkerFase = 13;
-            *internalTimer = 0;
-            return;
-        }
-        else if (*gameTalkerFase == 13)
-        {
-            *gameTalkerFase = 14;
-            *internalTimer = 0;
-            return;
-        }
-        else if (*gameTalkerFase == 14)
-        {
-            *gameTalkerFase = 15;
-            *internalTimer = 0;
-            return;
-        }
-        else if (*gameTalkerFase == 15)
-        {
-            *gameTalkerFase = 16;
-            *internalTimer = 0;
-            return;
-        }
-        else if (*gameTalkerFase == 16)
-        {
-            *gameTalkerFase = 17;
-            *internalTimer = 0;
-            return;
-        }
-        else if (*gameTalkerFase == 17)
-        {
-            *gameTalkerFase = 18;
-            *internalTimer = 0;
-            *randText = rand() % 3;
-            return;
-        }
-        textPositioning(blank, 95, 16);
-        *internalTimer = 0;
-        *randText = rand() % 3;
-        *randText = 1;
-
-        return;
-    }
- }
- */
-
-
-
 const char** dialogues[][3] = {
     { ouch ,  ouch_variant1 ,  ouch_variant2 },
     { huh ,  huh_variant1 ,  huh_variant2 },
@@ -558,7 +192,6 @@ void advancePhase(int* phase, int* timer) {
 }
 
 void gameTalker(snake* segment, int points, int ticks, int* gameTalkerFase, int* gameTalkerMap, int* internalTimer, int* randText) {
-    //printf("\033[H internalTimer: %i ",*internalTimer,*randText);
 
     // MAP boundaries condition
     if ((segment->x_pos < 2 || segment->y_pos > 32 || segment->y_pos < 3) && *gameTalkerMap == 0) {
@@ -568,7 +201,7 @@ void gameTalker(snake* segment, int points, int ticks, int* gameTalkerFase, int*
     
     // Dialogue phases based on points
     if (*gameTalkerFase < 5) {
-        int thresholds[] = { 2, 5, 7, 10 }; //This are the points you have to reach in order for a threshhold to be reached
+        int thresholds[] = { 10, 25, 60, 95 }; //This are the points you have to reach in order for a threshhold to be reached
         for (int i = 0; i < 4; i++) {
             if (points == thresholds[i] && *gameTalkerFase == i) {
                 showDialogue(dialogues[i + 1][*randText], 95, 16);
@@ -577,38 +210,20 @@ void gameTalker(snake* segment, int points, int ticks, int* gameTalkerFase, int*
             }
         }
     }
-    if (points == 12 && *gameTalkerFase == 4) 
+    if (points == 100 && *gameTalkerFase == 4) 
     {
         *gameTalkerFase = 5;
-        *randText = 0;
     }
-    
-    // Special cases for phases 5-17
+
+    //This are all for animations
     if (*gameTalkerFase >= 5 && *gameTalkerFase < 17) {
         int index = (*gameTalkerFase - 5);
         showDialogue(animations[*randText][index], 95, 16);
-        //*internalTimer += 5; // Add Anidatade Ifs to control the speed of each animation.
-        if (*randText == 0)
+
+        //You have different speeds depending on the animation
+        if (*randText == 0 || *randText == 1) 
         {
-            if (*gameTalkerFase != 5)
-            {
-                *internalTimer += 5;
-            }
-            else
-            {
-                *internalTimer += 2;
-            }
-        }
-        else if (*randText == 1)
-        {
-            if (*gameTalkerFase != 5)
-            {
-                *internalTimer += 5;
-            }
-            else
-            {
-                *internalTimer += 2;
-            }
+            *internalTimer += (*gameTalkerFase != 5) ? 5 : 2; //terniary operator, it decides between 5 or 2 depending on the actual phase
         }
         else if (*randText == 2)
         {
@@ -619,11 +234,10 @@ void gameTalker(snake* segment, int points, int ticks, int* gameTalkerFase, int*
         }
     }
     
-
     // Reset conditions based on internal timer
     if (*internalTimer >= 100) {
-        printf("\033[H internalTimer: %i  gameTalkerFase: %i", *internalTimer, *gameTalkerFase);
 
+        //This are for the animations
         if (*gameTalkerFase >= 5 && *gameTalkerFase < 17)
         {
             advancePhase(gameTalkerFase, internalTimer);

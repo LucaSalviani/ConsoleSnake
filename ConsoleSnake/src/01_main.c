@@ -117,7 +117,7 @@ int main() {
         {
             internalTimer++;
         }
-        if (internalTimer == 70) 
+        if (internalTimer == 100) 
         {
             talkerFaseBuffer = gameTalkerFase;
         }

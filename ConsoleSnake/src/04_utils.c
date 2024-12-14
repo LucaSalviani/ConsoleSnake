@@ -3,6 +3,8 @@
 #include <windows.h>
 #include <stdlib.h>
 #include <math.h>
+#include <stdio.h>
+#include <stdbool.h>
 
 int randomBetween(int min, int max)
 {
@@ -122,4 +124,87 @@ void breathingEffectToColor(int ticks,struct RGB color1,struct RGB color2)
 
 void initializeRandomSeed() {
     srand(time(NULL));
+}
+
+
+void readInputWithLimit(char* input, int maxLen) 
+{
+    bool confirm = false;
+    printf("\033[17;104H");
+    clearBuffer();
+    HANDLE hInput = GetStdHandle(STD_INPUT_HANDLE);  // Obtén el manejador de la entrada estándar
+    DWORD modeOriginal, modeSinEco;
+    int i = 0;
+    memset(input, 0, maxLen);
+    // Guarda el modo actual de la consola
+    GetConsoleMode(hInput, &modeOriginal);
+
+    // Configura la consola para deshabilitar el eco y la entrada en modo línea
+    modeSinEco = modeOriginal & ~(ENABLE_ECHO_INPUT | ENABLE_LINE_INPUT);
+    SetConsoleMode(hInput, modeSinEco);
+
+    // Lee los caracteres sin eco
+    while (1) {
+        INPUT_RECORD inputRecord;
+        DWORD eventsRead;
+
+        // Lee la entrada de la consola
+        ReadConsoleInput(hInput, &inputRecord, 1, &eventsRead);
+
+        // Procesa solo eventos de teclado
+        if (inputRecord.EventType == KEY_EVENT && inputRecord.Event.KeyEvent.bKeyDown) {
+            char c = inputRecord.Event.KeyEvent.uChar.AsciiChar;
+            
+            if (c == '\r' || confirm == true) {  // Enter
+                printf("\033[18;104H\033[38;2;105;105;105mConfirm submission [y/n]: ");
+                confirm = true;
+                if (c == 'y')
+                {
+                    break;
+                }
+                else if (c == 'n')
+                {
+                printf("\033[18;104H                          ");
+
+                    confirm = false;
+                    printf("\033[17;104H%s", ANSI_COLOR_DARK_RED); // HAY QUE CORREGIR ESTO
+                }
+            }
+
+            if (c == '\b' && i > 0) {  // Backspace
+                printf("\b_\b");
+                i--;
+            }
+            else if (isalnum(c) && i < maxLen) {  // Otros caracteres dentro del límite
+                input[i] = c;
+                putchar(c);  // Muestra el carácter
+                //printf("%c", input[i]);
+                i++;
+            }
+        }
+    }
+    input[i] = '\0';  // Agregar terminador nulo
+
+    // Restaura el modo original de la consola
+    SetConsoleMode(hInput, modeOriginal);
+}
+
+
+void clearBuffer() {
+    HANDLE hInput = GetStdHandle(STD_INPUT_HANDLE); // Obtén el manejador de la entrada estándar
+    DWORD modeOriginal, modeSinEco;
+
+    // Guarda el modo actual
+    GetConsoleMode(hInput, &modeOriginal);
+
+    // Deshabilita el eco de entrada
+    modeSinEco = modeOriginal & ~ENABLE_ECHO_INPUT;
+    SetConsoleMode(hInput, modeSinEco);
+
+    // Limpia el buffer
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF);
+
+    // Restaura el modo original
+    SetConsoleMode(hInput, modeOriginal);
 }

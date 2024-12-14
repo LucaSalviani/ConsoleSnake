@@ -289,10 +289,10 @@ void displayRecords(const char* filename)
     // Leer y mostrar cada línea del archivo.
     char line[256];
     int line_number = 0;
-    printf("\033[18;97H%sRecords:",ANSI_COLOR_DARK_RED);
+    printf("\033[19;97H%sRecords:",ANSI_COLOR_DARK_RED);
     while (fgets(line, sizeof(line), file))
     {
-        printf("\033[%i;97H%s%s",18+line_number,ANSI_COLOR_DARK_RED, line);
+        printf("\033[%i;97H%s%s",19+line_number,ANSI_COLOR_DARK_RED, line);
         line_number++;
     }
 

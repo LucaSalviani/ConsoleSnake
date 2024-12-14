@@ -11,4 +11,6 @@ void textBreathEfect(int ticks);
 void textColorRandomizer(int ticks);
 void breathingEffectToColor(int ticks, struct RGB color1, struct RGB color2);
 void initializeRandomSeed();
+void readInputWithLimit(char* input, int maxLen);
+void clearBuffer();
 #endif // UTILS_H

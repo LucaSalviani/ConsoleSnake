@@ -157,6 +157,7 @@ int main() {
     int gameOverEffect = rand()%2;  //Randomizes which game over effect will be used
     char name[16] = { 0 };
     char* filename = "records.txt";
+    bool recordSaved = false;
     textPositioning(blank, 95, 16);
     /////////////////GAME OVER
     while (1)
@@ -176,12 +177,16 @@ int main() {
         printf("\033[17;97H%sPlayer:_______________ Score:%i", ANSI_COLOR_DARK_RED,points);
 
 
-        if (GetAsyncKeyState(VK_SPACE) & 0x8000)
+        if (GetAsyncKeyState(VK_RETURN) & 0x8000 && recordSaved == false)
         {
-            printf("\033[17;104H");
-            scanf_s("%15s", name, (unsigned)_countof(name));
+            //printf("\033[17;104H");
+           // scanf_s("%15s", name, (unsigned)_countof(name));
+           // clearBuffer();
+            readInputWithLimit(name,15);
+            //printf("\033[0;0H%s",name);
             saveRecord(filename, name, points);
             displayRecords(filename);
+            recordSaved = true;
         }
         Sleep(10);
     }

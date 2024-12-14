@@ -256,3 +256,46 @@ void gameTalker(snake* segment, int points, int ticks, int* gameTalkerFase, int*
         return;
     }
 }
+
+
+void saveRecord(const char* filename, const char* playerName, int score)
+{
+    // Abrir el archivo en modo de agregar ("a") para no sobrescribir el contenido.
+    FILE* file = fopen(filename, "a");
+    if (file == NULL)
+    {
+        perror("Error al abrir el archivo");
+        return ;
+    }
+
+    // Escribir el nombre del jugador y su puntaje en el archivo.
+    fprintf(file, "Player: %s  Score: %d\n", playerName, score);
+
+    // Cerrar el archivo.
+    fclose(file);
+}
+
+
+void displayRecords(const char* filename)
+{
+    // Abrir el archivo en modo lectura ("r").
+    FILE* file = fopen(filename, "r");
+    if (file == NULL)
+    {
+        perror("Error al abrir el archivo");
+        return;
+    }
+
+    // Leer y mostrar cada línea del archivo.
+    char line[256];
+    int line_number = 0;
+    printf("\033[18;97H%sRecords:",ANSI_COLOR_DARK_RED);
+    while (fgets(line, sizeof(line), file))
+    {
+        printf("\033[%i;97H%s%s",18+line_number,ANSI_COLOR_DARK_RED, line);
+        line_number++;
+    }
+
+    // Cerrar el archivo.
+    fclose(file);
+}

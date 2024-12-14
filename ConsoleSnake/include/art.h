@@ -178,6 +178,7 @@ extern const char* blank[];
 #define ANSI_COLOR_WHITE       "\033[0;37m"
 
 #define ANSI_COLOR_DARK_ORANGE   "\033[38;2;255;140;0m"
+#define ANSI_COLOR_DARK_RED     "\033[38;2;200;50;50m"
 #define ANSI_COLOR_DARK_BLUE	 "\x1b[34m"
 #define ANSI_COLOR_BRIGHT_PINK   "\033[38;2;255;105;180m"
 #define ANSI_COLOR_GOLD          "\033[38;2;255;204;0m"

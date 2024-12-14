@@ -155,9 +155,9 @@ int main() {
     freeSnakesMemory(segmentPtr);
     float factor = 0;
     int gameOverEffect = rand()%2;  //Randomizes which game over effect will be used
-
-
-
+    char name[16] = { 0 };
+    char* filename = "records.txt";
+    textPositioning(blank, 95, 16);
     /////////////////GAME OVER
     while (1)
     {
@@ -172,6 +172,17 @@ int main() {
             textPositioning(game_over, (29 * factor) + 2, 10);
         }
         ticks++;
+        printf("\033[16;97H\033[38;2;105;105;105mPress enter to submit a score.");
+        printf("\033[17;97H%sPlayer:_______________ Score:%i", ANSI_COLOR_DARK_RED,points);
+
+
+        if (GetAsyncKeyState(VK_SPACE) & 0x8000)
+        {
+            printf("\033[17;104H");
+            scanf_s("%15s", name, (unsigned)_countof(name));
+            saveRecord(filename, name, points);
+            displayRecords(filename);
+        }
         Sleep(10);
     }
     return 0;

@@ -168,6 +168,8 @@ void readInputWithLimit(char* input, int maxLen)
 
                     confirm = false;
                     printf("\033[17;104H%s", ANSI_COLOR_DARK_RED); // HAY QUE CORREGIR ESTO
+                    c = '_';
+                    i = 0;
                 }
             }
 
@@ -175,7 +177,7 @@ void readInputWithLimit(char* input, int maxLen)
                 printf("\b_\b");
                 i--;
             }
-            else if (isalnum(c) && i < maxLen) {  // Otros caracteres dentro del límite
+            else if ((isalnum(c) || c == '_' || c == ' ' || c == '-' || c == '+' || c == '\\' || c == '/' || c == '?' || c == '>' || c == '<' || c == '.' || c == '@' || c == '#' || c == '$' || c == '&' || c == '*' || c == '^' || c == '!' || c == '~' || c == '(' || c == ')' || c == '[' || c == ']' || c == ':' || c == ';' || c == '\'' || c == '"' || c == '%') && i < maxLen) {  // Otros caracteres dentro del límite
                 input[i] = c;
                 putchar(c);  // Muestra el carácter
                 //printf("%c", input[i]);
@@ -190,21 +192,8 @@ void readInputWithLimit(char* input, int maxLen)
 }
 
 
-void clearBuffer() {
-    HANDLE hInput = GetStdHandle(STD_INPUT_HANDLE); // Obtén el manejador de la entrada estándar
-    DWORD modeOriginal, modeSinEco;
-
-    // Guarda el modo actual
-    GetConsoleMode(hInput, &modeOriginal);
-
-    // Deshabilita el eco de entrada
-    modeSinEco = modeOriginal & ~ENABLE_ECHO_INPUT;
-    SetConsoleMode(hInput, modeSinEco);
-
-    // Limpia el buffer
-    int c;
-    while ((c = getchar()) != '\n' && c != EOF);
-
-    // Restaura el modo original
-    SetConsoleMode(hInput, modeOriginal);
+void clearBuffer() // IT ONLY WORKS FOR WINDOWS
+{
+    HANDLE hInput = GetStdHandle(STD_INPUT_HANDLE);  // Obtén el manejador de entrada estándar
+    FlushConsoleInputBuffer(hInput);                // Limpia el buffer de entrada
 }

@@ -3,6 +3,12 @@
 
 #include "snake.h"
 
+typedef struct PLayer{
+    char name[16];
+    int points;
+    struct Player* next;
+} Player;
+
 
 // Funciones del juego
 void controls(snake* segment, int* direction, bool* pause, int xLeftBoundary, int xRightBoundary, int yUpBoundary, int yDownBoundary);
@@ -12,6 +18,10 @@ void gameTalker(snake* segment, int points, int ticks, int* gameTalkerFase, int*
 void forcedPause(bool* pause);
 void pointsDisplay(int points, int xPos, int yPos, const char** text[]);
 void displayRecords(const char* filename);
-void saveRecord(const char* filename, const char* playerName, int score);
+void readRecord(const char* recordsTxt, Player* playerPtr);
+void saveRecord(const char* recordsTxt, Player* playerPtr);
+void padString(char* str, int totalLength, char padChar);
+void addPlayer(Player** playerPtr, char nameRead[16], int pointsFinal);
+
 
 #endif // GAME_H

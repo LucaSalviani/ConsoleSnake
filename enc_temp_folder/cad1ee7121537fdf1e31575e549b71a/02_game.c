@@ -384,7 +384,7 @@ void saveRecord(const char* recordsTxt, Player* playerPtr)
         char nameBuffer[16] = { 0 };
 
         // Copiar y rellenar el nombre
-        if (strncpy_s(nameBuffer, sizeof(nameBuffer), playerPtr->name, _TRUNCATE) != 0)//todo como el orto aca ACA HAY QUILOMBOOOOO ARREGLALO ACA <<<<<<<<<<<<<<<<<<<<
+        if (strncpy_s(nameBuffer, sizeof(nameBuffer), playerPtr->name, _TRUNCATE) != 0)//todo como el orto aca
         {
             fprintf(stderr, "Error al copiar el nombre del jugador\n");
             fclose(file);

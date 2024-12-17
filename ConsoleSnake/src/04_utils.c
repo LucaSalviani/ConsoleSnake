@@ -177,7 +177,7 @@ void readInputWithLimit(char* input, int maxLen)
                 printf("\b_\b");
                 i--;
             }
-            else if ((isalnum(c) || c == '_' || c == ' ' || c == '-' || c == '+' || c == '\\' || c == '/' || c == '?' || c == '>' || c == '<' || c == '.' || c == '@' || c == '#' || c == '$' || c == '&' || c == '*' || c == '^' || c == '!' || c == '~' || c == '(' || c == ')' || c == '[' || c == ']' || c == ':' || c == ';' || c == '\'' || c == '"' || c == '%') && i < maxLen) {  // Otros caracteres dentro del límite
+            else if ((isalnum(c) || c == '_' || c == ' ' || c == '-' || c == '+' || c == '\\' || c == '/' || c == '?' || c == '>' || c == '<' || c == '.' || c == '@' || c == '#' || c == '$' || c == '&' || c == '*' || c == '^' || c == '!' || c == '~' || c == '(' || c == ')' || c == '[' || c == ']' || c == ';' || c == '\'' || c == '"' || c == '%') && i < maxLen) {  // Otros caracteres dentro del límite
                 input[i] = c;
                 putchar(c);  // Muestra el carácter
                 //printf("%c", input[i]);

@@ -45,6 +45,21 @@ int main() {
 
 
 
+    ///////////////CREATES A PLAYER
+
+    Player* playerPtr = NULL;
+    Player* player = malloc(sizeof(Player));
+    if (player == NULL)
+    {
+        printf("Theres no space in memory to run the game");
+        return 1;
+    }
+    playerPtr = player; // Stores the head of the list in a ptr
+
+    char* recordsTxt = "records.txt";
+
+    readRecord(recordsTxt,playerPtr);//Reads the players records base
+
     ////////////CREATES SNAKES HEAD SEGMENT AND A POINTER TO IT:
     snake* segmentPtr = NULL;
     snake* segment = malloc(sizeof(snake));
@@ -156,7 +171,6 @@ int main() {
     float factor = 0;
     int gameOverEffect = rand()%2;  //Randomizes which game over effect will be used
     char name[16] = { 0 };
-    char* filename = "records.txt";
     bool recordSaved = false;
     textPositioning(blank, 95, 16);
     /////////////////GAME OVER
@@ -179,13 +193,10 @@ int main() {
 
         if (GetAsyncKeyState(VK_RETURN) & 0x8000 && recordSaved == false)
         {
-            //printf("\033[17;104H");
-           // scanf_s("%15s", name, (unsigned)_countof(name));
-           // clearBuffer();
             readInputWithLimit(name,15);
-            //printf("\033[0;0H%s",name);
-            saveRecord(filename, name, points);
-            displayRecords(filename);
+            addPlayer(&playerPtr, name, points);
+            saveRecord(recordsTxt, points);
+            displayRecords(recordsTxt);
             recordSaved = true;
         }
         Sleep(10);

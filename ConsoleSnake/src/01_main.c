@@ -48,17 +48,17 @@ int main() {
     ///////////////CREATES A PLAYER
 
     Player* playerPtr = NULL;
-    Player* player = malloc(sizeof(Player));
-    if (player == NULL)
-    {
-        printf("Theres no space in memory to run the game");
-        return 1;
-    }
-    playerPtr = player; // Stores the head of the list in a ptr
+    //Player* player = malloc(sizeof(Player));
+    //if (player == NULL)
+    //{
+    //    printf("Theres no space in memory to run the game");
+    //    return 1;
+    //}
+    //playerPtr = player; // Stores the head of the list in a ptr
 
     char* recordsTxt = "records.txt";
 
-    readRecord(recordsTxt,playerPtr);//Reads the players records base
+    readRecord(recordsTxt,&playerPtr);//Reads the players records base
 
     ////////////CREATES SNAKES HEAD SEGMENT AND A POINTER TO IT:
     snake* segmentPtr = NULL;
@@ -187,16 +187,17 @@ int main() {
             textPositioning(game_over, (29 * factor) + 2, 10);
         }
         ticks++;
-        printf("\033[16;97H\033[38;2;105;105;105mPress enter to submit a score.");
-        printf("\033[17;97H%sPlayer:_______________ Score:%i", ANSI_COLOR_DARK_RED,points);
+        printf("\033[16;95H\033[38;2;105;105;105mPress enter to submit a score.");
+        printf("\033[17;95H%sPLAYER:_______________ SCORE:%4i", ANSI_COLOR_DARK_RED,points);
 
 
         if (GetAsyncKeyState(VK_RETURN) & 0x8000 && recordSaved == false)
         {
             readInputWithLimit(name,15);
             addPlayer(&playerPtr, name, points);
-            saveRecord(recordsTxt, points);
-            displayRecords(recordsTxt);
+            //printf("\033[HACA ESTA EL SORETE %s", playerPtr->name);
+            saveRecord(recordsTxt, playerPtr);                  ///// ACORDATE DE LIBERAR LA MEMORIAAAA GILLLL
+            displayRecords(recordsTxt);  
             recordSaved = true;
         }
         Sleep(10);

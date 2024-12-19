@@ -1,0 +1,5 @@
+PLAYER: Corrido?       |SCORE:    1
+PLAYER:   Que chupa pin|SCORE:    0
+PLAYER:     JAJAJAJ    |SCORE:    0
+PLAYER:    Muajajaj    |SCORE:    0
+PLAYER:  Poronga;; xd  |SCORE:    0

@@ -259,8 +259,7 @@ void gameTalker(snake* segment, int points, int ticks, int* gameTalkerFase, int*
 }
 
 
-
-void readRecord(const char* recordsTxt, Player* playerPtr)
+void readRecord(const char* recordsTxt, Player** playerPtr)
 {
     FILE* file = fopen(recordsTxt, "r");
     if (file == NULL)
@@ -268,51 +267,57 @@ void readRecord(const char* recordsTxt, Player* playerPtr)
         perror("Error al abrir el archivo");
         return;
     }
+
     char nameRead[16] = { 0 };
     char pointsString[5] = { 0 };
     int pointsFinal = 0;
     int c;
-    bool read = false;
     int readingCycle = 0;
     int characterPos = 0;
-    char* target;
-    while ((c = fgetc(file)) != EOF) //Reads until end of file
+    char* target = NULL;
+
+    while ((c = fgetc(file)) != EOF) // Lee hasta el final del archivo
     {
         if (c == ':')
         {
-            c = fgetc(file);
-            if (readingCycle == 0)
+            if (readingCycle == 0) // Comienza a leer el nombre
             {
                 readingCycle = 1;
+                characterPos = 0;
             }
-            if (readingCycle == 3)
+            else if (readingCycle == 3) // Comienza a leer los puntos
             {
-                readingCycle = 4;
+                readingCycle = 2;
+                characterPos = 0;
             }
         }
         else if (c == '|' || c == '\n')
         {
-            if (readingCycle == 2)
+            if (readingCycle == 1) // Fin del nombre
             {
-                nameRead[16] = '\0';
-                readingCycle = 3;
+                nameRead[characterPos] = '\0';
+                readingCycle = 3; // Cambia al estado de leer puntos
             }
-            if (readingCycle == 4)
+            else if (readingCycle == 2) // Fin de los puntos
             {
-                pointsString[5] = '\0';
-                pointsFinal = atoi(pointsString);
-                addPlayer(&playerPtr, nameRead, pointsFinal);
-                readingCycle = 0;
+                pointsString[characterPos] = '\0';
+                pointsFinal = atoi(pointsString); // Convierte puntos a entero
+                addPlayer(playerPtr, nameRead, pointsFinal); // Agrega a la lista
+                readingCycle = 0; // Reinicia el ciclo
             }
             characterPos = 0;
         }
-
-        target = (readingCycle == 1) ? nameRead : (readingCycle == 2) ? pointsString : NULL;
-        if (target != NULL)
+        else
         {
-            target[characterPos++] = c;
+            // Determina el buffer de destino
+            target = (readingCycle == 1) ? nameRead : (readingCycle == 2) ? pointsString : NULL;
+            if (target != NULL && characterPos < ((readingCycle == 1) ? sizeof(nameRead) - 1 : sizeof(pointsString) - 1))
+            {
+                target[characterPos++] = c;
+            }
         }
     }
+
     fclose(file);
 }
 
@@ -332,47 +337,10 @@ void addPlayer(Player** playerPtr, char nameRead[16], int pointsFinal)
     *playerPtr = newPlayer;
 }
 
-/*
+
 void saveRecord(const char* recordsTxt, Player* playerPtr)
 {
-
-    FILE* file = fopen(recordsTxt, "w");
-    if (file == NULL)
-    {
-        perror("Error al abrir el archivo");
-        return;
-    }
-
-    while (playerPtr != NULL )
-    {
-        char nameBuffer[16] = { 0 };
-        char intPadding[5] = { 0 };
-
-        strncpy_s(nameBuffer, sizeof(nameBuffer), playerPtr->name, _TRUNCATE);
-
-        padString(nameBuffer, 15, '_');
-
-        int exponential = 10;
-        for (int i = 0; i < 4; i++)
-        {
-            if ((playerPtr->points) / (exponential/10) >= 1)
-            {
-                intPadding[i] = '_';
-            }
-            exponential *= 10;
-        }
-
-        fprintf(file, "Player: %s  Score: %s%d\n",nameBuffer ,intPadding, playerPtr->points); 
-        playerPtr = playerPtr->next;
-    }
-    // Cerrar el archivo.
-    fclose(file);
-}
-
-*/
-void saveRecord(const char* recordsTxt, Player* playerPtr)
-{
-    FILE* file = fopen(recordsTxt, "a"); // Modo apéndice para no sobrescribir
+    FILE* file = fopen(recordsTxt, "w"); // Modo apéndice para no sobrescribir
     if (file == NULL)
     {
         perror("Error al abrir el archivo");
@@ -382,18 +350,21 @@ void saveRecord(const char* recordsTxt, Player* playerPtr)
     while (playerPtr != NULL)
     {
         char nameBuffer[16] = { 0 };
-
         // Copiar y rellenar el nombre
-        if (strncpy_s(nameBuffer, sizeof(nameBuffer), playerPtr->name, _TRUNCATE) != 0)//todo como el orto aca ACA HAY QUILOMBOOOOO ARREGLALO ACA <<<<<<<<<<<<<<<<<<<<
-        {
-            fprintf(stderr, "Error al copiar el nombre del jugador\n");
-            fclose(file);
-            return;
+        if(playerPtr->name != NULL)
+        { 
+            if (strncpy_s(nameBuffer, sizeof(nameBuffer), playerPtr->name, _TRUNCATE) != 0)
+            {
+                fprintf(stderr, "Error al copiar el nombre del jugador\n");
+                fclose(file);
+                return;
+            }
         }
-        padString(nameBuffer, 15, '_');
+
+        padString(nameBuffer, 15, ' ');
 
         // Escribir registro en el archivo
-        fprintf(file, "Player: %s  Score: %4d\n", nameBuffer, playerPtr->points);
+        fprintf(file, "PLAYER: %s|SCORE: %4d\n", nameBuffer, playerPtr->points);
 
         playerPtr = playerPtr->next;
     }
@@ -428,10 +399,10 @@ void displayRecords(const char* recordsTxt)
     // Leer y mostrar cada línea del archivo.
     char line[256];
     int line_number = 0;
-    printf("\033[19;97H%sRecords:",ANSI_COLOR_DARK_RED);
+    printf("\033[19;95H%sRECORDS:",ANSI_COLOR_DARK_RED);
     while (fgets(line, sizeof(line), file))
     {
-        printf("\033[%i;97H%s%s",19+line_number,ANSI_COLOR_DARK_RED, line);
+        printf("\033[%i;95H%s%s",19+line_number,ANSI_COLOR_DARK_RED, line);
         line_number++;
     }
 

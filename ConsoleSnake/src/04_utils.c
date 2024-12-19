@@ -130,7 +130,7 @@ void initializeRandomSeed() {
 void readInputWithLimit(char* input, int maxLen) 
 {
     bool confirm = false;
-    printf("\033[17;104H");
+    printf("\033[17;102H"); // THIS SETS THE CURSOR WRITING POSITION
     clearBuffer();
     HANDLE hInput = GetStdHandle(STD_INPUT_HANDLE);  // Obtén el manejador de la entrada estándar
     DWORD modeOriginal, modeSinEco;
@@ -156,7 +156,7 @@ void readInputWithLimit(char* input, int maxLen)
             char c = inputRecord.Event.KeyEvent.uChar.AsciiChar;
             
             if (c == '\r' || confirm == true) {  // Enter
-                printf("\033[18;104H\033[38;2;105;105;105mConfirm submission [y/n]: ");
+                printf("\033[18;102H\033[38;2;105;105;105mConfirm submission [y/n]: ");
                 confirm = true;
                 if (c == 'y')
                 {
@@ -164,11 +164,12 @@ void readInputWithLimit(char* input, int maxLen)
                 }
                 else if (c == 'n')
                 {
-                printf("\033[18;104H                          ");
+                printf("\033[18;102H                          "); // deletes the confirm submision text
 
                     confirm = false;
-                    printf("\033[17;104H%s", ANSI_COLOR_DARK_RED); // HAY QUE CORREGIR ESTO
-                    c = '_';
+                    printf("\033[17;102H%s_______________", ANSI_COLOR_DARK_RED);  //deltes the user name eco
+                    printf("\033[17;102H%s", ANSI_COLOR_DARK_RED); //sets the cursor so that the user can write freely
+                    c = '\b';
                     i = 0;
                 }
             }
@@ -177,7 +178,7 @@ void readInputWithLimit(char* input, int maxLen)
                 printf("\b_\b");
                 i--;
             }
-            else if ((isalnum(c) || c == '_' || c == ' ' || c == '-' || c == '+' || c == '\\' || c == '/' || c == '?' || c == '>' || c == '<' || c == '.' || c == '@' || c == '#' || c == '$' || c == '&' || c == '*' || c == '^' || c == '!' || c == '~' || c == '(' || c == ')' || c == '[' || c == ']' || c == ';' || c == '\'' || c == '"' || c == '%') && i < maxLen) {  // Otros caracteres dentro del límite
+            else if (confirm == false && (isalnum(c) || c == '_' || c == ' ' || c == '-' || c == '+' || c == '\\' || c == '/' || c == '?' || c == '>' || c == '<' || c == '.' || c == '@' || c == '#' || c == '$' || c == '&' || c == '*' || c == '^' || c == '!' || c == '~' || c == '(' || c == ')' || c == '[' || c == ']' || c == ';' || c == '\'' || c == '"' || c == '%') && i < maxLen) {  // Otros caracteres dentro del límite
                 input[i] = c;
                 putchar(c);  // Muestra el carácter
                 //printf("%c", input[i]);

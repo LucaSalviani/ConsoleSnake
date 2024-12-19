@@ -23,6 +23,7 @@ void readRecord(const char* recordsTxt, Player** playerPtr);
 void saveRecord(const char* recordsTxt, Player* playerPtr);
 void padString(char* str, int totalLength, char padChar);
 void addPlayer(Player** playerPtr, char nameRead[16], int pointsFinal);
+void padStringIzq(char* str, int totalLength, char padChar);
 
 
 #endif // GAME_H

@@ -337,6 +337,13 @@ void addPlayer(Player** playerPtr, char nameRead[16], int pointsFinal)
     *playerPtr = newPlayer;
 }
 
+void orderPlayerRecord()
+{
+
+
+
+
+}
 
 void saveRecord(const char* recordsTxt, Player* playerPtr)
 {
@@ -362,15 +369,16 @@ void saveRecord(const char* recordsTxt, Player* playerPtr)
         }
 
         padString(nameBuffer, 15, ' ');
-
+        //padStringIzq(nameBuffer, 15, ' '); // Hago el padding a izq o a derecha?
         // Escribir registro en el archivo
-        fprintf(file, "PLAYER: %s|SCORE: %4d\n", nameBuffer, playerPtr->points);
+        fprintf(file, "PLAYER:%s|SCORE:%4d\n", nameBuffer, playerPtr->points);
 
         playerPtr = playerPtr->next;
     }
     // Cerrar el archivo.
     fclose(file);
 }
+
 
 
 void padString(char* str, int totalLength, char padChar) 
@@ -383,6 +391,27 @@ void padString(char* str, int totalLength, char padChar)
             str[i] = padChar;
         }
         str[totalLength] = '\0';  // Asegurarse de que la cadena esté terminada en nulo
+    }
+}
+
+
+
+void padStringIzq(char* str, int totalLength, char padChar)
+{
+    int len = strlen(str);
+
+    if (len < totalLength) {
+        int padding = totalLength - len;
+
+        // Desplazar la cadena original hacia la derecha
+        for (int i = len; i >= 0; i--) {
+            str[i + padding] = str[i];
+        }
+
+        // Rellenar con 'padChar' al principio
+        for (int i = 0; i < padding; i++) {
+            str[i] = padChar;
+        }
     }
 }
 

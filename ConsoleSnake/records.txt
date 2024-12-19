@@ -1,5 +1,13 @@
-PLAYER: Corrido?       |SCORE:    1
-PLAYER:   Que chupa pin|SCORE:    0
-PLAYER:     JAJAJAJ    |SCORE:    0
-PLAYER:    Muajajaj    |SCORE:    0
-PLAYER:  Poronga;; xd  |SCORE:    0
+PLAYER:         ICKKCK|SCORE:   1
+PLAYER:No buenardo    |SCORE:   1
+PLAYER:Buenaaa        |SCORE:   1
+PLAYER:Desastre       |SCORE:   1
+PLAYER:Averga         |SCORE:   1
+PLAYER:Yaqui          |SCORE:   1
+PLAYER:Mostro no      |SCORE:   1
+PLAYER:Lo arregle?    |SCORE:   1
+PLAYER:Arregleishon!  |SCORE:   1
+PLAYER:Funka de 10    |SCORE:   1
+PLAYER:Test           |SCORE:   1
+PLAYER:Buenardo       |SCORE:   1
+PLAYER:        Porongo|SCORE:   1

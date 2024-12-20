@@ -259,6 +259,9 @@ void gameTalker(snake* segment, int points, int ticks, int* gameTalkerFase, int*
 }
 
 
+/////////////////// FROM DOWN HERE ITS ALL RELATED TO THE PLAYERS DATA FILE
+
+// Reads the record from the data file into a linked list of 2 elements, name and points
 void readRecord(const char* recordsTxt, Player** playerPtr)
 {
     FILE* file = fopen(recordsTxt, "r");
@@ -321,7 +324,7 @@ void readRecord(const char* recordsTxt, Player** playerPtr)
     fclose(file);
 }
 
-
+////// Adds a player to the linked list
 void addPlayer(Player** playerPtr, char nameRead[16], int pointsFinal)
 {
     Player* newPlayer = malloc(sizeof(Player));
@@ -337,14 +340,105 @@ void addPlayer(Player** playerPtr, char nameRead[16], int pointsFinal)
     *playerPtr = newPlayer;
 }
 
-void orderPlayerRecord()
+
+void mergeSort(Player **playerPtr)
 {
+     Player* head = *playerPtr;
+     Player* a;
+     Player* b;
+
+    // Base case 
+    if ((head == NULL) || (head->next == NULL))
+    {
+        return;
+    }
+
+    // Split head 
+    FrontBackSplit(head, &a, &b);
+
+    // Recursively sort the sublists 
+    mergeSort(&a);
+    mergeSort(&b);
+
+    *playerPtr = SortedMerge(a, b);
+
+}
+
+struct Player* SortedMerge( Player* a,  Player* b)
+{
+     Player* result = NULL;
+
+    // Base cases 
+    if (a == NULL)
+        return (b);
+    else if (b == NULL)
+        return (a);
+
+    // Pick either a or b, and recur 
+    if (a->points >= b->points)
+    {
+        result = a;
+        result->next =
+            SortedMerge(a->next, b);
+    }
+    else
+    {
+        result = b;
+        result->next = SortedMerge(a, b->next);
+    }
+    return (result);
+}
 
 
+
+void FrontBackSplit( Player* source,  Player** frontRef,  Player** backRef)
+{
+     Player* fast;
+     Player* slow;
+    slow = source;
+    fast = source->next;
+
+    /* Advance 'fast' two nodes, and
+       advance 'slow' one node */
+    while (fast != NULL)
+    {
+        fast = fast->next;
+        if (fast != NULL)
+        {
+            slow = slow->next;
+            fast = fast->next;
+        }
+    }
+
+    /* 'slow' is before the midpoint in the
+        list, so split it in two at that point. */
+    *frontRef = source;
+    *backRef = slow->next;
+    slow->next = NULL;
+}
+
+
+
+// Frees players linked list
+void freePlayerList(Player * playerPtr)
+{
+    // Base case
+    if (playerPtr == NULL)
+    {
+        return;  // If NULL return
+    }
+
+    // Call the function recursevly 
+    freePlayerList(playerPtr->next);
+
+    // Free actual node
+    free(playerPtr);
 
 
 }
 
+
+///////////// Rewrites the players file with the new list
 void saveRecord(const char* recordsTxt, Player* playerPtr)
 {
     FILE* file = fopen(recordsTxt, "w"); // Modo apéndice para no sobrescribir
@@ -377,10 +471,11 @@ void saveRecord(const char* recordsTxt, Player* playerPtr)
     }
     // Cerrar el archivo.
     fclose(file);
+    freePlayerList(playerPtr);
 }
 
 
-
+/////// Gives the names string padding
 void padString(char* str, int totalLength, char padChar) 
 {
     int len = strlen(str);
@@ -395,7 +490,7 @@ void padString(char* str, int totalLength, char padChar)
 }
 
 
-
+///////// Gives the names string padding to the left
 void padStringIzq(char* str, int totalLength, char padChar)
 {
     int len = strlen(str);
@@ -415,6 +510,8 @@ void padStringIzq(char* str, int totalLength, char padChar)
     }
 }
 
+
+///////// Displays the records file 
 void displayRecords(const char* recordsTxt)
 {
     // Abrir el archivo en modo lectura ("r").

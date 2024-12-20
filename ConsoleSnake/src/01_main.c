@@ -195,8 +195,8 @@ int main() {
         {
             readInputWithLimit(name,15);
             addPlayer(&playerPtr, name, points);
-            //printf("\033[HACA ESTA EL SORETE %s", playerPtr->name);
-            saveRecord(recordsTxt, playerPtr);                  ///// ACORDATE DE LIBERAR LA MEMORIAAAA GILLLL
+            mergeSort(&playerPtr);
+            saveRecord(recordsTxt, playerPtr);                  
             displayRecords(recordsTxt);  
             recordSaved = true;
         }

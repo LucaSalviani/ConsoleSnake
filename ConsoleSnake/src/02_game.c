@@ -166,7 +166,7 @@ void controls(snake* segment, int* direction, bool* pause,int xLeftBoundary,int 
     }
 }
 
-
+// All the dialogues are indexed in an array
 const char** dialogues[][3] = {
     { ouch ,  ouch_variant1 ,  ouch_variant2 },
     { huh ,  huh_variant1 ,  huh_variant2 },
@@ -176,6 +176,7 @@ const char** dialogues[][3] = {
 
 };
 
+// All animations are indexed in an array
 const char** animations[][12] = {
     { worm1 ,  worm2 ,  worm3, worm2  ,worm3, worm2 ,worm3, worm2 ,worm3, worm2 ,worm3, worm2},
     { thumbs_up ,  happy_face ,  happy_face_2,happy_face ,  happy_face_2,happy_face ,  happy_face_2,happy_face ,  happy_face_2,happy_face ,  happy_face_2,happy_face},
@@ -279,16 +280,16 @@ void readRecord(const char* recordsTxt, Player** playerPtr)
     int characterPos = 0;
     char* target = NULL;
 
-    while ((c = fgetc(file)) != EOF) // Lee hasta el final del archivo
+    while ((c = fgetc(file)) != EOF) // Reads until end of file
     {
         if (c == ':')
         {
-            if (readingCycle == 0) // Comienza a leer el nombre
+            if (readingCycle == 0) // Starts reading the name
             {
                 readingCycle = 1;
                 characterPos = 0;
             }
-            else if (readingCycle == 3) // Comienza a leer los puntos
+            else if (readingCycle == 3) // Starts reading the points
             {
                 readingCycle = 2;
                 characterPos = 0;
@@ -296,25 +297,25 @@ void readRecord(const char* recordsTxt, Player** playerPtr)
         }
         else if (c == '|' || c == '\n')
         {
-            if (readingCycle == 1) // Fin del nombre
+            if (readingCycle == 1) // End of the name
             {
                 nameRead[characterPos] = '\0';
-                readingCycle = 3; // Cambia al estado de leer puntos
+                readingCycle = 3; // changes the state of point reading
             }
-            else if (readingCycle == 2) // Fin de los puntos
+            else if (readingCycle == 2) // Ends of the points
             {
                 pointsString[characterPos] = '\0';
-                pointsFinal = atoi(pointsString); // Convierte puntos a entero
-                addPlayer(playerPtr, nameRead, pointsFinal); // Agrega a la lista
-                readingCycle = 0; // Reinicia el ciclo
+                pointsFinal = atoi(pointsString); // Converts points into int
+                addPlayer(playerPtr, nameRead, pointsFinal); // Adds to the list
+                readingCycle = 0; // Cycle restarts
             }
             characterPos = 0;
         }
         else
         {
-            // Determina el buffer de destino
+            // Determines the destination buffer with a terniary operation
             target = (readingCycle == 1) ? nameRead : (readingCycle == 2) ? pointsString : NULL;
-            if (target != NULL && characterPos < ((readingCycle == 1) ? sizeof(nameRead) - 1 : sizeof(pointsString) - 1))
+            if (target != NULL && characterPos < ((readingCycle == 1) ? sizeof(nameRead) - 1 : sizeof(pointsString) - 1)) // checks to avoid crashes
             {
                 target[characterPos++] = c;
             }
@@ -340,7 +341,7 @@ void addPlayer(Player** playerPtr, char nameRead[16], int pointsFinal)
     *playerPtr = newPlayer;
 }
 
-
+// Recursive merge sorting algorithm that works with the linked list and does not use brute force (An array)
 void mergeSort(Player **playerPtr)
 {
      Player* head = *playerPtr;
@@ -364,6 +365,7 @@ void mergeSort(Player **playerPtr)
 
 }
 
+// Merges two sorted lists
 struct Player* SortedMerge( Player* a,  Player* b)
 {
      Player* result = NULL;
@@ -398,8 +400,7 @@ void FrontBackSplit( Player* source,  Player** frontRef,  Player** backRef)
     slow = source;
     fast = source->next;
 
-    /* Advance 'fast' two nodes, and
-       advance 'slow' one node */
+    // Advance 'fast' two nodes, and advance 'slow' one node   
     while (fast != NULL)
     {
         fast = fast->next;
@@ -410,8 +411,8 @@ void FrontBackSplit( Player* source,  Player** frontRef,  Player** backRef)
         }
     }
 
-    /* 'slow' is before the midpoint in the
-        list, so split it in two at that point. */
+    // 'slow' is before the midpoint in the list, so split it in two at that point.
+         
     *frontRef = source;
     *backRef = slow->next;
     slow->next = NULL;
@@ -441,35 +442,34 @@ void freePlayerList(Player * playerPtr)
 ///////////// Rewrites the players file with the new list
 void saveRecord(const char* recordsTxt, Player* playerPtr)
 {
-    FILE* file = fopen(recordsTxt, "w"); // Modo apéndice para no sobrescribir
+    FILE* file = fopen(recordsTxt, "w"); // We want to everwrite the previous file with the new ordered linked list
     if (file == NULL)
     {
-        perror("Error al abrir el archivo");
+        perror("Error while opening file");
         return;
     }
 
     while (playerPtr != NULL)
     {
         char nameBuffer[16] = { 0 };
-        // Copiar y rellenar el nombre
+        // Copy and fill the name
         if(playerPtr->name != NULL)
         { 
             if (strncpy_s(nameBuffer, sizeof(nameBuffer), playerPtr->name, _TRUNCATE) != 0)
             {
-                fprintf(stderr, "Error al copiar el nombre del jugador\n");
+                fprintf(stderr, "Error while copying the players name\n");
                 fclose(file);
                 return;
             }
         }
 
         padString(nameBuffer, 15, ' ');
-        //padStringIzq(nameBuffer, 15, ' '); // Hago el padding a izq o a derecha?
-        // Escribir registro en el archivo
+        // Right registry into file
         fprintf(file, "PLAYER:%s|SCORE:%4d\n", nameBuffer, playerPtr->points);
 
         playerPtr = playerPtr->next;
     }
-    // Cerrar el archivo.
+    // Close file
     fclose(file);
     freePlayerList(playerPtr);
 }
@@ -481,11 +481,11 @@ void padString(char* str, int totalLength, char padChar)
     int len = strlen(str);
 
     if (len < totalLength) {
-        // Rellenar con 'padChar' hasta completar la longitud deseada
+        // Fill with padChar until the string has the desired length 
         for (int i = len; i < totalLength; i++) {
             str[i] = padChar;
         }
-        str[totalLength] = '\0';  // Asegurarse de que la cadena esté terminada en nulo
+        str[totalLength] = '\0';  // Makes sure that the chain is terminated in a null
     }
 }
 
@@ -498,12 +498,10 @@ void padStringIzq(char* str, int totalLength, char padChar)
     if (len < totalLength) {
         int padding = totalLength - len;
 
-        // Desplazar la cadena original hacia la derecha
         for (int i = len; i >= 0; i--) {
             str[i + padding] = str[i];
         }
 
-        // Rellenar con 'padChar' al principio
         for (int i = 0; i < padding; i++) {
             str[i] = padChar;
         }
@@ -514,7 +512,7 @@ void padStringIzq(char* str, int totalLength, char padChar)
 ///////// Displays the records file 
 void displayRecords(const char* recordsTxt)
 {
-    // Abrir el archivo en modo lectura ("r").
+    // Open the file in read mode
     FILE* file = fopen(recordsTxt, "r");
     if (file == NULL)
     {
@@ -522,7 +520,7 @@ void displayRecords(const char* recordsTxt)
         return;
     }
 
-    // Leer y mostrar cada línea del archivo.
+    // Read and show each line of the file
     char line[256];
     int line_number = 0;
     printf("\033[19;95H%sRECORDS:",ANSI_COLOR_DARK_RED);
@@ -532,6 +530,6 @@ void displayRecords(const char* recordsTxt)
         line_number++;
     }
 
-    // Cerrar el archivo.
+    // Close the file
     fclose(file);
 }

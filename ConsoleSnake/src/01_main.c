@@ -19,6 +19,8 @@ int main() {
     int gameTalkerMap = 0;
     int internalTimer = 0;
     int randText = rand() % 3;
+    int scroll = 0;
+    int registryAmount = 0;
 
     //Windows size, everything will be based on it
     const int consoleWidth = 1100;
@@ -187,8 +189,12 @@ int main() {
             textPositioning(game_over, (29 * factor) + 2, 10);
         }
         ticks++;
-        printf("\033[16;95H\033[38;2;105;105;105mPress enter to submit a score.");
-        printf("\033[17;95H%sPLAYER:_______________ SCORE:%4i", ANSI_COLOR_DARK_RED,points);
+        if (recordSaved == false)
+        {
+            printf("\033[16;95H\033[38;2;105;105;105mPress enter to submit a score.");
+            printf("\033[17;95H%sPLAYER:_______________ SCORE:%4i", ANSI_COLOR_DARK_RED, points);
+        }
+
 
 
         if (GetAsyncKeyState(VK_RETURN) & 0x8000 && recordSaved == false)
@@ -196,10 +202,16 @@ int main() {
             readInputWithLimit(name,15);
             addPlayer(&playerPtr, name, points);
             mergeSort(&playerPtr);
-            saveRecord(recordsTxt, playerPtr);                  
-            displayRecords(recordsTxt);  
+            saveRecord(recordsTxt, playerPtr,&registryAmount);                  
+            displayRecords(recordsTxt,&scroll,registryAmount);  
             recordSaved = true;
         }
+
+        if (recordSaved == true)
+        {
+            displayRecords(recordsTxt,&scroll,registryAmount);
+        }
+
         Sleep(10);
     }
     return 0;

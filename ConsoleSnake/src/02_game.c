@@ -32,22 +32,22 @@ void georginasCookies(snake** segment,snake** segmentPtr, int* x_food, int* y_fo
 //Waits for the first key to be pressed
 bool gameStart(int* snakeDirection)
 {
-    if ((GetAsyncKeyState(VK_LEFT) & 0x8000))
+    if ((GetAsyncKeyState(VK_LEFT) & 0x8000) || (GetAsyncKeyState('a') & 0x8000) || (GetAsyncKeyState('A') & 0x8000))
     {
         return false;
         *snakeDirection = 1;
     }
-    else if ((GetAsyncKeyState(VK_RIGHT) & 0x8000)) 
+    else if ((GetAsyncKeyState(VK_RIGHT) & 0x8000) || (GetAsyncKeyState('d') & 0x8000) || (GetAsyncKeyState('D') & 0x8000))
     {
         *snakeDirection = 2;
         return false;
     }
-    else if ((GetAsyncKeyState(VK_UP) & 0x8000))
+    else if ((GetAsyncKeyState(VK_UP) & 0x8000) || (GetAsyncKeyState('w') & 0x8000) || (GetAsyncKeyState('W') & 0x8000))
     {
         *snakeDirection = 3;
         return false;
     }
-    else if ((GetAsyncKeyState(VK_DOWN) & 0x8000)) 
+    else if ((GetAsyncKeyState(VK_DOWN) & 0x8000) || (GetAsyncKeyState('s') & 0x8000) || (GetAsyncKeyState('S') & 0x8000))
     {
         *snakeDirection = 4;
         return false;
@@ -94,18 +94,19 @@ void pointsDisplay(int points,int xPos,int yPos,const char ** text[])
 void controls(snake* segment, int* direction, bool* pause,int xLeftBoundary,int xRightBoundary,int yUpBoundary,int yDownBoundary)
 {
     //Arrow keys are observed and whenever one is pressed it changes x and y coordinates of the snakes head accordingly
-    if ((GetAsyncKeyState(VK_LEFT) & 0x8000)) {
+    if ((GetAsyncKeyState(VK_LEFT) & 0x8000) || (GetAsyncKeyState('a') & 0x8000) || (GetAsyncKeyState('A') & 0x8000))
+    {
         *direction = 1;
     }
-    if ((GetAsyncKeyState(VK_RIGHT) & 0x8000))
+    if ((GetAsyncKeyState(VK_RIGHT) & 0x8000) || (GetAsyncKeyState('d') & 0x8000) || (GetAsyncKeyState('D') & 0x8000))
     {
         *direction = 2;
     }
-    if ((GetAsyncKeyState(VK_UP) & 0x8000))
+    if ((GetAsyncKeyState(VK_UP) & 0x8000) || (GetAsyncKeyState('w') & 0x8000) || (GetAsyncKeyState('W') & 0x8000))
     {
         *direction = 3;
     }
-    if ((GetAsyncKeyState(VK_DOWN) & 0x8000))
+    if ((GetAsyncKeyState(VK_DOWN) & 0x8000) || (GetAsyncKeyState('s') & 0x8000) || (GetAsyncKeyState('S') & 0x8000))
     {
         *direction = 4;
     }
@@ -440,7 +441,7 @@ void freePlayerList(Player * playerPtr)
 
 
 ///////////// Rewrites the players file with the new list
-void saveRecord(const char* recordsTxt, Player* playerPtr)
+void saveRecord(const char* recordsTxt, Player* playerPtr,int *registryAmount)
 {
     FILE* file = fopen(recordsTxt, "w"); // We want to everwrite the previous file with the new ordered linked list
     if (file == NULL)
@@ -451,6 +452,7 @@ void saveRecord(const char* recordsTxt, Player* playerPtr)
 
     while (playerPtr != NULL)
     {
+        *registryAmount++;
         char nameBuffer[16] = { 0 };
         // Copy and fill the name
         if(playerPtr->name != NULL)
@@ -510,7 +512,7 @@ void padStringIzq(char* str, int totalLength, char padChar)
 
 
 ///////// Displays the records file 
-void displayRecords(const char* recordsTxt)
+void displayRecords(const char* recordsTxt,int* scroll,int registryAmount)
 {
     // Open the file in read mode
     FILE* file = fopen(recordsTxt, "r");
@@ -523,10 +525,38 @@ void displayRecords(const char* recordsTxt)
     // Read and show each line of the file
     char line[256];
     int line_number = 0;
-    printf("\033[19;95H%sRECORDS:",ANSI_COLOR_DARK_RED);
-    while (fgets(line, sizeof(line), file))
+    printf("\033[16;95H%s              RECORDS           ",ANSI_COLOR_DARK_RED);
+    printf("\033[17;95H                                  ");
+
+    if (scroll != NULL) {
+        // Detect keys up
+        if (((GetAsyncKeyState(VK_UP) & 0x8000) || (GetAsyncKeyState('w') & 0x8000) || (GetAsyncKeyState('W') & 0x8000)) && (*scroll) > 0) {
+            (*scroll)--;
+            //prints the scroll wheel
+            printf("\033[%d;130H  ", 18 + (*scroll));
+            printf("\033[%d;130H||", 17 + (*scroll));
+            Sleep(20);
+        }
+
+        // Detect keys down
+        if (((GetAsyncKeyState(VK_DOWN) & 0x8000) || (GetAsyncKeyState('s') & 0x8000) || (GetAsyncKeyState('S') & 0x8000)) && (*scroll) < 15) {
+            (*scroll)++;
+            //prints the scroll wheel
+            printf("\033[%d;130H  ", 16 + (*scroll));
+            printf("\033[%d;130H||", 17 + (*scroll));
+            Sleep(20);
+        }
+
+    }
+    else {
+        // Null case
+        printf("\033[%d;130H||", 17);
+    }
+
+
+    for (int i = 0; i < 15 && fgets(line, sizeof(line), file) ; i++)
     {
-        printf("\033[%i;95H%s%s",19+line_number,ANSI_COLOR_DARK_RED, line);
+        printf("\033[%i;95H%s%s", 18 + line_number, ANSI_COLOR_DARK_RED, line);
         line_number++;
     }
 

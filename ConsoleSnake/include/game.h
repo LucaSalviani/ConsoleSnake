@@ -1,7 +1,7 @@
 #ifndef GAME_H
 #define GAME_H
 #define _CRT_SECURE_NO_WARNINGS
-
+#include <stdio.h>
 #include "snake.h"
 
 typedef struct PLayer{
@@ -28,6 +28,7 @@ void freePlayerList(Player* playerPtr);
 void mergeSort(Player** playerPtr);
 struct Player* SortedMerge(Player* a, Player* b);
 void FrontBackSplit(Player* source, Player** frontRef, Player** backRef);
+void skipLines(FILE* file, int linesToSkip);
 
 
 #endif // GAME_H

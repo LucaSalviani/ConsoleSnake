@@ -452,7 +452,6 @@ void saveRecord(const char* recordsTxt, Player* playerPtr,int *registryAmount)
 
     while (playerPtr != NULL)
     {
-        *registryAmount++;
         char nameBuffer[16] = { 0 };
         // Copy and fill the name
         if(playerPtr->name != NULL)
@@ -467,6 +466,7 @@ void saveRecord(const char* recordsTxt, Player* playerPtr,int *registryAmount)
 
         padString(nameBuffer, 15, ' ');
         // Right registry into file
+        (*registryAmount)++;
         fprintf(file, "PLAYER:%s|SCORE:%4d\n", nameBuffer, playerPtr->points);
 
         playerPtr = playerPtr->next;
@@ -528,30 +528,34 @@ void displayRecords(const char* recordsTxt,int* scroll,int registryAmount)
     printf("\033[16;95H%s              RECORDS           ",ANSI_COLOR_DARK_RED);
     printf("\033[17;95H                                  ");
 
-    if (scroll != NULL) {
-        // Detect keys up
-        if (((GetAsyncKeyState(VK_UP) & 0x8000) || (GetAsyncKeyState('w') & 0x8000) || (GetAsyncKeyState('W') & 0x8000)) && (*scroll) > 0) {
-            (*scroll)--;
-            //prints the scroll wheel
-            printf("\033[%d;130H  ", 18 + (*scroll));
-            printf("\033[%d;130H||", 17 + (*scroll));
-            Sleep(20);
-        }
+    if (registryAmount > 15)
+    {
+        float scrollRate = (registryAmount ) / 15;
+        int integralPart = round(scrollRate); // i could also calculate the integer rest of the division and use that as a parameter so that the scroll is more exact, but it is a lot of work for very little reward, maybe some day(?
+        if (scroll != NULL) {
+            // Detect keys up
+            if (((GetAsyncKeyState(VK_UP) & 0x8000) || (GetAsyncKeyState('w') & 0x8000) || (GetAsyncKeyState('W') & 0x8000)) && (*scroll) > 0) {
+                (*scroll)--;
+                //prints the scroll wheel
+                int scrolledAmount = (*scroll) / integralPart;
+                printf("\033[%d;130H  ", 18 + scrolledAmount);
+                printf("\033[%d;130H||", 17 + scrolledAmount);
+                Sleep(10);
+            }
 
-        // Detect keys down
-        if (((GetAsyncKeyState(VK_DOWN) & 0x8000) || (GetAsyncKeyState('s') & 0x8000) || (GetAsyncKeyState('S') & 0x8000)) && (*scroll) < 15) {
-            (*scroll)++;
-            //prints the scroll wheel
-            printf("\033[%d;130H  ", 16 + (*scroll));
-            printf("\033[%d;130H||", 17 + (*scroll));
-            Sleep(20);
+            // Detect keys down
+            if (((GetAsyncKeyState(VK_DOWN) & 0x8000) || (GetAsyncKeyState('s') & 0x8000) || (GetAsyncKeyState('S') & 0x8000)) && (*scroll) < registryAmount - 15) {
+                (*scroll)++;
+                //prints the scroll wheel
+                int scrolledAmount = (*scroll) / integralPart;
+                printf("\033[%d;130H  ", 16 + scrolledAmount);
+                printf("\033[%d;130H||", 17 + scrolledAmount);
+                Sleep(10);
+            }
+            skipLines(file, *scroll);
         }
-
     }
-    else {
-        // Null case
-        printf("\033[%d;130H||", 17);
-    }
+    
 
 
     for (int i = 0; i < 15 && fgets(line, sizeof(line), file) ; i++)
@@ -559,7 +563,20 @@ void displayRecords(const char* recordsTxt,int* scroll,int registryAmount)
         printf("\033[%i;95H%s%s", 18 + line_number, ANSI_COLOR_DARK_RED, line);
         line_number++;
     }
-
+ 
     // Close the file
     fclose(file);
+}
+
+void skipLines(FILE* file, int linesToSkip) 
+{
+    char buffer[256];  // buffer for the lines 
+
+    for (int i = 0; i < linesToSkip; i++) 
+    {
+        if (fgets(buffer, sizeof(buffer), file) == NULL) {
+            printf("\033[HReached end of file before skipping lines\n");
+            break;
+        }
+    }
 }

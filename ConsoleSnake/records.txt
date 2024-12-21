@@ -3,34 +3,69 @@ PLAYER:Matanga        |SCORE:   6
 PLAYER:Matanga        |SCORE:   6
 PLAYER:Matanga        |SCORE:   6
 PLAYER:Matanga        |SCORE:   6
+PLAYER:Matanga        |SCORE:   6
+PLAYER:Matanga        |SCORE:   6
+PLAYER:Matanga        |SCORE:   6
+PLAYER:Matanga        |SCORE:   6
+PLAYER:Matanga        |SCORE:   6
+PLAYER:Matanga        |SCORE:   6
+PLAYER:Matanga        |SCORE:   6
+PLAYER:Matanga        |SCORE:   6
+PLAYER:Matanga        |SCORE:   6
+PLAYER:Matanga        |SCORE:   6
+PLAYER:Matanga        |SCORE:   6
+PLAYER:Matanga        |SCORE:   6
+PLAYER:Matanga        |SCORE:   6
+PLAYER:Matanga        |SCORE:   6
+PLAYER:Matanga        |SCORE:   6
 PLAYER:Matanga        |SCORE:   5
 PLAYER:Matanga        |SCORE:   5
 PLAYER:Matanga        |SCORE:   5
 PLAYER:Matanga        |SCORE:   5
 PLAYER:Matanga        |SCORE:   5
+PLAYER:Matanga        |SCORE:   5
+PLAYER:Matanga        |SCORE:   5
+PLAYER:Matanga        |SCORE:   5
+PLAYER:Cuanta fe      |SCORE:   2
+PLAYER:Como si fuera t|SCORE:   1
+PLAYER:Feliz          |SCORE:   1
+PLAYER:1st try        |SCORE:   1
+PLAYER:Follow         |SCORE:   1
+PLAYER:Scroll         |SCORE:   1
+PLAYER:In my eye      |SCORE:   1
+PLAYER:Jungle         |SCORE:   1
+PLAYER:Averga         |SCORE:   1
+PLAYER:noo anda       |SCORE:   1
+PLAYER:Mucho de golpe |SCORE:   1
+PLAYER:Yeahhh         |SCORE:   1
+PLAYER:MM?            |SCORE:   1
 PLAYER:Take a look    |SCORE:   1
-PLAYER:MM?            |SCORE:   1
+PLAYER:Shout          |SCORE:   1
+PLAYER:Mucho de golpe |SCORE:   1
 PLAYER:Yeahhh         |SCORE:   1
-PLAYER:Yeah           |SCORE:   1
 PLAYER:MM?            |SCORE:   1
-PLAYER:Say            |SCORE:   1
-PLAYER:MM?            |SCORE:   1
+PLAYER:Take a look    |SCORE:   1
+PLAYER:Shout          |SCORE:   1
+PLAYER:Mucho de golpe |SCORE:   1
 PLAYER:Yeahhh         |SCORE:   1
-PLAYER:Yeah           |SCORE:   1
 PLAYER:MM?            |SCORE:   1
-PLAYER:Say            |SCORE:   1
-PLAYER:MM?            |SCORE:   1
+PLAYER:Take a look    |SCORE:   1
+PLAYER:Shout          |SCORE:   1
+PLAYER:Mucho de golpe |SCORE:   1
 PLAYER:Yeahhh         |SCORE:   1
-PLAYER:Yeah           |SCORE:   1
 PLAYER:MM?            |SCORE:   1
-PLAYER:Say            |SCORE:   1
-PLAYER:MM?            |SCORE:   1
-PLAYER:Yeahhh         |SCORE:   1
-PLAYER:Yeah           |SCORE:   1
-PLAYER:MM?            |SCORE:   1
-PLAYER:Say            |SCORE:   1
-PLAYER:MM?            |SCORE:   1
-PLAYER:Yeahhh         |SCORE:   1
-PLAYER:Yeah           |SCORE:   1
-PLAYER:MM?            |SCORE:   1
-PLAYER:Say            |SCORE:   1
+PLAYER:Take a look    |SCORE:   1
+PLAYER:Shout          |SCORE:   1
+PLAYER:Mmmm dudoso    |SCORE:   1
+PLAYER:MMM            |SCORE:   1
+PLAYER:Averga         |SCORE:   1
+PLAYER:Move me        |SCORE:   1
+PLAYER:Scroll         |SCORE:   1
+PLAYER:A ver          |SCORE:   1
+PLAYER:Tengo fe       |SCORE:   1
+PLAYER:Prueba         |SCORE:   1
+PLAYER:Veremos        |SCORE:   1
+PLAYER:Test           |SCORE:   1
+PLAYER:tristeza       |SCORE:   1
+PLAYER:Boludito       |SCORE:   1
+PLAYER:Fin            |SCORE:   0

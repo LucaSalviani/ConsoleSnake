@@ -132,26 +132,26 @@ void readInputWithLimit(char* input, int maxLen)
     bool confirm = false;
     printf("\033[17;102H"); // THIS SETS THE CURSOR WRITING POSITION
     clearBuffer();
-    HANDLE hInput = GetStdHandle(STD_INPUT_HANDLE);  // Obtén el manejador de la entrada estándar
+    HANDLE hInput = GetStdHandle(STD_INPUT_HANDLE);  // Obtains current console handle
     DWORD modeOriginal, modeSinEco;
     int i = 0;
     memset(input, 0, maxLen);
-    // Guarda el modo actual de la consola
+    // Saves current console mode
     GetConsoleMode(hInput, &modeOriginal);
 
-    // Configura la consola para deshabilitar el eco y la entrada en modo línea
+    // Configures the console the disenable the eco and the in line input
     modeSinEco = modeOriginal & ~(ENABLE_ECHO_INPUT | ENABLE_LINE_INPUT);
     SetConsoleMode(hInput, modeSinEco);
 
-    // Lee los caracteres sin eco
+    // Reads characters without eco, later on i will show them one by one with my own criteria
     while (1) {
         INPUT_RECORD inputRecord;
         DWORD eventsRead;
 
-        // Lee la entrada de la consola
+        // Reads console input
         ReadConsoleInput(hInput, &inputRecord, 1, &eventsRead);
 
-        // Procesa solo eventos de teclado
+        // Only process keyboard events
         if (inputRecord.EventType == KEY_EVENT && inputRecord.Event.KeyEvent.bKeyDown) {
             char c = inputRecord.Event.KeyEvent.uChar.AsciiChar;
             
@@ -178,23 +178,22 @@ void readInputWithLimit(char* input, int maxLen)
                 printf("\b_\b");
                 i--;
             }
-            else if (confirm == false && (isalnum(c) || c == '_' || c == ' ' || c == '-' || c == '+' || c == '\\' || c == '/' || c == '?' || c == '>' || c == '<' || c == '.' || c == '@' || c == '#' || c == '$' || c == '&' || c == '*' || c == '^' || c == '!' || c == '~' || c == '(' || c == ')' || c == '[' || c == ']' || c == ';' || c == '\'' || c == '"' || c == '%') && i < maxLen) {  // Otros caracteres dentro del límite
+            else if (confirm == false && (isalnum(c) || c == '_' || c == ' ' || c == '-' || c == '+' || c == '\\' || c == '/' || c == '?' || c == '>' || c == '<' || c == '.' || c == '@' || c == '#' || c == '$' || c == '&' || c == '*' || c == '^' || c == '!' || c == '~' || c == '(' || c == ')' || c == '[' || c == ']' || c == ';' || c == '\'' || c == '"' || c == '%') && i < maxLen) {  // Other charactrers inside the limit
                 input[i] = c;
-                putchar(c);  // Muestra el carácter
-                //printf("%c", input[i]);
+                putchar(c);  // Shows character
                 i++;
             }
         }
     }
-    input[i] = '\0';  // Agregar terminador nulo
+    input[i] = '\0';  // Adds null terminator
 
-    // Restaura el modo original de la consola
+    // Restores console original mode
     SetConsoleMode(hInput, modeOriginal);
 }
 
 
 void clearBuffer() // IT ONLY WORKS FOR WINDOWS
 {
-    HANDLE hInput = GetStdHandle(STD_INPUT_HANDLE);  // Obtén el manejador de entrada estándar
-    FlushConsoleInputBuffer(hInput);                // Limpia el buffer de entrada
+    HANDLE hInput = GetStdHandle(STD_INPUT_HANDLE);  // Obtains the hanlde for input standard
+    FlushConsoleInputBuffer(hInput);                // Cleans input buffer
 }

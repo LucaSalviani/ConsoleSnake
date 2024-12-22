@@ -512,7 +512,7 @@ void padStringIzq(char* str, int totalLength, char padChar)
 
 
 ///////// Displays the records file 
-void displayRecords(const char* recordsTxt,int* scroll,int registryAmount)
+void displayRecords(const char* recordsTxt,int* scroll,int registryAmount,int ticks)
 {
     // Open the file in read mode
     FILE* file = fopen(recordsTxt, "r");
@@ -524,7 +524,6 @@ void displayRecords(const char* recordsTxt,int* scroll,int registryAmount)
 
     // Read and show each line of the file
     char line[256];
-    int line_number = 0;
     printf("\033[16;95H%s              RECORDS           ",ANSI_COLOR_DARK_RED);
     printf("\033[17;95H                                  ");
 
@@ -537,7 +536,7 @@ void displayRecords(const char* recordsTxt,int* scroll,int registryAmount)
             if (((GetAsyncKeyState(VK_UP) & 0x8000) || (GetAsyncKeyState('w') & 0x8000) || (GetAsyncKeyState('W') & 0x8000)) && (*scroll) > 0) {
                 (*scroll)--;
                 //prints the scroll wheel
-                int scrolledAmount = (*scroll) / integralPart;
+                int scrolledAmount = (*scroll) / integralPart; // how much will the scroll wheel move, it is relative to the amount of elements in the file
                 printf("\033[%d;130H  ", 18 + scrolledAmount);
                 printf("\033[%d;130H||", 17 + scrolledAmount);
                 Sleep(10);
@@ -552,22 +551,34 @@ void displayRecords(const char* recordsTxt,int* scroll,int registryAmount)
                 printf("\033[%d;130H||", 17 + scrolledAmount);
                 Sleep(10);
             }
-            skipLines(file, *scroll);
+            skipLines(file, *scroll); // puts the file cursor where it needs to be so that the next 15 file lines are read apropatlly
         }
     }
     
 
-
+    // Prints the file lines dessired either by amount (15) or availabilty (less than 15 file registrys)
     for (int i = 0; i < 15 && fgets(line, sizeof(line), file) ; i++)
     {
-        printf("\033[%i;95H%s%s", 18 + line_number, ANSI_COLOR_DARK_RED, line);
-        line_number++;
+        
+            if (i < (3 - *scroll))
+            {
+                breathingEffectToColor(ticks, red, white);
+                textPositioning(top,86, 17 + i);
+                printf("\033[%i;92H%i", 18 + i, i + 1 + *scroll );
+            }
+            else
+            {
+                printf("\033[%i;86H       ", 18 + i);
+                printf("%s", ANSI_COLOR_DARK_RED);
+            }
+            printf("\033[%i;95H%s", 18 + i, line);
     }
  
     // Close the file
     fclose(file);
 }
 
+// Skips lines in the file so that the file cursor is where it is expected
 void skipLines(FILE* file, int linesToSkip) 
 {
     char buffer[256];  // buffer for the lines 

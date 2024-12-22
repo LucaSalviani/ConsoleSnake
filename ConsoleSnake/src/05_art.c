@@ -6,6 +6,8 @@
 struct RGB pink = { 255,105,180 };
 struct RGB white = { 255,255,255 };
 struct RGB dark_orange = { 255,140,0 };
+struct RGB red = { 200,50,50 };
+
 //Ogre font
 const char* points_art[] = {
 "             _       _         ",
@@ -132,6 +134,8 @@ const char* game_keys[] = {
 " |/__\\|/__\\|/__\\|/___________\\|",
 NULL
 };
+
+
 
 const char* controls_text[] = {
 "  ___ ___  _  _ _____ ___  ___  _    ___       ",
@@ -629,6 +633,11 @@ NULL
 };
 
 
+
+const char* top[] = {
+"|TOP  ",
+NULL
+};
 
 
 void titleErasser()

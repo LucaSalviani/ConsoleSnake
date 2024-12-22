@@ -45,18 +45,8 @@ int main() {
     printf("\033[?25l");//Hides cursor
     windowManagement(710, 290, consoleWidth, consoleHeight);//Manages console position and size
 
-
-
     ///////////////CREATES A PLAYER
-
     Player* playerPtr = NULL;
-    //Player* player = malloc(sizeof(Player));
-    //if (player == NULL)
-    //{
-    //    printf("Theres no space in memory to run the game");
-    //    return 1;
-    //}
-    //playerPtr = player; // Stores the head of the list in a ptr
 
     char* recordsTxt = "records.txt";
 
@@ -84,10 +74,11 @@ int main() {
     while (gameStart(&snakeDirection))
     {
         printf("\x1b[13;0H \x1b[22m  %s %s", ANSI_COLOR_DARK_ORANGE,SNAKE_LOGO);//Title
-        printf("\033[0;109H\033[38;2;105;105;105m |_ Luca Salviani _|");//Signature
-
+        printf("\033[34;110H%sCreator:Luca Salviani ",ANSI_COLOR_GREY);//Signature
+        printf("\033[34;90H%sConsole_snake: 1.0", ANSI_COLOR_GREY);//Version
         //Controls
         textPositioning(controls_text,7, 3);
+        printf("%s", ANSI_COLOR_DARK_RED);
         textPositioning(game_keys, 50, 0);
         printf("\033[11;56H MOVEMENT     PAUSE GAME");
         
@@ -175,27 +166,35 @@ int main() {
     char name[16] = { 0 };
     bool recordSaved = false;
     textPositioning(blank, 95, 16);
+
+
+
     /////////////////GAME OVER
     while (1)
     {
-        factor = (sin(ticks * 0.03) + 1) / 1.5;
-        breathingEffectToColor(ticks, pink, white);
+        
+        factor = (sin(ticks * 0.03) + 1) / 1.5; // Is the rate at which the movement effect is added for the game over
+        breathingEffectToColor(ticks, pink, white); // Adds the breathing effect to the game over 
+
+        // Random Option 1 for the game over
         if (gameOverEffect == 1)
         {
             textPositioning(game_over, 20, (30 * factor / 2) + 3);
         }
-        else if (gameOverEffect == 0)
+        // Random Option 2 for the game over
+        else if (gameOverEffect == 0) 
         {
             textPositioning(game_over, (29 * factor) + 2, 10);
         }
-        ticks++;
+        // Asks the user if he/she wants to add a record to the records files
         if (recordSaved == false)
         {
             printf("\033[16;95H\033[38;2;105;105;105mPress enter to submit a score.");
             printf("\033[17;95H%sPLAYER:_______________ SCORE:%4i", ANSI_COLOR_DARK_RED, points);
         }
 
-
+        /*Checks for record inputs->adds player if input determines so->sorts the player LL made from the players record file earlier in the execution of the program including the new input->saves the LL into the
+        players record file->displays the file using a scrolling mechanism->sets the recordSaved variable to true so that the user cant save more than 1 record*/
 
         if (GetAsyncKeyState(VK_RETURN) & 0x8000 && recordSaved == false)
         {
@@ -203,15 +202,20 @@ int main() {
             addPlayer(&playerPtr, name, points);
             mergeSort(&playerPtr);
             saveRecord(recordsTxt, playerPtr,&registryAmount);                  
-            displayRecords(recordsTxt,&scroll,registryAmount);  
+            displayRecords(recordsTxt,&scroll,registryAmount,ticks);  
             recordSaved = true;
         }
 
+        // Constant display after saving a record
         if (recordSaved == true)
         {
-            displayRecords(recordsTxt,&scroll,registryAmount);
+            displayRecords(recordsTxt,&scroll,registryAmount,ticks);
         }
 
+        //Augments ticks
+        ticks++;
+
+        //Sleep function so that the program dosent execute on constant time and the user has aa nicer experience/computer dosent explode
         Sleep(10);
     }
     return 0;

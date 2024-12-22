@@ -13,6 +13,7 @@ struct RGB
 extern struct RGB pink;
 extern struct RGB white;
 extern struct RGB dark_orange;
+extern struct RGB red;
 
 //First art style, simpler to write MUCH more difficult if you want to move the art in the X axis, good for big static images like titles, or that are already right aligned
 #define SNAKE_LOGO "\n\
@@ -150,6 +151,8 @@ extern const char* fireworks_11[];
 
 extern const char* fireworks_12[];
 
+extern const char* top[];
+
 
 extern const char* blank[];
 
@@ -183,7 +186,7 @@ extern const char* blank[];
 #define ANSI_COLOR_BRIGHT_PINK   "\033[38;2;255;105;180m"
 #define ANSI_COLOR_GOLD          "\033[38;2;255;204;0m"
 #define ANSI_COLOR_DARK_PINK     "\033[38;2;150;60;100m"
-
+#define ANSI_COLOR_GREY          "\033[38;2;105;105;105m"
 
 #define ANSI_RESET_STYLE            "\033[0m"
 #define ANSI_RESET_POSITION			"\033[H"

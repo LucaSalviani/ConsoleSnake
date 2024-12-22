@@ -18,7 +18,7 @@ bool gameStart(int* snakeDirection);
 void gameTalker(snake* segment, int points, int ticks, int* gameTalkerFase, int* gameTalkerMap, int* internatTimer,int* randText);
 void forcedPause(bool* pause);
 void pointsDisplay(int points, int xPos, int yPos, const char** text[]);
-void displayRecords(const char* recordsTxt, int* scroll, int registryAmount);
+void displayRecords(const char* recordsTxt, int* scroll, int registryAmount, int ticks);
 void readRecord(const char* recordsTxt, Player** playerPtr);
 void saveRecord(const char* recordsTxt, Player* playerPtr, int* registryAmount);
 void padString(char* str, int totalLength, char padChar);

@@ -12,18 +12,85 @@ int randomBetween(int min, int max)
     return value;
 }
 
-void windowManagement(int wind_x, int wind_y, int wind_h, int wind_w) {
-
-    //Set console size 
+void windowManagement(int wind_x, int wind_y, int wind_h, int wind_w) 
+{
+    // Obtiene el handle de la consola
     HWND consoleWindow = GetConsoleWindow();
-
-    //Console  window x position , y position, height and width
-    MoveWindow(consoleWindow, wind_x, wind_y, wind_h, wind_w, TRUE);
-
-    //Set the buffer size with the same rate as the window
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-    COORD coord = { wind_h, wind_w };
-    SetConsoleScreenBufferSize(hConsole, coord);
+
+    // Configura la posición y el tamaño de la ventana
+    MoveWindow(consoleWindow, wind_x, wind_y, 1100, 574, TRUE);
+
+
+
+
+    // Establece el tamaño del buffer de pantalla para evitar el scroll
+    COORD bufferSize;
+    bufferSize.X = 133 ;  // Ancho del buffer en caracteres (igual al ancho de la ventana)
+    bufferSize.Y = 35 ;  // Alto del buffer en caracteres (igual a la altura de la ventana)
+
+    // Establece el tamaño del buffer
+    SetConsoleScreenBufferSize(hConsole, bufferSize);
+
+
+    // Configura la ventana de la consola para que coincida con el tamaño del buffer
+    SMALL_RECT windowSize = { 0, 0, 132 , 34 };  // Define el tamaño de la ventana visible
+    SetConsoleWindowInfo(hConsole, TRUE, &windowSize);
+
+}
+
+void disableQuickEditMode() 
+{
+    HANDLE hInput = GetStdHandle(STD_INPUT_HANDLE);
+    DWORD prevMode;
+
+    // Obtiene el modo actual
+    GetConsoleMode(hInput, &prevMode);
+
+    // Desactiva QUICK_EDIT_MODE y habilita INPUT_MODE estándar
+    SetConsoleMode(hInput, prevMode & ~ENABLE_QUICK_EDIT_MODE);
+}
+
+void disableSelection() 
+{
+    HANDLE hConsole = GetStdHandle(STD_INPUT_HANDLE);
+    DWORD mode;
+    GetConsoleMode(hConsole, &mode);
+    mode &= ~ENABLE_QUICK_EDIT_MODE;  // Desactivar Quick Edit Mode
+    SetConsoleMode(hConsole, mode);
+}
+
+
+void disableMaximize() 
+{
+    HWND hWndConsole = GetConsoleWindow();
+
+    // Obtener los estilos actuales de la ventana
+    LONG style = GetWindowLong(hWndConsole, GWL_STYLE);
+
+    // Quitar la opción de maximizar
+    style &= ~WS_MAXIMIZEBOX;
+
+    // Actualizar los estilos de la ventana
+    SetWindowLong(hWndConsole, GWL_STYLE, style);
+
+    // Forzar una actualización de la ventana para aplicar los cambios
+    SetWindowPos(hWndConsole, NULL, 0, 0, 0, 0,
+        SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER | SWP_FRAMECHANGED);
+}
+
+void disableResize() 
+{
+    HWND hWndConsole = GetConsoleWindow();
+
+    // Deshabilitar la opción de redimensionar
+    LONG style = GetWindowLong(hWndConsole, GWL_STYLE);
+    style &= ~WS_SIZEBOX; // Quitar el estilo que permite redimensionar
+    SetWindowLong(hWndConsole, GWL_STYLE, style);
+
+    // Forzar una actualización de la ventana para aplicar los cambios
+    SetWindowPos(hWndConsole, NULL, 0, 0, 0, 0,
+        SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER | SWP_FRAMECHANGED);
 }
 
 void textPositioning(const char* text[],int textX, int textY)
@@ -31,14 +98,20 @@ void textPositioning(const char* text[],int textX, int textY)
     //Sets Y position of the text
     printf("\033[H"); 
     printf("\033[%dB", textY); 
+    bool noCarry = false;
 
     for (int i = 0; text[i]!= NULL; i++)
     {
-        right_align(text[i],textX);
+        if (text[i+1] == NULL)
+        {
+            noCarry = true;
+        }
+
+        right_align(text[i],textX,noCarry);
     }
 }
 
-void right_align(const char* text[], int textX)
+void right_align(const char* text[], int textX,bool noCarry)
 {
     if (text == NULL) {
         printf("Error: Null text chain passed to right_align\n");
@@ -49,7 +122,15 @@ void right_align(const char* text[], int textX)
         return;
     }
     //Sets X position for the text
-    printf("\033[%dC%s\n", textX, text);
+    if (noCarry == false)
+    {
+        printf("\033[%dC%s\n", textX, text);
+    }
+    else if (noCarry == true)
+    {
+        printf("\033[%dC%s", textX, text);
+
+    }
 }
 
 

@@ -14,6 +14,10 @@ extern struct RGB pink;
 extern struct RGB white;
 extern struct RGB dark_orange;
 extern struct RGB red;
+extern struct RGB redBright;
+extern struct RGB grey;
+extern struct RGB lightGrey;
+
 
 //First art style, simpler to write MUCH more difficult if you want to move the art in the X axis, good for big static images like titles, or that are already right aligned
 #define SNAKE_LOGO "\n\
@@ -62,7 +66,7 @@ extern struct RGB red;
 ||                                                                                          |                                      ||\n\
 ||                                                                                          |                                      ||\n\
 |\\------------------------------------------------------------------------------------------\\--------------------------------------/|\n\
-+---------------------------------------------------------------------------------------------------------------------------------- - +\n"
++-----------------------------------------------------------------------------------------------------------------------------------+\n"
 
 //Trying different ascii art formats. This one is a little bit more difficult to define the art in itself, you have to also make another .c file with the art definitions, but way easier to move in X axis and also easier to make dynamic (provided you have a function that does that for you as i have). I think the easiest format might be to use a text file read from that and apply the changes to the text to move it on its axis on the go, only problem is you wont have a nice executable and it wont all be contained on your code, and youd need external resources so not one file executable.
 
@@ -153,6 +157,16 @@ extern const char* fireworks_12[];
 
 extern const char* top[];
 
+const char* arena3[];
+
+const char* arenaPiece1[];
+
+const char* arenaPiece2[];
+
+const char* arenaPiece3[];
+
+const char* arenaPiece4[];
+
 
 extern const char* blank[];
 
@@ -187,8 +201,13 @@ extern const char* blank[];
 #define ANSI_COLOR_GOLD          "\033[38;2;255;204;0m"
 #define ANSI_COLOR_DARK_PINK     "\033[38;2;150;60;100m"
 #define ANSI_COLOR_GREY          "\033[38;2;105;105;105m"
+#define ANSI_COLOR_LIGHT_GREY    "\033[38;2;80;80;80m"
+
 
 #define ANSI_RESET_STYLE            "\033[0m"
 #define ANSI_RESET_POSITION			"\033[H"
+#define ANSI_TEXT_BACKGROUND_INVERSION      "\033[7m"
+#define ANSI_TEXT_BACKGROUND_REVERSION      "\033[27m"
+
 
 #endif // ART_H

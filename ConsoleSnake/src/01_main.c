@@ -23,8 +23,8 @@ int main() {
     int registryAmount = 0;
 
     //Windows size, everything will be based on it
-    const int consoleWidth = 1100;
-    const int consoleHeight = 600;
+    const int consoleWidth = 1100;//1100
+    const int consoleHeight = 600;//600
 
     //Font size, set them up at the standard but will later be checked by a handle
     int FontSizeX = 8;
@@ -43,7 +43,14 @@ int main() {
     initializeRandomSeed();
 
     printf("\033[?25l");//Hides cursor
-    windowManagement(710, 290, consoleWidth, consoleHeight);//Manages console position and size
+   
+    windowManagement(410, 240, consoleWidth, consoleHeight);//Manages console position and size
+    SetConsoleTitleA("SNAKE");
+    disableResize();
+    disableMaximize();
+    
+    //disableSelection();
+    disableQuickEditMode();
 
     ///////////////CREATES A PLAYER
     Player* playerPtr = NULL;
@@ -77,10 +84,10 @@ int main() {
         printf("\033[34;110H%sCreator:Luca Salviani ",ANSI_COLOR_GREY);//Signature
         printf("\033[34;90H%sConsole_snake: 1.0", ANSI_COLOR_GREY);//Version
         //Controls
-        textPositioning(controls_text,7, 3);
+        textPositioning(controls_text,27, 3);
         printf("%s", ANSI_COLOR_DARK_RED);
-        textPositioning(game_keys, 50, 0);
-        printf("\033[11;56H MOVEMENT     PAUSE GAME");
+        textPositioning(game_keys, 70, 0);
+        printf("\033[11;75H MOVEMENT     PAUSE GAME");
         
         printf("\x1b[23;55H%s Hold the arrows to play %s",ANSI_COLOR_DARK_ORANGE,ANSI_RESET_STYLE);//Start buttons
         Sleep(300);
@@ -96,10 +103,11 @@ int main() {
 
    ///////////////GAME SETUP
     titleErasser();
-    printf("\x1b[H %s %s", ANSI_COLOR_DARK_ORANGE, ARENA2);//Prints the arena.
+    //printf("\033[H%s %s", ANSI_COLOR_DARK_ORANGE, ARENA2);//Prints the arena.
+    printf("%s", ANSI_COLOR_DARK_ORANGE);
+    textPositioning(arena3, 0, 0);
     textPositioning(points_art, 97, 2);//Prints the points text.
     ticks = 0; //Resets game ticks.
-
     ////////////////GAME
     while (1)
     {

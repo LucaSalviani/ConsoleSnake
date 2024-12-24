@@ -15,7 +15,7 @@ void georginasCookies(snake** segment,snake** segmentPtr, int* x_food, int* y_fo
     if (((*segment)->x_pos == *x_food && (*segment)->y_pos == *y_food) || ((snakesDirection == 3 || snakesDirection == 4) && (((*segment)->x_pos+1) == *x_food && (*segment)->y_pos == *y_food)))
     {
         (*points)++;
-        pointsDisplay(*points, 130, 10, numbers);
+        pointsDisplay(*points, 130, 8, numbers);
         (*snakeSize)++;
         ////Adds a snake segment
 
@@ -531,47 +531,123 @@ void displayRecords(const char* recordsTxt,int* scroll,int registryAmount,int ti
     {
         float scrollRate = (registryAmount ) / 15;
         int integralPart = round(scrollRate); // i could also calculate the integer rest of the division and use that as a parameter so that the scroll is more exact, but it is a lot of work for very little reward, maybe some day(?
-        if (scroll != NULL) {
+        if (scroll != NULL ) 
+        {
             // Detect keys up
-            if (((GetAsyncKeyState(VK_UP) & 0x8000) || (GetAsyncKeyState('w') & 0x8000) || (GetAsyncKeyState('W') & 0x8000)) && (*scroll) > 0) {
+            if (((((GetAsyncKeyState(VK_UP) & 0x8000) ||
+                    (GetAsyncKeyState('w') & 0x8000) ||
+                    (GetAsyncKeyState('W') & 0x8000)) 
+                    &&
+                    (ticks % 4 == 0)                   ) 
+                    ||
+                (((GetAsyncKeyState(VK_UP) & 0x8000) ||
+                    (GetAsyncKeyState('w') & 0x8000) ||
+                    (GetAsyncKeyState('W') & 0x8000)) && (GetAsyncKeyState(VK_SHIFT) & 0x8000) && (ticks % 1 == 0)))
+                    &&
+                ((*scroll) > 0))
+            {
                 (*scroll)--;
                 //prints the scroll wheel
                 int scrolledAmount = (*scroll) / integralPart; // how much will the scroll wheel move, it is relative to the amount of elements in the file
                 printf("\033[%d;130H  ", 18 + scrolledAmount);
                 printf("\033[%d;130H||", 17 + scrolledAmount);
-                Sleep(10);
             }
 
             // Detect keys down
-            if (((GetAsyncKeyState(VK_DOWN) & 0x8000) || (GetAsyncKeyState('s') & 0x8000) || (GetAsyncKeyState('S') & 0x8000)) && (*scroll) < registryAmount - 15) {
+            //if (((GetAsyncKeyState(VK_DOWN) & 0x8000) || (GetAsyncKeyState('s') & 0x8000) || (GetAsyncKeyState('S') & 0x8000)) && (ticks % 4 == 0) && ((*scroll) < (registryAmount - 15)))
+
+            if(
+                 (
+                    (
+                        (
+                            (GetAsyncKeyState(VK_DOWN) & 0x8000) 
+                            ||
+                            (GetAsyncKeyState('s') & 0x8000) 
+                            ||
+                            (GetAsyncKeyState('S') & 0x8000)
+                        )
+                        &&
+                        (ticks % 4 == 0)
+                    )
+
+                    ||
+
+                    (
+                        (
+                            (GetAsyncKeyState(VK_DOWN) & 0x8000) 
+                            ||
+                            (GetAsyncKeyState('s') & 0x8000) 
+                            ||
+                            (GetAsyncKeyState('S') & 0x8000)
+                        ) 
+                        && 
+                        (GetAsyncKeyState(VK_SHIFT) & 0x8000) 
+                        && 
+                        (ticks % 1 == 0)
+                    )
+                 )   
+                 &&
+                 ((*scroll) < (registryAmount - 15)) 
+              )
+            {
                 (*scroll)++;
                 //prints the scroll wheel
                 int scrolledAmount = (*scroll) / integralPart;
                 printf("\033[%d;130H  ", 16 + scrolledAmount);
                 printf("\033[%d;130H||", 17 + scrolledAmount);
-                Sleep(10);
             }
+
+
+
+
+
+            printf("\033[3;71H%s|%s Arrows for scrolling", ANSI_COLOR_DARK_ORANGE, ANSI_COLOR_LIGHT_GREY);
+            printf("\033[4;71H%s|%s+SHIFT fast scrolling",ANSI_COLOR_DARK_ORANGE,ANSI_COLOR_LIGHT_GREY);
+            printf("\033[5;72H%s---------------------",ANSI_COLOR_DARK_ORANGE);
+            printf("%s", ANSI_COLOR_DARK_RED);
             skipLines(file, *scroll); // puts the file cursor where it needs to be so that the next 15 file lines are read apropatlly
         }
     }
     
 
     // Prints the file lines dessired either by amount (15) or availabilty (less than 15 file registrys)
+  
     for (int i = 0; i < 15 && fgets(line, sizeof(line), file) ; i++)
     {
-        
+     
             if (i < (3 - *scroll))
-            {
+            { 
                 breathingEffectToColor(ticks, red, white);
-                textPositioning(top,86, 17 + i);
-                printf("\033[%i;92H%i", 18 + i, i + 1 + *scroll );
+                if (i == 0)
+                {
+                    
+                    if (*scroll == 0)
+                    {
+                        printf("%s",ANSI_TEXT_BACKGROUND_INVERSION);
+                    }
+                    textPositioning(top, 81, 17 + i);
+                    printf("\033[%i;86H%i ====>", 18 + i, i + 1 + *scroll);
+
+                    printf("%s",ANSI_TEXT_BACKGROUND_REVERSION);
+                }
+                else
+                {
+                    textPositioning(top, 86, 17 + i);
+                    printf("\033[%i;92H%i", 18 + i, i + 1 + *scroll);
+
+                }
             }
-            else
+            else if (i < 5)
             {
-                printf("\033[%i;86H       ", 18 + i);
+                printf("\033[%i;79H              ", 18 + i);
                 printf("%s", ANSI_COLOR_DARK_RED);
             }
+            if (*scroll == 0 && i == 0)
+            {
+                printf("%s", ANSI_TEXT_BACKGROUND_INVERSION);
+            }
             printf("\033[%i;95H%s", 18 + i, line);
+            printf("%s", ANSI_TEXT_BACKGROUND_REVERSION);
     }
  
     // Close the file

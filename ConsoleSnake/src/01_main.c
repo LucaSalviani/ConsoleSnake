@@ -9,8 +9,13 @@
 
 
 int main() {
-    bool gamePlaying = 1;
-    while (gamePlaying == 1)
+    const int consoleWidth = 1064;//1100
+    const int consoleHeight = 576;//576
+    disableResizeAndMaximize(); // Self explanatory
+    configureConsoleForGame(); // Puts console in Raw mode and disables quick edit.
+    windowManagement(410, 240, consoleHeight, consoleWidth);//Manages console position and size
+    SetConsoleTitleA("SNAKE");
+    while (1)
     {
 
         ///////////// VARIABLES INITILAZATION
@@ -27,8 +32,7 @@ int main() {
         int registryAmount = 0;
 
         //Windows size, everything will be based on it
-        const int consoleWidth = 1064;//1100
-        const int consoleHeight = 576;//576
+
 
         //Font size, set them up at the standard but will later be checked by a handle
         int FontSizeX = 8;
@@ -48,10 +52,7 @@ int main() {
 
         printf("\033[?25l");//Hides cursor
 
-        disableResizeAndMaximize(); // Self explanatory
-        configureConsoleForGame(); // Puts console in Raw mode and disables quick edit.
-        windowManagement(410, 240, consoleHeight, consoleWidth);//Manages console position and size
-        SetConsoleTitleA("SNAKE");
+
 
         ///////////////CREATES A PLAYER
         Player* playerPtr = NULL;
@@ -118,6 +119,7 @@ int main() {
         {
             if (ticks % 300 == 0)
             {
+                printf("%s", ANSI_COLOR_DARK_ORANGE);
                 textPositioning(arenaPiece1, 1, 1);
                 textPositioning(arenaPiece3, 1, 3);
                 textPositioning(arenaPiece2, 1, 34);
@@ -176,6 +178,7 @@ int main() {
 
         printf("\x1b[%d;%dH ", y_food, x_food);     //Deletes the food
         drawSnake(segmentPtr, true);    //Deletes the snake by giving it a true value
+        printf("%s",ANSI_COLOR_DARK_ORANGE);
         textPositioning(arenaPiece1, 1, 1);
         textPositioning(arenaPiece3, 1, 3);
         textPositioning(arenaPiece2, 1, 34);
@@ -205,7 +208,7 @@ int main() {
             {
                 textPositioning(game_over, (29 * factor) + 3, 10);
             }
-            printf("\033[32;30HMaintain pressed R to replay");
+            printf("\033[32;30HMaintain R pressed to replay");
             // Asks the user if he/she wants to add a record to the records files
             if (recordSaved == false)
             {
@@ -240,8 +243,8 @@ int main() {
                     pressing = 1;  // Marks we are pressing the key
                 }
 
-                // If key was pressed for more than 3 seconds
-                if (GetTickCount() - startTime >= 3000) {
+                // If key was pressed for more than 1.7 seconds
+                if (GetTickCount() - startTime >= 1700) {
                     textPositioning(bigBlank, 1, 1);
                     break;
                     pressing = 0;  //Resets so that it dosent execute multiple times

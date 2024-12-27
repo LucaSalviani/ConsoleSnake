@@ -1,5 +1,6 @@
 PLAYER:Nice pretty boy|SCORE:  62
 PLAYER:Turn away      |SCORE:  22
+PLAYER:Teta           |SCORE:  11
 PLAYER:Modern Cliche  |SCORE:  11
 PLAYER:Hold on        |SCORE:   7
 PLAYER:Matanga        |SCORE:   6
@@ -30,6 +31,7 @@ PLAYER:Matanga        |SCORE:   5
 PLAYER:Matanga        |SCORE:   5
 PLAYER:Matanga        |SCORE:   5
 PLAYER:Matanga        |SCORE:   5
+PLAYER:Love           |SCORE:   3
 PLAYER:Nice           |SCORE:   2
 PLAYER:A verga        |SCORE:   2
 PLAYER:Cuanta fe      |SCORE:   2
@@ -37,6 +39,7 @@ PLAYER:Higher         |SCORE:   2
 PLAYER:No usamos sleep|SCORE:   2
 PLAYER:fuck           |SCORE:   2
 PLAYER:Hell 2         |SCORE:   2
+PLAYER:Ohhh yeahhh    |SCORE:   1
 PLAYER:Posta?1        |SCORE:   1
 PLAYER:No             |SCORE:   1
 PLAYER:Hell           |SCORE:   1
@@ -231,6 +234,7 @@ PLAYER:Down           |SCORE:   1
 PLAYER:Thats allright |SCORE:   1
 PLAYER:Today          |SCORE:   1
 PLAYER:Same           |SCORE:   1
+PLAYER:Descision estil|SCORE:   1
 PLAYER:HELLL COUNSILLL|SCORE:   0
 PLAYER:Modulo con 5   |SCORE:   0
 PLAYER:Fin            |SCORE:   0

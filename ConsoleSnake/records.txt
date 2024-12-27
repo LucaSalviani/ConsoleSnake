@@ -30,12 +30,22 @@ PLAYER:Matanga        |SCORE:   5
 PLAYER:Matanga        |SCORE:   5
 PLAYER:Matanga        |SCORE:   5
 PLAYER:Matanga        |SCORE:   5
+PLAYER:Hell 2         |SCORE:   2
 PLAYER:fuck           |SCORE:   2
 PLAYER:No usamos sleep|SCORE:   2
 PLAYER:Higher         |SCORE:   2
 PLAYER:Cuanta fe      |SCORE:   2
 PLAYER:A verga        |SCORE:   2
 PLAYER:Nice           |SCORE:   2
+PLAYER:Same           |SCORE:   1
+PLAYER:Today          |SCORE:   1
+PLAYER:Thats allright |SCORE:   1
+PLAYER:Down           |SCORE:   1
+PLAYER:POinkt         |SCORE:   1
+PLAYER:Slight         |SCORE:   1
+PLAYER:Peteee         |SCORE:   1
+PLAYER:Now            |SCORE:   1
+PLAYER:Va qie va      |SCORE:   1
 PLAYER:Chupa pija     |SCORE:   1
 PLAYER:Down           |SCORE:   1
 PLAYER:Overnight NICE |SCORE:   1
@@ -209,6 +219,20 @@ PLAYER:Father         |SCORE:   1
 PLAYER:Overnight      |SCORE:   1
 PLAYER:Averga         |SCORE:   1
 PLAYER:Its            |SCORE:   1
+PLAYER:Oh yeah        |SCORE:   1
+PLAYER:Yeah           |SCORE:   1
+PLAYER:Joya?          |SCORE:   1
+PLAYER:Sticky         |SCORE:   1
+PLAYER:SHe goes down  |SCORE:   1
+PLAYER:Nice           |SCORE:   1
+PLAYER:averga         |SCORE:   1
+PLAYER:Thats okay     |SCORE:   1
+PLAYER:Nice           |SCORE:   1
+PLAYER:Hell           |SCORE:   1
+PLAYER:No             |SCORE:   1
+PLAYER:Beautifull     |SCORE:   0
+PLAYER:Si?            |SCORE:   0
 PLAYER:Averga         |SCORE:   0
 PLAYER:Fin            |SCORE:   0
 PLAYER:Modulo con 5   |SCORE:   0
+PLAYER:HELLL COUNSILLL|SCORE:   0

@@ -22,8 +22,6 @@ void windowManagement(int wind_x, int wind_y, int wind_h, int wind_w)
     MoveWindow(consoleWindow, wind_x, wind_y, wind_w, wind_h, TRUE);
 
 
-
-
     // Defines the consoles buffer, its determined in characters
     COORD bufferSize;
     bufferSize.X = (wind_w / 8);  //133 Width of the console in characters, it has to be the same as the translation from pixels to characters so that there are no scroll bars
@@ -244,3 +242,4 @@ void clearBuffer() // IT ONLY WORKS FOR WINDOWS
     HANDLE hInput = GetStdHandle(STD_INPUT_HANDLE);  // Obtains the hanlde for input standard
     FlushConsoleInputBuffer(hInput);                // Cleans input buffer
 }
+

@@ -569,10 +569,11 @@ void displayRecords(const char* recordsTxt,int* scroll,int registryAmount,int ti
             }
 
             //Prints a letter at the top explaining how the file navigation controls work
-            printf("\033[3;71H%s|%s Arrows for scrolling", ANSI_COLOR_DARK_ORANGE, ANSI_COLOR_LIGHT_GREY);
-            printf("\033[4;71H%s|%s+SHIFT fast scrolling",ANSI_COLOR_DARK_ORANGE,ANSI_COLOR_LIGHT_GREY);
-            printf("\033[5;72H%s---------------------",ANSI_COLOR_DARK_ORANGE);
-            printf("%s", ANSI_COLOR_DARK_RED);
+           //printf("\033[3;71H%s|%s Arrows for scrolling", ANSI_COLOR_DARK_ORANGE, ANSI_COLOR_LIGHT_GREY);
+           //printf("\033[4;71H%s|%s+SHIFT fast scrolling",ANSI_COLOR_DARK_ORANGE,ANSI_COLOR_LIGHT_GREY);
+           // printf("\033[5;72H%s---------------------",ANSI_COLOR_DARK_ORANGE);
+            printf("\033[32;71H Arrows for scrolling");
+            printf("\033[33;71H+SHIFT fast scrolling");
             skipLines(file, *scroll); // puts the file cursor where it needs to be so that the next 15 file lines are read apropatlly
         }
     }
@@ -634,3 +635,6 @@ void skipLines(FILE* file, int linesToSkip)
         }
     }
 }
+
+
+

@@ -27,168 +27,169 @@ PLAYER:Matanga        |SCORE:   5
 PLAYER:Matanga        |SCORE:   5
 PLAYER:Matanga        |SCORE:   5
 PLAYER:Matanga        |SCORE:   5
-PLAYER:fuck           |SCORE:   2
-PLAYER:No usamos sleep|SCORE:   2
-PLAYER:Higher         |SCORE:   2
-PLAYER:Cuanta fe      |SCORE:   2
 PLAYER:A verga        |SCORE:   2
-PLAYER:Submit         |SCORE:   1
-PLAYER:Quick          |SCORE:   1
-PLAYER:Seh            |SCORE:   1
-PLAYER:Shift          |SCORE:   1
-PLAYER:Solo           |SCORE:   1
-PLAYER:Zeta           |SCORE:   1
-PLAYER:Deseo          |SCORE:   1
-PLAYER:Todo alrededor |SCORE:   1
-PLAYER:Viene          |SCORE:   1
-PLAYER:asdasd         |SCORE:   1
-PLAYER:No             |SCORE:   1
-PLAYER:Lpm            |SCORE:   1
-PLAYER:complejo       |SCORE:   1
-PLAYER:;C             |SCORE:   1
-PLAYER:Porfa          |SCORE:   1
-PLAYER:Fe             |SCORE:   1
-PLAYER:Please work    |SCORE:   1
-PLAYER:+              |SCORE:   1
-PLAYER:Scrolling      |SCORE:   1
-PLAYER:Fe             |SCORE:   1
-PLAYER:Cuadrado       |SCORE:   1
-PLAYER:Arruinado?     |SCORE:   1
-PLAYER:Dudoso         |SCORE:   1
-PLAYER:Averga         |SCORE:   1
-PLAYER:Test           |SCORE:   1
-PLAYER:Modulus        |SCORE:   1
-PLAYER:Petardo        |SCORE:   1
-PLAYER:Mouth          |SCORE:   1
-PLAYER:Expected       |SCORE:   1
-PLAYER:Sick love      |SCORE:   1
-PLAYER:Bocha          |SCORE:   1
-PLAYER:Top            |SCORE:   1
-PLAYER:Very thick     |SCORE:   1
-PLAYER:Thick          |SCORE:   1
-PLAYER:No             |SCORE:   1
-PLAYER:Nice           |SCORE:   1
-PLAYER:Good one       |SCORE:   1
-PLAYER:Mucho          |SCORE:   1
-PLAYER:First!         |SCORE:   1
-PLAYER:Lively         |SCORE:   1
-PLAYER:white          |SCORE:   1
-PLAYER:Separar        |SCORE:   1
-PLAYER:Yikes          |SCORE:   1
-PLAYER:MM?            |SCORE:   1
-PLAYER:Mask           |SCORE:   1
-PLAYER:No mas         |SCORE:   1
-PLAYER:Fe final       |SCORE:   1
-PLAYER:Forwarp        |SCORE:   1
-PLAYER:Please         |SCORE:   1
-PLAYER:Dreams         |SCORE:   1
-PLAYER:Top            |SCORE:   1
-PLAYER:Enjoyable      |SCORE:   1
-PLAYER:Enjoy          |SCORE:   1
-PLAYER:Mauro          |SCORE:   1
-PLAYER:Mamerto        |SCORE:   1
-PLAYER:Nice           |SCORE:   1
-PLAYER:Record?        |SCORE:   1
-PLAYER:Como si fuera t|SCORE:   1
-PLAYER:Feliz          |SCORE:   1
-PLAYER:1st try        |SCORE:   1
-PLAYER:Follow         |SCORE:   1
-PLAYER:Scroll         |SCORE:   1
-PLAYER:In my eye      |SCORE:   1
-PLAYER:Jungle         |SCORE:   1
-PLAYER:Averga         |SCORE:   1
-PLAYER:noo anda       |SCORE:   1
-PLAYER:Mucho de golpe |SCORE:   1
-PLAYER:Yeahhh         |SCORE:   1
-PLAYER:MM?            |SCORE:   1
-PLAYER:Take a look    |SCORE:   1
-PLAYER:Shout          |SCORE:   1
-PLAYER:Mucho de golpe |SCORE:   1
-PLAYER:Yeahhh         |SCORE:   1
-PLAYER:MM?            |SCORE:   1
-PLAYER:Take a look    |SCORE:   1
-PLAYER:Shout          |SCORE:   1
-PLAYER:Mucho de golpe |SCORE:   1
-PLAYER:Yeahhh         |SCORE:   1
-PLAYER:MM?            |SCORE:   1
-PLAYER:Take a look    |SCORE:   1
-PLAYER:Shout          |SCORE:   1
-PLAYER:Mucho de golpe |SCORE:   1
-PLAYER:Yeahhh         |SCORE:   1
-PLAYER:MM?            |SCORE:   1
-PLAYER:Take a look    |SCORE:   1
-PLAYER:Shout          |SCORE:   1
-PLAYER:Mmmm dudoso    |SCORE:   1
-PLAYER:MMM            |SCORE:   1
-PLAYER:Averga         |SCORE:   1
-PLAYER:Move me        |SCORE:   1
-PLAYER:Scroll         |SCORE:   1
-PLAYER:A ver          |SCORE:   1
-PLAYER:Tengo fe       |SCORE:   1
-PLAYER:Prueba         |SCORE:   1
-PLAYER:Veremos        |SCORE:   1
-PLAYER:Test           |SCORE:   1
-PLAYER:tristeza       |SCORE:   1
-PLAYER:Boludito       |SCORE:   1
-PLAYER:High           |SCORE:   1
-PLAYER:Lets gooo!     |SCORE:   1
-PLAYER:Ramon          |SCORE:   1
-PLAYER:Curiosio       |SCORE:   1
-PLAYER:Averhga        |SCORE:   1
-PLAYER:Enjoying       |SCORE:   1
-PLAYER:Lets see       |SCORE:   1
-PLAYER:Your turn      |SCORE:   1
-PLAYER:Horizontal     |SCORE:   1
-PLAYER:Porfa          |SCORE:   1
-PLAYER:Forwarrrp      |SCORE:   1
-PLAYER:Cercano        |SCORE:   1
-PLAYER:Top            |SCORE:   1
-PLAYER:Re tonto       |SCORE:   1
-PLAYER:Obsoleto       |SCORE:   1
-PLAYER:Jajajja        |SCORE:   1
-PLAYER:Red            |SCORE:   1
-PLAYER:Epic           |SCORE:   1
-PLAYER:Grey           |SCORE:   1
-PLAYER:Pro            |SCORE:   1
-PLAYER:Raping         |SCORE:   1
-PLAYER:Other way      |SCORE:   1
-PLAYER:Poco           |SCORE:   1
-PLAYER:Nice           |SCORE:   1
-PLAYER:Prolijo        |SCORE:   1
-PLAYER:THICK          |SCORE:   1
-PLAYER:Nice           |SCORE:   1
-PLAYER:Lets see       |SCORE:   1
-PLAYER:Greek world    |SCORE:   1
-PLAYER:Late           |SCORE:   1
-PLAYER:Suck my kiss   |SCORE:   1
-PLAYER:Hit me         |SCORE:   1
-PLAYER:Test           |SCORE:   1
-PLAYER:Hell           |SCORE:   1
-PLAYER:Use arrows     |SCORE:   1
-PLAYER:Raro           |SCORE:   1
-PLAYER:De milagro     |SCORE:   1
-PLAYER:Fe             |SCORE:   1
-PLAYER:Mindfullnes    |SCORE:   1
-PLAYER:Scrollerrr     |SCORE:   1
-PLAYER:Fast           |SCORE:   1
-PLAYER:Vamos          |SCORE:   1
-PLAYER:All thought    |SCORE:   1
-PLAYER:Esta bien?     |SCORE:   1
-PLAYER:Porfaa         |SCORE:   1
-PLAYER:Esto tiene que |SCORE:   1
-PLAYER:Falto commit   |SCORE:   1
-PLAYER:LRPM           |SCORE:   1
-PLAYER:comp           |SCORE:   1
-PLAYER:>0             |SCORE:   1
-PLAYER:Si             |SCORE:   1
-PLAYER:Biuu           |SCORE:   1
-PLAYER:Biu            |SCORE:   1
-PLAYER:gesto          |SCORE:   1
-PLAYER:Abajo          |SCORE:   1
-PLAYER:Observar       |SCORE:   1
-PLAYER:Nice           |SCORE:   1
-PLAYER:jaja           |SCORE:   1
+PLAYER:Cuanta fe      |SCORE:   2
+PLAYER:Higher         |SCORE:   2
+PLAYER:No usamos sleep|SCORE:   2
+PLAYER:fuck           |SCORE:   2
+PLAYER:Testeamos lo ul|SCORE:   1
 PLAYER:Re funkando    |SCORE:   1
-PLAYER:Averga         |SCORE:   0
-PLAYER:Fin            |SCORE:   0
+PLAYER:jaja           |SCORE:   1
+PLAYER:Nice           |SCORE:   1
+PLAYER:Observar       |SCORE:   1
+PLAYER:Abajo          |SCORE:   1
+PLAYER:gesto          |SCORE:   1
+PLAYER:Biu            |SCORE:   1
+PLAYER:Biuu           |SCORE:   1
+PLAYER:Si             |SCORE:   1
+PLAYER:>0             |SCORE:   1
+PLAYER:comp           |SCORE:   1
+PLAYER:LRPM           |SCORE:   1
+PLAYER:Falto commit   |SCORE:   1
+PLAYER:Esto tiene que |SCORE:   1
+PLAYER:Porfaa         |SCORE:   1
+PLAYER:Esta bien?     |SCORE:   1
+PLAYER:All thought    |SCORE:   1
+PLAYER:Vamos          |SCORE:   1
+PLAYER:Fast           |SCORE:   1
+PLAYER:Scrollerrr     |SCORE:   1
+PLAYER:Mindfullnes    |SCORE:   1
+PLAYER:Fe             |SCORE:   1
+PLAYER:De milagro     |SCORE:   1
+PLAYER:Raro           |SCORE:   1
+PLAYER:Use arrows     |SCORE:   1
+PLAYER:Hell           |SCORE:   1
+PLAYER:Test           |SCORE:   1
+PLAYER:Hit me         |SCORE:   1
+PLAYER:Suck my kiss   |SCORE:   1
+PLAYER:Late           |SCORE:   1
+PLAYER:Greek world    |SCORE:   1
+PLAYER:Lets see       |SCORE:   1
+PLAYER:Nice           |SCORE:   1
+PLAYER:THICK          |SCORE:   1
+PLAYER:Prolijo        |SCORE:   1
+PLAYER:Nice           |SCORE:   1
+PLAYER:Poco           |SCORE:   1
+PLAYER:Other way      |SCORE:   1
+PLAYER:Raping         |SCORE:   1
+PLAYER:Pro            |SCORE:   1
+PLAYER:Grey           |SCORE:   1
+PLAYER:Epic           |SCORE:   1
+PLAYER:Red            |SCORE:   1
+PLAYER:Jajajja        |SCORE:   1
+PLAYER:Obsoleto       |SCORE:   1
+PLAYER:Re tonto       |SCORE:   1
+PLAYER:Top            |SCORE:   1
+PLAYER:Cercano        |SCORE:   1
+PLAYER:Forwarrrp      |SCORE:   1
+PLAYER:Porfa          |SCORE:   1
+PLAYER:Horizontal     |SCORE:   1
+PLAYER:Your turn      |SCORE:   1
+PLAYER:Lets see       |SCORE:   1
+PLAYER:Enjoying       |SCORE:   1
+PLAYER:Averhga        |SCORE:   1
+PLAYER:Curiosio       |SCORE:   1
+PLAYER:Ramon          |SCORE:   1
+PLAYER:Lets gooo!     |SCORE:   1
+PLAYER:High           |SCORE:   1
+PLAYER:Boludito       |SCORE:   1
+PLAYER:tristeza       |SCORE:   1
+PLAYER:Test           |SCORE:   1
+PLAYER:Veremos        |SCORE:   1
+PLAYER:Prueba         |SCORE:   1
+PLAYER:Tengo fe       |SCORE:   1
+PLAYER:A ver          |SCORE:   1
+PLAYER:Scroll         |SCORE:   1
+PLAYER:Move me        |SCORE:   1
+PLAYER:Averga         |SCORE:   1
+PLAYER:MMM            |SCORE:   1
+PLAYER:Mmmm dudoso    |SCORE:   1
+PLAYER:Shout          |SCORE:   1
+PLAYER:Take a look    |SCORE:   1
+PLAYER:MM?            |SCORE:   1
+PLAYER:Yeahhh         |SCORE:   1
+PLAYER:Mucho de golpe |SCORE:   1
+PLAYER:Shout          |SCORE:   1
+PLAYER:Take a look    |SCORE:   1
+PLAYER:MM?            |SCORE:   1
+PLAYER:Yeahhh         |SCORE:   1
+PLAYER:Mucho de golpe |SCORE:   1
+PLAYER:Shout          |SCORE:   1
+PLAYER:Take a look    |SCORE:   1
+PLAYER:MM?            |SCORE:   1
+PLAYER:Yeahhh         |SCORE:   1
+PLAYER:Mucho de golpe |SCORE:   1
+PLAYER:Shout          |SCORE:   1
+PLAYER:Take a look    |SCORE:   1
+PLAYER:MM?            |SCORE:   1
+PLAYER:Yeahhh         |SCORE:   1
+PLAYER:Mucho de golpe |SCORE:   1
+PLAYER:noo anda       |SCORE:   1
+PLAYER:Averga         |SCORE:   1
+PLAYER:Jungle         |SCORE:   1
+PLAYER:In my eye      |SCORE:   1
+PLAYER:Scroll         |SCORE:   1
+PLAYER:Follow         |SCORE:   1
+PLAYER:1st try        |SCORE:   1
+PLAYER:Feliz          |SCORE:   1
+PLAYER:Como si fuera t|SCORE:   1
+PLAYER:Record?        |SCORE:   1
+PLAYER:Nice           |SCORE:   1
+PLAYER:Mamerto        |SCORE:   1
+PLAYER:Mauro          |SCORE:   1
+PLAYER:Enjoy          |SCORE:   1
+PLAYER:Enjoyable      |SCORE:   1
+PLAYER:Top            |SCORE:   1
+PLAYER:Dreams         |SCORE:   1
+PLAYER:Please         |SCORE:   1
+PLAYER:Forwarp        |SCORE:   1
+PLAYER:Fe final       |SCORE:   1
+PLAYER:No mas         |SCORE:   1
+PLAYER:Mask           |SCORE:   1
+PLAYER:MM?            |SCORE:   1
+PLAYER:Yikes          |SCORE:   1
+PLAYER:Separar        |SCORE:   1
+PLAYER:white          |SCORE:   1
+PLAYER:Lively         |SCORE:   1
+PLAYER:First!         |SCORE:   1
+PLAYER:Mucho          |SCORE:   1
+PLAYER:Good one       |SCORE:   1
+PLAYER:Nice           |SCORE:   1
+PLAYER:No             |SCORE:   1
+PLAYER:Thick          |SCORE:   1
+PLAYER:Very thick     |SCORE:   1
+PLAYER:Top            |SCORE:   1
+PLAYER:Bocha          |SCORE:   1
+PLAYER:Sick love      |SCORE:   1
+PLAYER:Expected       |SCORE:   1
+PLAYER:Mouth          |SCORE:   1
+PLAYER:Petardo        |SCORE:   1
+PLAYER:Modulus        |SCORE:   1
+PLAYER:Test           |SCORE:   1
+PLAYER:Averga         |SCORE:   1
+PLAYER:Dudoso         |SCORE:   1
+PLAYER:Arruinado?     |SCORE:   1
+PLAYER:Cuadrado       |SCORE:   1
+PLAYER:Fe             |SCORE:   1
+PLAYER:Scrolling      |SCORE:   1
+PLAYER:+              |SCORE:   1
+PLAYER:Please work    |SCORE:   1
+PLAYER:Fe             |SCORE:   1
+PLAYER:Porfa          |SCORE:   1
+PLAYER:;C             |SCORE:   1
+PLAYER:complejo       |SCORE:   1
+PLAYER:Lpm            |SCORE:   1
+PLAYER:No             |SCORE:   1
+PLAYER:asdasd         |SCORE:   1
+PLAYER:Viene          |SCORE:   1
+PLAYER:Todo alrededor |SCORE:   1
+PLAYER:Deseo          |SCORE:   1
+PLAYER:Zeta           |SCORE:   1
+PLAYER:Solo           |SCORE:   1
+PLAYER:Shift          |SCORE:   1
+PLAYER:Seh            |SCORE:   1
+PLAYER:Quick          |SCORE:   1
+PLAYER:Submit         |SCORE:   1
 PLAYER:Modulo con 5   |SCORE:   0
+PLAYER:Fin            |SCORE:   0
+PLAYER:Averga         |SCORE:   0

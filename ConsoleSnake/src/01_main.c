@@ -80,10 +80,9 @@ int main() {
     {
 
         printf("\x1b[13;1H \x1b[22m  %s %s", ANSI_COLOR_DARK_ORANGE,SNAKE_LOGO);//Title
-        printf("\033[34;110H%sCreator:Luca Salviani ",ANSI_COLOR_GREY);//Signature
-        printf("\033[34;90H%sConsole_snake: 1.0", ANSI_COLOR_GREY);//Version
-        //Controls
-        textPositioning(controls_text,27, 3);
+        printf("\033[35;110H%sCreator:Luca Salviani ",ANSI_COLOR_GREY);//Signature
+        printf("\033[35;90H%sConsole_snake: 1.0", ANSI_COLOR_GREY);//Version
+        textPositioning(controls_text,27, 3);//Controls
         printf("%s", ANSI_COLOR_DARK_RED);
         textPositioning(game_keys, 70, 1);
         printf("\033[11;75H MOVEMENT     PAUSE GAME");
@@ -106,7 +105,7 @@ int main() {
     textPositioning(arena3, 1, 1);
     
 
-    textPositioning(points_art, 97, 2);//Prints the points text.
+    textPositioning(points_art, 97, 3);//Prints the points text.
     ticks = 0; //Resets game ticks.
     ////////////////GAME
     while (1)
@@ -124,7 +123,7 @@ int main() {
 
         printf("\x1b[%d;%dH  ", y_buffer, x_buffer);        //Clears snake trail
 
-        controls(segment, &snakeDirection,&pause,1,91,1,34);
+        controls(segment, &snakeDirection,&pause,1,91,1,35);
 
         georginasCookies(&segment,&segmentPtr, &x_food, &y_food, &points,&snakeSize, x_buffer, y_buffer,snakeDirection);
 
@@ -184,15 +183,15 @@ int main() {
         factor = (sin(ticks * 0.03) + 1) / 1.5; // Is the rate at which the movement effect is added for the game over
         breathingEffectToColor(ticks, pink, white); // Adds the breathing effect to the game over 
 
-        // Random Option 1 for the game over
+        // Random Option 1 for the game over Vertical movement one
         if (gameOverEffect == 1)
         {
             textPositioning(game_over, 20, (30 * factor / 2) + 3);
         }
-        // Random Option 2 for the game over
+        // Random Option 2 for the game over Horizontal movement one
         else if (gameOverEffect == 0) 
         {
-            textPositioning(game_over, (29 * factor) + 2, 10);
+            textPositioning(game_over, (29 * factor) + 3, 10);
         }
         // Asks the user if he/she wants to add a record to the records files
         if (recordSaved == false)

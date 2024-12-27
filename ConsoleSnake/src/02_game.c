@@ -15,7 +15,7 @@ void georginasCookies(snake** segment,snake** segmentPtr, int* x_food, int* y_fo
     if (((*segment)->x_pos == *x_food && (*segment)->y_pos == *y_food) || ((snakesDirection == 3 || snakesDirection == 4) && (((*segment)->x_pos+1) == *x_food && (*segment)->y_pos == *y_food)))
     {
         (*points)++;
-        pointsDisplay(*points, 130, 8, numbers);
+        pointsDisplay(*points, 130, 9, numbers);
         (*snakeSize)++;
         ////Adds a snake segment
 
@@ -197,14 +197,14 @@ void advancePhase(int* phase, int* timer) {
 void gameTalker(snake* segment, int points, int ticks, int* gameTalkerFase, int* gameTalkerMap, int* internalTimer, int* randText) {
 
     // MAP boundaries condition
-    if ((segment->x_pos < 2 || segment->y_pos > 32 || segment->y_pos < 3) && *gameTalkerMap == 0) {
+    if ((segment->x_pos < 2 || segment->y_pos > 33 || segment->y_pos < 3) && *gameTalkerMap == 0) {
         showDialogue(dialogues[0][*randText], 95, 16);
         *gameTalkerMap = 1;
     }
     
     // Dialogue phases based on points
     if (*gameTalkerFase < 5) {
-        int thresholds[] = { 10, 25, 60, 95 }; //This are the points you have to reach in order for a threshhold to be reached
+        int thresholds[] = { 10, 25, 50, 90 }; //This are the points you have to reach in order for a threshhold to be reached 10 25 50 90
         for (int i = 0; i < 4; i++) {
             if (points == thresholds[i] && *gameTalkerFase == i) {
                 showDialogue(dialogues[i + 1][*randText], 95, 16);
@@ -221,7 +221,7 @@ void gameTalker(snake* segment, int points, int ticks, int* gameTalkerFase, int*
     //This are all for animations
     if (*gameTalkerFase >= 5 && *gameTalkerFase < 17) {
         int index = (*gameTalkerFase - 5);
-        showDialogue(animations[*randText][index], 95, 16);
+        showDialogue(animations[*randText][index], 96, 18);
 
         //You have different speeds depending on the animation
         if (*randText == 0 || *randText == 1) 
@@ -246,7 +246,7 @@ void gameTalker(snake* segment, int points, int ticks, int* gameTalkerFase, int*
             advancePhase(gameTalkerFase, internalTimer);
             if (*gameTalkerFase == 17)
             {
-                textPositioning(blank, 95, 16);
+                textPositioning(blank, 96, 18);
                 return;
             }
             return;

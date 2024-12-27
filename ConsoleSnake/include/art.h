@@ -168,6 +168,8 @@ const char* arenaPiece3[];
 const char* arenaPiece4[];
 
 
+extern const char* bigBlank[];
+
 extern const char* blank[];
 
 #define RIGHT_ALIGN "\x1b[98G"

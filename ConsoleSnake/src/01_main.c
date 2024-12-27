@@ -101,15 +101,24 @@ int main() {
 
    ///////////////GAME SETUP
     titleErasser();
+    textPositioning(bigBlank, 1, 1);
     printf("%s", ANSI_COLOR_DARK_ORANGE);
-    textPositioning(arena3, 1, 1);
-    
+    textPositioning(arenaPiece1, 1, 1);
+    textPositioning(arenaPiece3, 1, 3);
+    textPositioning(arenaPiece2, 1, 34);
+    textPositioning(arenaPiece4, 93, 1);
 
     textPositioning(points_art, 97, 3);//Prints the points text.
     ticks = 0; //Resets game ticks.
     ////////////////GAME
     while (1)
     {
+        if (ticks % 300 == 0)
+        {
+            textPositioning(arenaPiece1, 1, 1);
+            textPositioning(arenaPiece3, 1, 3);
+            textPositioning(arenaPiece2, 1, 34);
+        }
         //The buffer follows the snakes head
         x_buffer = segmentPtr->x_pos;
         y_buffer = segmentPtr->y_pos;
@@ -154,19 +163,19 @@ int main() {
             }
         }
         ticks++;    //Counts game ticks
-
         textBreathEfect(ticks);// Gives the food the Breathe colors effect
-        
         printf("\x1b[%d;%dHG", y_food, x_food); //Prints food
-
-
     }
    
 
 
     ///////////////GAME OVER SETUP
+
     printf("\x1b[%d;%dH ", y_food, x_food);     //Deletes the food
     drawSnake(segmentPtr, true);    //Deletes the snake by giving it a true value
+    textPositioning(arenaPiece1, 1, 1);
+    textPositioning(arenaPiece3, 1, 3);
+    textPositioning(arenaPiece2, 1, 34);
     freeSnakesMemory(segmentPtr);
     float factor = 0;
     int gameOverEffect = rand()%2;  //Randomizes which game over effect will be used

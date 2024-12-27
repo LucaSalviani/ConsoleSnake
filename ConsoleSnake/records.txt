@@ -1,4 +1,7 @@
+PLAYER:Nice pretty boy|SCORE:  62
+PLAYER:Turn away      |SCORE:  22
 PLAYER:Modern Cliche  |SCORE:  11
+PLAYER:Hold on        |SCORE:   7
 PLAYER:Matanga        |SCORE:   6
 PLAYER:Matanga        |SCORE:   6
 PLAYER:Matanga        |SCORE:   6
@@ -27,6 +30,7 @@ PLAYER:Matanga        |SCORE:   5
 PLAYER:Matanga        |SCORE:   5
 PLAYER:Matanga        |SCORE:   5
 PLAYER:Matanga        |SCORE:   5
+PLAYER:Nice           |SCORE:   2
 PLAYER:A verga        |SCORE:   2
 PLAYER:Cuanta fe      |SCORE:   2
 PLAYER:Higher         |SCORE:   2

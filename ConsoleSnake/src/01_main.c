@@ -44,11 +44,11 @@ int main() {
 
     printf("\033[?25l");//Hides cursor
    
+    
     windowManagement(410, 240, consoleHeight, consoleWidth);//Manages console position and size
+    disableResizeAndMaximize(); // Self explanatory
+    configureConsoleForGame(); // Puts console in Raw mode and disables quick edit.
     SetConsoleTitleA("SNAKE");
-    disableResize();
-    disableMaximize();
-    disableQuickEditMode();
 
     ///////////////CREATES A PLAYER
     Player* playerPtr = NULL;

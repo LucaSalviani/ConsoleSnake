@@ -12,8 +12,6 @@ void breathingEffectToColor(int ticks, struct RGB color1, struct RGB color2);
 void initializeRandomSeed();
 void readInputWithLimit(char* input, int maxLen);
 void clearBuffer();
-void disableResize();
-void disableMaximize();
-void disableSelection();
-void disableQuickEditMode();
+void disableResizeAndMaximize();
+void configureConsoleForGame();
 #endif // UTILS_H

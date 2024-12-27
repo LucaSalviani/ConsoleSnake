@@ -36,6 +36,10 @@ PLAYER:Cuanta fe      |SCORE:   2
 PLAYER:Higher         |SCORE:   2
 PLAYER:No usamos sleep|SCORE:   2
 PLAYER:fuck           |SCORE:   2
+PLAYER:Its            |SCORE:   1
+PLAYER:Averga         |SCORE:   1
+PLAYER:Overnight      |SCORE:   1
+PLAYER:Father         |SCORE:   1
 PLAYER:Porfavor funka |SCORE:   1
 PLAYER:Fixed          |SCORE:   1
 PLAYER:No entiendo    |SCORE:   1
@@ -200,6 +204,10 @@ PLAYER:Submit         |SCORE:   1
 PLAYER:Averga         |SCORE:   1
 PLAYER:Bien           |SCORE:   1
 PLAYER:Test compacto  |SCORE:   1
+PLAYER:Test scroll    |SCORE:   1
+PLAYER:gaga           |SCORE:   1
+PLAYER:Overnight NICE |SCORE:   1
+PLAYER:Down           |SCORE:   1
 PLAYER:Modulo con 5   |SCORE:   0
 PLAYER:Fin            |SCORE:   0
 PLAYER:Averga         |SCORE:   0

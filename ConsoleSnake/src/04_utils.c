@@ -12,85 +12,77 @@ int randomBetween(int min, int max)
     return value;
 }
 
-void windowManagement(int wind_x, int wind_y, int wind_h, int wind_w) 
-{
-    //Obtains console handle
+void windowManagement(int wind_x, int wind_y, int wind_h, int wind_w) {
     HWND consoleWindow = GetConsoleWindow();
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-    
-    //This gives the console its position and its absolute size, the absolute size is determined in pixels
+
+    // Posicionar la ventana
     MoveWindow(consoleWindow, wind_x, wind_y, wind_w, wind_h, TRUE);
 
-
-
-
-    // Defines the consoles buffer, its determined in characters
+    // Ajustar tamaño del buffer
     COORD bufferSize;
-    bufferSize.X = (wind_w/8);  //133 Width of the console in characters, it has to be the same as the translation from pixels to characters so that there are no scroll bars
-    bufferSize.Y = (wind_h/16)-1;  //35 Height of the console in characters, it has to be the same as the translation from pixels to characters so that there are no scroll bars
-
-    // Sets the consoles buffer to the handle
+    bufferSize.X = wind_w / 8;
+    bufferSize.Y = (wind_h / 16) - 1;
     SetConsoleScreenBufferSize(hConsole, bufferSize);
 
-
-    // This sets the VISIBLE not absolute size of the console window, and it makes the scroll bar area to disapear
-    SMALL_RECT windowSize = { 0, 0, (wind_w/8)-1, (wind_h/16)-2};  //132 34 Defines visible window size, its defines in characters not pixels, it has to be 1 less than the buffer
-    SetConsoleWindowInfo(hConsole, TRUE, &windowSize); // Sets the visible window size
-
-}
-
-void disableQuickEditMode() 
-{
-    HANDLE hInput = GetStdHandle(STD_INPUT_HANDLE);
-    DWORD prevMode;
-
-    // Obtiene el modo actual
-    GetConsoleMode(hInput, &prevMode);
-
-    // Desactiva QUICK_EDIT_MODE y habilita INPUT_MODE estándar
-    SetConsoleMode(hInput, prevMode & ~ENABLE_QUICK_EDIT_MODE);
-}
-
-void disableSelection() 
-{
-    HANDLE hConsole = GetStdHandle(STD_INPUT_HANDLE);
-    DWORD mode;
-    GetConsoleMode(hConsole, &mode);
-    mode &= ~ENABLE_QUICK_EDIT_MODE;  // Desactivar Quick Edit Mode
-    SetConsoleMode(hConsole, mode);
+    // Ajustar tamaño visible de la ventana
+    SMALL_RECT windowSize = { 0, 0, (wind_w / 8) - 1, (wind_h / 16) - 2 };
+    SetConsoleWindowInfo(hConsole, TRUE, &windowSize);
 }
 
 
-void disableMaximize() 
+void disableResizeAndMaximize() 
 {
     HWND hWndConsole = GetConsoleWindow();
+    LONG style;
 
     // Obtener los estilos actuales de la ventana
-    LONG style = GetWindowLong(hWndConsole, GWL_STYLE);
-
-    // Quitar la opción de maximizar
-    style &= ~WS_MAXIMIZEBOX;
-
-    // Actualizar los estilos de la ventana
-    SetWindowLong(hWndConsole, GWL_STYLE, style);
-
-    // Forzar una actualización de la ventana para aplicar los cambios
-    SetWindowPos(hWndConsole, NULL, 0, 0, 0, 0,
-        SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER | SWP_FRAMECHANGED);
-}
-
-void disableResize() 
-{
-    HWND hWndConsole = GetConsoleWindow();
+    style = GetWindowLong(hWndConsole, GWL_STYLE);
 
     // Deshabilitar la opción de redimensionar
-    LONG style = GetWindowLong(hWndConsole, GWL_STYLE);
     style &= ~WS_SIZEBOX; // Quitar el estilo que permite redimensionar
-    SetWindowLong(hWndConsole, GWL_STYLE, style);
+
+    // Deshabilitar la opción de maximizar
+    style &= ~WS_MAXIMIZEBOX; // Quitar el estilo que permite maximizar
+
+    // Establecer los nuevos estilos de la ventana
+    if (SetWindowLong(hWndConsole, GWL_STYLE, style) == 0) {
+        // Error al modificar los estilos
+        fprintf(stderr, "Error al modificar los estilos de la ventana de la consola.\n");
+        return;
+    }
 
     // Forzar una actualización de la ventana para aplicar los cambios
-    SetWindowPos(hWndConsole, NULL, 0, 0, 0, 0,
-        SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER | SWP_FRAMECHANGED);
+    if (SetWindowPos(hWndConsole, NULL, 0, 0, 0, 0,
+        SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER | SWP_FRAMECHANGED) == 0) {
+        // Error al actualizar la ventana
+        fprintf(stderr, "Error al actualizar la ventana de la consola.\n");
+        return;
+    }
+}
+
+
+void configureConsoleForGame() 
+{
+    HANDLE hInput = GetStdHandle(STD_INPUT_HANDLE);
+    DWORD mode;
+
+    // Obtener el modo actual de la consola
+    if (!GetConsoleMode(hInput, &mode)) {
+        fprintf(stderr, "Error al obtener el modo de la consola.\n");
+        return;
+    }
+
+    // Desactivar Quick Edit Mode (Evitar selección de texto) y configurar la entrada en modo "raw"
+    mode &= ~ENABLE_QUICK_EDIT_MODE;          // Desactivar Quick Edit Mode
+    mode &= ~(ENABLE_LINE_INPUT | ENABLE_ECHO_INPUT | ENABLE_PROCESSED_INPUT); // Configurar la entrada como "raw"
+
+    // Establecer el nuevo modo de entrada
+    if (!SetConsoleMode(hInput, mode)) {
+        fprintf(stderr, "Error al establecer el nuevo modo de la consola.\n");
+        return;
+    }
+
 }
 
 void textPositioning(const char* text[],int textX, int textY)

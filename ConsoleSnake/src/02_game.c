@@ -522,85 +522,53 @@ void displayRecords(const char* recordsTxt,int* scroll,int registryAmount,int ti
         return;
     }
 
-    // Read and show each line of the file
+    // Presentation, Records title and blank space in case theres text from the game talker
     char line[256];
     printf("\033[16;95H%s              RECORDS           ",ANSI_COLOR_DARK_RED);
     printf("\033[17;95H                                  ");
 
+    // This only happens if you have a big enough file, it controls the scroll down effect, including the scroll bar and  the scroll rate. In this case it activates at a file with 15 registrys since thats the display space
     if (registryAmount > 15)
     {
         float scrollRate = (registryAmount ) / 15;
         int integralPart = round(scrollRate); // i could also calculate the integer rest of the division and use that as a parameter so that the scroll is more exact, but it is a lot of work for very little reward, maybe some day(?
         if (scroll != NULL ) 
         {
-            // Detect keys up
-            if (((((GetAsyncKeyState(VK_UP) & 0x8000) ||
-                    (GetAsyncKeyState('w') & 0x8000) ||
-                    (GetAsyncKeyState('W') & 0x8000)) 
-                    &&
-                    (ticks % 4 == 0)                   ) 
-                    ||
-                (((GetAsyncKeyState(VK_UP) & 0x8000) ||
-                    (GetAsyncKeyState('w') & 0x8000) ||
-                    (GetAsyncKeyState('W') & 0x8000)) && (GetAsyncKeyState(VK_SHIFT) & 0x8000) && (ticks % 1 == 0)))
-                    &&
-                ((*scroll) > 0))
-            {
-                (*scroll)--;
-                //prints the scroll wheel
-                int scrolledAmount = (*scroll) / integralPart; // how much will the scroll wheel move, it is relative to the amount of elements in the file
-                printf("\033[%d;130H  ", 18 + scrolledAmount);
-                printf("\033[%d;130H||", 17 + scrolledAmount);
-            }
+            // Detect keys up for scroll and shift its all based on the scroll rate setted up the space where you will print the files records ( in this case 15) and the file size
+            bool isUpPressed = (GetAsyncKeyState(VK_UP) & 0x8000)
+                || (GetAsyncKeyState('w') & 0x8000)
+                || (GetAsyncKeyState('W') & 0x8000);
 
-            // Detect keys down
-            //if (((GetAsyncKeyState(VK_DOWN) & 0x8000) || (GetAsyncKeyState('s') & 0x8000) || (GetAsyncKeyState('S') & 0x8000)) && (ticks % 4 == 0) && ((*scroll) < (registryAmount - 15)))
+            if (isUpPressed && ((*scroll) > 0)) {
+                if ((ticks % 4 == 0) || ((GetAsyncKeyState(VK_SHIFT) & 0x8000) && (ticks % 1 == 0))) {
+                    (*scroll)--;
 
-            if(
-                 (
-                    (
-                        (
-                            (GetAsyncKeyState(VK_DOWN) & 0x8000) 
-                            ||
-                            (GetAsyncKeyState('s') & 0x8000) 
-                            ||
-                            (GetAsyncKeyState('S') & 0x8000)
-                        )
-                        &&
-                        (ticks % 4 == 0)
-                    )
+                    // Calcula cuánto mover la rueda de desplazamiento
+                    int scrolledAmount = (*scroll) / integralPart;
 
-                    ||
-
-                    (
-                        (
-                            (GetAsyncKeyState(VK_DOWN) & 0x8000) 
-                            ||
-                            (GetAsyncKeyState('s') & 0x8000) 
-                            ||
-                            (GetAsyncKeyState('S') & 0x8000)
-                        ) 
-                        && 
-                        (GetAsyncKeyState(VK_SHIFT) & 0x8000) 
-                        && 
-                        (ticks % 1 == 0)
-                    )
-                 )   
-                 &&
-                 ((*scroll) < (registryAmount - 15)) 
-              )
-            {
-                (*scroll)++;
-                //prints the scroll wheel
-                int scrolledAmount = (*scroll) / integralPart;
-                printf("\033[%d;130H  ", 16 + scrolledAmount);
-                printf("\033[%d;130H||", 17 + scrolledAmount);
+                    // Imprime la rueda de desplazamiento
+                    printf("\033[%d;130H  ", 18 + scrolledAmount);
+                    printf("\033[%d;130H||", 17 + scrolledAmount);
+                }
             }
 
 
+            // Detect keys down for the scroll and shift, its all based on a scroll rate and the files size
+            bool isDownPressed = (GetAsyncKeyState(VK_DOWN) & 0x8000)
+                || (GetAsyncKeyState('s') & 0x8000)
+                || (GetAsyncKeyState('S') & 0x8000);
 
+            if (isDownPressed && ((*scroll) < (registryAmount - 15))) {
+                if ((ticks % 4 == 0) || ((GetAsyncKeyState(VK_SHIFT) & 0x8000) && (ticks % 1 == 0))) {
+                    (*scroll)++;
+                        //prints the scroll wheel
+                        int scrolledAmount = (*scroll) / integralPart;
+                        printf("\033[%d;130H  ", 16 + scrolledAmount);
+                        printf("\033[%d;130H||", 17 + scrolledAmount);
+                }
+            }
 
-
+            //Prints a letter at the top explaining how the file navigation controls work
             printf("\033[3;71H%s|%s Arrows for scrolling", ANSI_COLOR_DARK_ORANGE, ANSI_COLOR_LIGHT_GREY);
             printf("\033[4;71H%s|%s+SHIFT fast scrolling",ANSI_COLOR_DARK_ORANGE,ANSI_COLOR_LIGHT_GREY);
             printf("\033[5;72H%s---------------------",ANSI_COLOR_DARK_ORANGE);
@@ -614,38 +582,37 @@ void displayRecords(const char* recordsTxt,int* scroll,int registryAmount,int ti
   
     for (int i = 0; i < 15 && fgets(line, sizeof(line), file) ; i++)
     {
-     
+            //This is for the Top 3 records
             if (i < (3 - *scroll))
             { 
                 breathingEffectToColor(ticks, red, white);
                 if (i == 0)
                 {
-                    
-                    if (*scroll == 0)
+                    if (*scroll == 0) // This is ONLY for the top 1 to distinguish it from the rest
                     {
                         printf("%s",ANSI_TEXT_BACKGROUND_INVERSION);
                     }
-                    textPositioning(top, 81, 17 + i);
+                    textPositioning(top, 81, 18 + i); //Prints some etiquetes for the top players and specially the first visible top considering the scroll
                     printf("\033[%i;86H%i ====>", 18 + i, i + 1 + *scroll);
 
                     printf("%s",ANSI_TEXT_BACKGROUND_REVERSION);
                 }
                 else
                 {
-                    textPositioning(top, 86, 17 + i);
+                    textPositioning(top, 86, 18 + i); // for every other top player thats not first visible considering the scroll
                     printf("\033[%i;92H%i", 18 + i, i + 1 + *scroll);
-
                 }
             }
-            else if (i < 5)
+            else if (i < 5) // deletes the top etiquetes based on the scroll so that it only show apropiettly
             {
                 printf("\033[%i;79H              ", 18 + i);
                 printf("%s", ANSI_COLOR_DARK_RED);
             }
-            if (*scroll == 0 && i == 0)
+            if (*scroll == 0 && i == 0) //resets background inversion
             {
                 printf("%s", ANSI_TEXT_BACKGROUND_INVERSION);
             }
+            //THIS PRINTS THE RECORDS, the actual records everything above is visual effects for the top 3
             printf("\033[%i;95H%s", 18 + i, line);
             printf("%s", ANSI_TEXT_BACKGROUND_REVERSION);
     }
@@ -654,7 +621,7 @@ void displayRecords(const char* recordsTxt,int* scroll,int registryAmount,int ti
     fclose(file);
 }
 
-// Skips lines in the file so that the file cursor is where it is expected
+// Skips lines in the file so that the file cursor is where it is expected based on the scroll rate, if you scrolled 5 postions down it will skip 5 positions
 void skipLines(FILE* file, int linesToSkip) 
 {
     char buffer[256];  // buffer for the lines 

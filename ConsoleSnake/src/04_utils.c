@@ -14,28 +14,28 @@ int randomBetween(int min, int max)
 
 void windowManagement(int wind_x, int wind_y, int wind_h, int wind_w) 
 {
-    // Obtiene el handle de la consola
+    //Obtains console handle
     HWND consoleWindow = GetConsoleWindow();
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-
-    // Configura la posición y el tamaño de la ventana
-    MoveWindow(consoleWindow, wind_x, wind_y, 1100, 574, TRUE);
-
-
+    
+    //This gives the console its position and its absolute size, the absolute size is determined in pixels
+    MoveWindow(consoleWindow, wind_x, wind_y, wind_w, wind_h, TRUE);
 
 
-    // Establece el tamaño del buffer de pantalla para evitar el scroll
+
+
+    // Defines the consoles buffer, its determined in characters
     COORD bufferSize;
-    bufferSize.X = 133 ;  // Ancho del buffer en caracteres (igual al ancho de la ventana)
-    bufferSize.Y = 35 ;  // Alto del buffer en caracteres (igual a la altura de la ventana)
+    bufferSize.X = (wind_w/8);  //133 Width of the console in characters, it has to be the same as the translation from pixels to characters so that there are no scroll bars
+    bufferSize.Y = (wind_h/16)-1;  //35 Height of the console in characters, it has to be the same as the translation from pixels to characters so that there are no scroll bars
 
-    // Establece el tamaño del buffer
+    // Sets the consoles buffer to the handle
     SetConsoleScreenBufferSize(hConsole, bufferSize);
 
 
-    // Configura la ventana de la consola para que coincida con el tamaño del buffer
-    SMALL_RECT windowSize = { 0, 0, 132 , 34 };  // Define el tamaño de la ventana visible
-    SetConsoleWindowInfo(hConsole, TRUE, &windowSize);
+    // This sets the VISIBLE not absolute size of the console window, and it makes the scroll bar area to disapear
+    SMALL_RECT windowSize = { 0, 0, (wind_w/8)-1, (wind_h/16)-2};  //132 34 Defines visible window size, its defines in characters not pixels, it has to be 1 less than the buffer
+    SetConsoleWindowInfo(hConsole, TRUE, &windowSize); // Sets the visible window size
 
 }
 
@@ -95,45 +95,11 @@ void disableResize()
 
 void textPositioning(const char* text[],int textX, int textY)
 {
-    //Sets Y position of the text
-    printf("\033[H"); 
-    printf("\033[%dB", textY); 
-    bool noCarry = false;
-
     for (int i = 0; text[i]!= NULL; i++)
     {
-        if (text[i+1] == NULL)
-        {
-            noCarry = true;
-        }
-
-        right_align(text[i],textX,noCarry);
+        printf("\033[%i;%iH%s", textY+i, textX, text[i]);
     }
 }
-
-void right_align(const char* text[], int textX,bool noCarry)
-{
-    if (text == NULL) {
-        printf("Error: Null text chain passed to right_align\n");
-        return;
-    }
-    if (textX < 0) {
-        printf("Error: Invalid parameter  textX: %d\n", textX);
-        return;
-    }
-    //Sets X position for the text
-    if (noCarry == false)
-    {
-        printf("\033[%dC%s\n", textX, text);
-    }
-    else if (noCarry == true)
-    {
-        printf("\033[%dC%s", textX, text);
-
-    }
-}
-
-
 
 
 void get_console_font_size(int *FontSizeY, int* FontSizeX) 

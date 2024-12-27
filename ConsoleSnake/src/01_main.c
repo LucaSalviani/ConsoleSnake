@@ -23,8 +23,8 @@ int main() {
     int registryAmount = 0;
 
     //Windows size, everything will be based on it
-    const int consoleWidth = 1100;//1100
-    const int consoleHeight = 600;//600
+    const int consoleWidth = 1064;//1100
+    const int consoleHeight = 576;//574
 
     //Font size, set them up at the standard but will later be checked by a handle
     int FontSizeX = 8;
@@ -44,12 +44,10 @@ int main() {
 
     printf("\033[?25l");//Hides cursor
    
-    windowManagement(410, 240, consoleWidth, consoleHeight);//Manages console position and size
+    windowManagement(410, 240, consoleHeight, consoleWidth);//Manages console position and size
     SetConsoleTitleA("SNAKE");
     disableResize();
     disableMaximize();
-    
-    //disableSelection();
     disableQuickEditMode();
 
     ///////////////CREATES A PLAYER
@@ -80,13 +78,14 @@ int main() {
     /////////////GAME FRONT PAGE
     while (gameStart(&snakeDirection))
     {
-        printf("\x1b[13;0H \x1b[22m  %s %s", ANSI_COLOR_DARK_ORANGE,SNAKE_LOGO);//Title
+
+        printf("\x1b[13;1H \x1b[22m  %s %s", ANSI_COLOR_DARK_ORANGE,SNAKE_LOGO);//Title
         printf("\033[34;110H%sCreator:Luca Salviani ",ANSI_COLOR_GREY);//Signature
         printf("\033[34;90H%sConsole_snake: 1.0", ANSI_COLOR_GREY);//Version
         //Controls
         textPositioning(controls_text,27, 3);
         printf("%s", ANSI_COLOR_DARK_RED);
-        textPositioning(game_keys, 70, 0);
+        textPositioning(game_keys, 70, 1);
         printf("\033[11;75H MOVEMENT     PAUSE GAME");
         
         printf("\x1b[23;55H%s Hold the arrows to play %s",ANSI_COLOR_DARK_ORANGE,ANSI_RESET_STYLE);//Start buttons
@@ -103,9 +102,10 @@ int main() {
 
    ///////////////GAME SETUP
     titleErasser();
-    //printf("\033[H%s %s", ANSI_COLOR_DARK_ORANGE, ARENA2);//Prints the arena.
     printf("%s", ANSI_COLOR_DARK_ORANGE);
-    textPositioning(arena3, 0, 0);
+    textPositioning(arena3, 1, 1);
+    
+
     textPositioning(points_art, 97, 2);//Prints the points text.
     ticks = 0; //Resets game ticks.
     ////////////////GAME
@@ -124,7 +124,7 @@ int main() {
 
         printf("\x1b[%d;%dH  ", y_buffer, x_buffer);        //Clears snake trail
 
-        controls(segment, &snakeDirection,&pause,0,91,0,34);
+        controls(segment, &snakeDirection,&pause,1,91,1,34);
 
         georginasCookies(&segment,&segmentPtr, &x_food, &y_food, &points,&snakeSize, x_buffer, y_buffer,snakeDirection);
 

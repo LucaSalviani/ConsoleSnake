@@ -1,1 +1,1 @@
-The console in which you will open the game will need administrator levels for Ansii codes, and console manipulation (Disabling Resize and disabling the Quick edit mode). If not given the game will open but it will not work! 
+The console in which you will open the game will need administrator levels for Ansii codes, and console manipulation (Disabling Resize and disabling the Quick edit mode). If not given the game will open but it will not work as expected! 

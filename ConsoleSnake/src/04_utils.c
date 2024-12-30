@@ -16,6 +16,7 @@ void windowManagement(int wind_x, int wind_y, int wind_h, int wind_w)
 {
     //Obtains console handle
     HWND consoleWindow = GetConsoleWindow();
+    ShowWindow(consoleWindow, SW_RESTORE);
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
     //This gives the console its position and its absolute size, the absolute size is determined in pixels

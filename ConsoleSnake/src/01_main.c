@@ -52,8 +52,9 @@ int main() {
         initializeRandomSeed();
 
         printf("\033[?25l");//Hides cursor
-        printf("\033[H");
-        textPositioning(bigBlank, 1, 1);
+        printf("\033[H");//Positions the cursor at the start of the console matrix
+        printf("\033[40m\033[2J");//Cleans the console and sets the background to black
+
 
 
 
@@ -108,7 +109,7 @@ int main() {
 
         ///////////////GAME SETUP
         titleErasser();
-        textPositioning(bigBlank, 1, 1);
+        printf("\033[40m\033[2J"); //Cleans the console and sets the background to black
         printf("%s", ANSI_COLOR_DARK_ORANGE);
         textPositioning(arenaPiece1, 1, 1);
         textPositioning(arenaPiece3, 1, 3);

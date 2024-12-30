@@ -1,3 +1,4 @@
+PLAYER:BlackRyu       |SCORE: 102
 PLAYER:Nice pretty boy|SCORE:  62
 PLAYER:Turn away      |SCORE:  22
 PLAYER:Teta           |SCORE:  11
@@ -32,6 +33,7 @@ PLAYER:Matanga        |SCORE:   5
 PLAYER:Matanga        |SCORE:   5
 PLAYER:Matanga        |SCORE:   5
 PLAYER:Love           |SCORE:   3
+PLAYER:ginaca         |SCORE:   3
 PLAYER:Nice           |SCORE:   2
 PLAYER:A verga        |SCORE:   2
 PLAYER:Cuanta fe      |SCORE:   2

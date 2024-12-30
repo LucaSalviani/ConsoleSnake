@@ -15,6 +15,7 @@ int main() {
     configureConsoleForGame(); // Puts console in Raw mode and disables quick edit.
     windowManagement(410, 240, consoleHeight, consoleWidth);//Manages console position and size
     SetConsoleTitleA("SNAKE");
+   enableAnsiEscapeCodes();
     while (1)
     {
 
@@ -51,6 +52,8 @@ int main() {
         initializeRandomSeed();
 
         printf("\033[?25l");//Hides cursor
+        printf("\033[H");
+        textPositioning(bigBlank, 1, 1);
 
 
 
@@ -70,8 +73,8 @@ int main() {
             return 1;
         }
         //Declares the position of the head of the snake 
-        segment->x_pos = 20;
-        segment->y_pos = 20;
+        segment->x_pos = 46;
+        segment->y_pos = 17;
         segment->next = NULL;
         //We get a head pointer
         segmentPtr = segment;
@@ -113,10 +116,23 @@ int main() {
         textPositioning(arenaPiece4, 93, 1);
 
         textPositioning(points_art, 97, 3);//Prints the points text.
+        
+        printf("\033[15;36HMove in one direction!");
+        Sleep(200);
+        while (gameStart(&snakeDirection))
+        {
+            breathingEffectToColor(ticks,dark_orange,white);
+            printf("\033[15;36HMove in one direction!");
+            ticks++;
+            Sleep(10);
+        }
+        printf("\033[15;36H                      ");
         ticks = 0; //Resets game ticks.
         ////////////////GAME
         while (1)
         {
+           
+
             if (ticks % 300 == 0)
             {
                 printf("%s", ANSI_COLOR_DARK_ORANGE);
@@ -136,9 +152,9 @@ int main() {
             }
 
             printf("\x1b[%d;%dH  ", y_buffer, x_buffer);        //Clears snake trail
-
+            
             controls(segment, &snakeDirection, &pause, 1, 91, 1, 35);
-
+            
             georginasCookies(&segment, &segmentPtr, &x_food, &y_food, &points, &snakeSize, x_buffer, y_buffer, snakeDirection);
 
             // GAME TALKER :
@@ -208,7 +224,7 @@ int main() {
             {
                 textPositioning(game_over, (29 * factor) + 3, 10);
             }
-            printf("\033[32;30HMaintain R pressed to replay");
+            printf("\033[32;39HHold R to replay");
             // Asks the user if he/she wants to add a record to the records files
             if (recordSaved == false)
             {

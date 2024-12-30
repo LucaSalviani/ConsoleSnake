@@ -38,6 +38,20 @@ void windowManagement(int wind_x, int wind_y, int wind_h, int wind_w)
 }
 
 
+void enableAnsiEscapeCodes() 
+{
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    DWORD dwMode;
+
+    // Obtener el modo actual
+    GetConsoleMode(hConsole, &dwMode);
+
+    // Habilitar el soporte para escape de caracteres ANSI
+    dwMode |= ENABLE_VIRTUAL_TERMINAL_PROCESSING;
+    SetConsoleMode(hConsole, dwMode);
+}
+
+
 void disableResizeAndMaximize() 
 {
     HWND hWndConsole = GetConsoleWindow();

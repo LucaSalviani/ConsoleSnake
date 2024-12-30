@@ -149,6 +149,13 @@
     <ClInclude Include="include\game.h" />
     <ClInclude Include="include\snake.h" />
     <ClInclude Include="include\utils.h" />
+    <ClInclude Include="resource2.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="ConsoleSnake.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\Logo\SnakeLogoV4.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

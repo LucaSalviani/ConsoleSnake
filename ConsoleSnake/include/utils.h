@@ -14,4 +14,5 @@ void readInputWithLimit(char* input, int maxLen);
 void clearBuffer();
 void disableResizeAndMaximize();
 void configureConsoleForGame();
+void enableAnsiEscapeCodes();
 #endif // UTILS_H

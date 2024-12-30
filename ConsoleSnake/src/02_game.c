@@ -269,7 +269,6 @@ void readRecord(const char* recordsTxt, Player** playerPtr)
     FILE* file = fopen(recordsTxt, "r");
     if (file == NULL)
     {
-        perror("Error al abrir el archivo");
         return;
     }
 

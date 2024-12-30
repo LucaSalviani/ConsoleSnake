@@ -17,8 +17,12 @@ void windowManagement(int wind_x, int wind_y, int wind_h, int wind_w)
     //Obtains console handle
     HWND consoleWindow = GetConsoleWindow();
     ShowWindow(consoleWindow, SW_RESTORE);
+   
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-
+    CONSOLE_SCREEN_BUFFER_INFO csbi;
+    GetConsoleScreenBufferInfo(hConsole, &csbi);
+    // Changes the background color of the console itself for older consoles like powershell
+    WORD color = (0x00 << 4) | (csbi.wAttributes & 0x0F);
     //This gives the console its position and its absolute size, the absolute size is determined in pixels
     MoveWindow(consoleWindow, wind_x, wind_y, wind_w, wind_h, TRUE);
 

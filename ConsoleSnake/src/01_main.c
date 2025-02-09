@@ -22,7 +22,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     disableResizeAndMaximize(); // Self explanatory
     setConsoleFontSize(18);
     configureConsoleForGame(); // Puts console in Raw mode and disables quick edit.
-    windowManagement(410, 240, consoleHeight, consoleWidth);//Manages console position and size
+    windowManagement(450, 200, consoleHeight, consoleWidth);//Manages console position and size
     printf("\033[40m\033[2J");//Cleans the console and sets the background to black
   
     SetConsoleTitleA("SNAKE");

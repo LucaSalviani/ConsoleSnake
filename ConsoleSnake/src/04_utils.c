@@ -27,7 +27,7 @@ void windowManagement(int wind_x, int wind_y, int wind_h, int wind_w)
     // Changes the background color of the console itself for older consoles like powershell
     WORD color = (0x00 << 4) | (csbi.wAttributes & 0x0F);
     //This gives the console its position and its absolute size, the absolute size is determined in pixels
-   // MoveWindow(consoleWindow, wind_x, wind_y, wind_w, wind_h, TRUE);
+    MoveWindow(consoleWindow, wind_x, wind_y, wind_w, wind_h, TRUE);
 
 
     // Defines the consoles buffer, its determined in characters

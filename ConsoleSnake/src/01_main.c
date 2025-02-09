@@ -8,7 +8,14 @@
 #include <math.h>
 
 
-int main() {
+int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
+    bool pause = false;
+
+    AllocConsole();
+        freopen("CONIN$", "r", stdin);
+        freopen("CONOUT$", "w", stdout);
+        freopen("CONOUT$", "w", stderr);
+
     const int consoleWidth = 1064;//1100
     const int consoleHeight = 576;//576
     disableResizeAndMaximize(); // Self explanatory

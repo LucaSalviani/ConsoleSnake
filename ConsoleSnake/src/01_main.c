@@ -6,15 +6,8 @@
 #include <stdlib.h>
 #include <windows.h>
 #include <math.h>
-#include <wchar.h>
-#include <shlwapi.h>
-#include <tlhelp32.h>
-
-#pragma comment(lib, "Shlwapi.lib")
 
 
-
-//int main(int argc, char* argv[])
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
     bool pause = false;
@@ -24,8 +17,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     freopen("CONOUT$", "w", stdout);
     freopen("CONOUT$", "w", stderr);
 
-    //forcedPause(&pause);
-    Sleep(1000);
     const int consoleWidth = 1064;//1100
     const int consoleHeight = 576;//576
     disableResizeAndMaximize(); // Self explanatory

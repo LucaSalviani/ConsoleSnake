@@ -1,1 +1,2 @@
-The console in which you will open the game will need administrator levels for Ansii codes, and console manipulation (Disabling Resize and disabling the Quick edit mode). If not given the game will open but it will not work as expected! 
+This version of the game works perfectly well in Windows 10/11. Have fun! 
+Consider putting the game in a folder since it creates a save file with the player records.

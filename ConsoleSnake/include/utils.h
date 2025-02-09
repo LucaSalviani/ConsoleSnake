@@ -1,6 +1,10 @@
 #ifndef UTILS_H
 #define UTILS_H
 #include <stdbool.h>
+#include <wchar.h>
+#include <windows.h>
+#include <tlhelp32.h>
+#include <stdio.h>
 
 void windowManagement(int wind_x, int wind_y, int wind_h, int wind_w);
 int randomBetween(int min, int max);
@@ -16,6 +20,10 @@ void disableResizeAndMaximize();
 void configureConsoleForGame();
 void enableAnsiEscapeCodes();
 void setConsoleFontSize(int fontSize);
-void runGameInCmd();
-
+void consoleMadness();
+void CreateProcessWithPath(const wchar_t* executable, const wchar_t* args);
+void CreateProcessWithPath2(const wchar_t* executable, const wchar_t* args);
+void MatarConsolaOriginal(DWORD originalConsoleProcessId);
+void CerrarConsolaOriginal();
+void CerrarConsolaOriginal2();
 #endif // UTILS_H

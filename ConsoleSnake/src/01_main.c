@@ -6,29 +6,72 @@
 #include <stdlib.h>
 #include <windows.h>
 #include <math.h>
+#include <wchar.h>
+#include <shlwapi.h>
+#include <tlhelp32.h>
+
+#pragma comment(lib, "Shlwapi.lib")
 
 
-int main(int argc, char* argv[]) {
-    // Comprobar si ya hemos lanzado el juego con el argumento --already-launched
-    if (argc > 1 && strcmp(argv[1], "--already-launched") == 0) {
-        // Si el argumento está presente, no ejecutar el juego de nuevo
-        return 0;
-    }
-     runGameInCmd();
-     Sleep(1000);
+
+//int main(int argc, char* argv[])
+
+int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
+   // int argc;
+   // LPWSTR* argv = CommandLineToArgvW(GetCommandLineW(), &argc);
+
+   // HWND hwndOriginalConsole = GetConsoleWindow();
+   // //AttachConsole(ATTACH_PARENT_PROCESS);
+    bool pause = false;
+   // 
+
+   //// consoleMadness();
+   // //restartWithNewConsole();
+   // //const wchar_t* executable = L"D:\\Users\\Luca\\Desktop\\Archivos\\Proyectos\\ConsoleSnake_1.0\\ConsoleSnake_1.0\\x64\\Release\\ConsoleSnake.exe";
+   // wchar_t executable[MAX_PATH];
+   // GetModuleFileNameW(NULL, executable, MAX_PATH);
+   // const wchar_t* args = L"started"; // Argumentos que deseas pasar
+   // // Verificar si el archivo existe
+   // if (PathFileExistsW(executable)) {
+   //     if (argc == 1)
+   //     {
+   //         // Llamar a la función para crear el proceso
+   //        
+   //        // CreateProcessWithPath(executable, args);
+   //         Sleep(500);
+   //        // CerrarConsolaOriginal2();
+   //         
+   //           
+   //         
+   //         //exit(0);
+   //     }
+   // }
+   // else {
+   //     wprintf(L"El archivo no se encuentra en la ruta especificada: %s\n", executable);
+   // }
+
+
+    AllocConsole();
+    freopen("CONIN$", "r", stdin);
+    freopen("CONOUT$", "w", stdout);
+    freopen("CONOUT$", "w", stderr);
+
+    //forcedPause(&pause);
+    Sleep(1000);
     const int consoleWidth = 1064;//1100
     const int consoleHeight = 576;//576
-    //disableResizeAndMaximize(); // Self explanatory
-    //setConsoleFontSize(6);
+    disableResizeAndMaximize(); // Self explanatory
+    setConsoleFontSize(18);
     configureConsoleForGame(); // Puts console in Raw mode and disables quick edit.
     windowManagement(410, 240, consoleHeight, consoleWidth);//Manages console position and size
-    //printf("\033[40m\033[2J");//Cleans the console and sets the background to black
-  
+    printf("\033[40m\033[2J");//Cleans the console and sets the background to black
+    
+    
     
     SetConsoleTitleA("SNAKE");
     enableAnsiEscapeCodes();
     
-
+    
     while (1)
     {
 
@@ -59,7 +102,7 @@ int main(int argc, char* argv[]) {
         // Random food position
         int x_food = randomBetween(3, 47);
         int y_food = randomBetween(3, 27);
-        bool pause = false;
+       
 
         //Starts random seed
         initializeRandomSeed();
@@ -100,12 +143,12 @@ int main(int argc, char* argv[]) {
         while (gameStart(&snakeDirection))
         {
            
-            //printf("\x1b[13;1H \x1b[22m  %s %s", ANSI_COLOR_DARK_ORANGE, SNAKE_LOGO);//Title
-            //printf("\033[35;110H%sCreator:Luca Salviani ", ANSI_COLOR_GREY);//Signature
-           // printf("\033[35;90H%sConsole_snake: 1.0", ANSI_COLOR_GREY);//Version
-            //textPositioning(controls_text, 27, 3);//Controls
+            printf("\x1b[13;1H \x1b[22m  %s %s", ANSI_COLOR_DARK_ORANGE, SNAKE_LOGO);//Title
+            printf("\033[35;110H%sCreator:Luca Salviani ", ANSI_COLOR_GREY);//Signature
+            printf("\033[35;90H%sConsole_snake: 1.0", ANSI_COLOR_GREY);//Version
+            textPositioning(controls_text, 27, 3);//Controls
             printf("%s", ANSI_COLOR_DARK_RED);
-            //textPositioning(game_keys, 70, 1);
+            textPositioning(game_keys, 70, 1);
             printf("\033[11;75H MOVEMENT     PAUSE GAME");
 
             printf("\x1b[23;55H%s Hold the arrows to play %s", ANSI_COLOR_DARK_ORANGE, ANSI_RESET_STYLE);//Start buttons
@@ -122,14 +165,14 @@ int main(int argc, char* argv[]) {
 
         ///////////////GAME SETUP
         titleErasser();
-        /*
+        
         printf("\033[40m\033[2J"); //Cleans the console and sets the background to black
         printf("%s", ANSI_COLOR_DARK_ORANGE);
         textPositioning(arenaPiece1, 1, 1);
         textPositioning(arenaPiece3, 1, 3);
         textPositioning(arenaPiece2, 1, 34);
         textPositioning(arenaPiece4, 93, 1);
-        */
+        
 
         textPositioning(points_art, 97, 3);//Prints the points text.
         
@@ -147,15 +190,15 @@ int main(int argc, char* argv[]) {
         ////////////////GAME
         while (1)
         {
-            /*
-            if (ticks % 300 == 0)
+            
+            if (ticks % 300 == 0) // repairs map
             {
                 printf("%s", ANSI_COLOR_DARK_ORANGE);
                 textPositioning(arenaPiece1, 1, 1);
                 textPositioning(arenaPiece3, 1, 3);
                 textPositioning(arenaPiece2, 1, 34);
             }
-            */
+            
             //The buffer follows the snakes head
             x_buffer = segmentPtr->x_pos;
             y_buffer = segmentPtr->y_pos;

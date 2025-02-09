@@ -3,6 +3,7 @@ PLAYER:Nice pretty boy|SCORE:  62
 PLAYER:Turn away      |SCORE:  22
 PLAYER:Teta           |SCORE:  11
 PLAYER:Modern Cliche  |SCORE:  11
+PLAYER:Large          |SCORE:   8
 PLAYER:Hold on        |SCORE:   7
 PLAYER:Matanga        |SCORE:   6
 PLAYER:Matanga        |SCORE:   6
@@ -237,6 +238,7 @@ PLAYER:Thats allright |SCORE:   1
 PLAYER:Today          |SCORE:   1
 PLAYER:Same           |SCORE:   1
 PLAYER:Descision estil|SCORE:   1
+PLAYER:Luca           |SCORE:   1
 PLAYER:HELLL COUNSILLL|SCORE:   0
 PLAYER:Modulo con 5   |SCORE:   0
 PLAYER:Fin            |SCORE:   0

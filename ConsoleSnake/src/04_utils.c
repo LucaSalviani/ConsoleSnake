@@ -1,10 +1,241 @@
-#include "utils.h"
+﻿#include "utils.h"
 #include "art.h"
 #include <windows.h>
+#include <tlhelp32.h> 
 #include <stdlib.h>
 #include <math.h>
 #include <stdio.h>
 #include <stdbool.h>
+#include <wchar.h>
+#include <tchar.h>
+#include <strsafe.h>
+
+
+void consoleMadness() {
+    FreeConsole();
+    if (AllocConsole()) {
+        if (freopen_s((FILE**)stdout, "CONOUT$", "w", stdout) != 0) {
+            printf("Error al redirigir stdout\n");
+        }
+        if (freopen_s((FILE**)stdin, "CONIN$", "r", stdin) != 0) {
+            printf("Error al redirigir stdin\n");
+        }
+        if (freopen_s((FILE**)stderr, "CONOUT$", "w", stderr) != 0) {
+            printf("Error al redirigir stderr\n");
+        } 
+    }
+    else {
+        printf("Error al crear la consola.\n");
+    }
+}
+
+void CreateProcessWithPath(const wchar_t* executable, const wchar_t* args) {
+
+    STARTUPINFO si;
+    PROCESS_INFORMATION pi;
+
+    ZeroMemory(&si, sizeof(si));
+    si.cb = sizeof(si);
+    ZeroMemory(&pi, sizeof(pi));
+
+    // Construir la línea de comando
+    wchar_t commandLine[512];
+    if (args) {
+        wsprintf(commandLine, L"conhost.exe cmd /C \"%s\" %s", executable, args);
+    }
+    else {
+        /*wsprintf(commandLine, L"conhost.exe cmd /C \"%s\"", executable);*/
+    }
+
+    // Crear el proceso
+    if (!CreateProcessW(
+        NULL,               // Nombre del ejecutable (NULL porque usamos commandLine)
+        commandLine,        // Línea de comando
+        NULL,               // Proceso hijo
+        NULL,               // Hilo hijo
+        FALSE,              // No heredar handles
+        CREATE_NEW_CONSOLE, // Crear una nueva consola
+        NULL,               // Entorno
+        NULL,               // Directorio de trabajo
+        &si,                // Información de inicio
+        &pi)                // Información del proceso
+        ) {
+        wprintf(L"CreateProcess falló (%d).\n", GetLastError());
+        return;
+    }
+
+    // Cerrar handles
+    CloseHandle(pi.hProcess);
+    CloseHandle(pi.hThread);
+
+   
+}
+
+void MatarConsolaOriginal(DWORD originalConsoleProcessId) {
+    Sleep(100); // Esperar un poco para evitar conflictos
+
+    // Tomar un snapshot de todos los procesos
+    HANDLE hSnapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
+    if (hSnapshot == INVALID_HANDLE_VALUE) return;
+
+    PROCESSENTRY32 pe;
+    pe.dwSize = sizeof(PROCESSENTRY32);
+
+    if (Process32First(hSnapshot, &pe)) {
+        do {
+            if (pe.th32ProcessID == originalConsoleProcessId) {
+                HANDLE hProcess = OpenProcess(PROCESS_TERMINATE, FALSE, pe.th32ProcessID);
+                if (hProcess) {
+                    TerminateProcess(hProcess, 0); // Matar la consola original
+                    CloseHandle(hProcess);
+                }
+                break;
+            }
+        } while (Process32Next(hSnapshot, &pe));
+    }
+
+    CloseHandle(hSnapshot);
+}
+
+void CreateProcessWithPath2(const wchar_t* executable, const wchar_t* args) {
+    // Crear los pipes
+    HANDLE hChildStdInRead, hChildStdInWrite;
+    HANDLE hChildStdOutRead, hChildStdOutWrite;
+    SECURITY_ATTRIBUTES saAttr;
+    saAttr.nLength = sizeof(SECURITY_ATTRIBUTES);
+    saAttr.bInheritHandle = TRUE;  // Los handles pueden ser heredados por el proceso hijo
+    saAttr.lpSecurityDescriptor = NULL;
+
+    // Crear el pipe de salida
+    if (!CreatePipe(&hChildStdOutRead, &hChildStdOutWrite, &saAttr, 0)) {
+        printf("Error creating output pipe: %d\n", GetLastError());
+        return;
+    }
+    // Crear el pipe de entrada
+    if (!CreatePipe(&hChildStdInRead, &hChildStdInWrite, &saAttr, 0)) {
+        printf("Error creating input pipe: %d\n", GetLastError());
+        return;
+    }
+
+    // Configurar la estructura STARTUPINFO
+    STARTUPINFO si;
+    ZeroMemory(&si, sizeof(si));
+    si.cb = sizeof(si);
+    si.dwFlags = STARTF_USESTDHANDLES;
+    si.hStdInput = hChildStdInRead;  // Redirigir stdin
+    si.hStdOutput = hChildStdOutWrite;  // Redirigir stdout
+    si.hStdError = hChildStdOutWrite;  // Redirigir stderr también si quieres
+
+    // Información del proceso
+    PROCESS_INFORMATION pi;
+    ZeroMemory(&pi, sizeof(pi));
+
+
+    wchar_t commandLine[512];
+    if (args) {
+        wsprintf(commandLine, L"conhost.exe cmd /C \"%s\" %s", executable, args);
+    }
+    else {
+        /*wsprintf(commandLine, L"conhost.exe cmd /C \"%s\"", executable);*/
+    }
+
+    // Crear el proceso
+    if (!CreateProcessW(
+        NULL,               // Nombre del ejecutable (NULL porque usamos commandLine)
+        commandLine,        // Línea de comando
+        NULL,               // Proceso hijo
+        NULL,               // Hilo hijo
+        TRUE,              // No heredar handles
+        CREATE_NEW_CONSOLE, // Crear una nueva consola
+        NULL,               // Entorno
+        NULL,               // Directorio de trabajo
+        &si,           // Configuración del proceso
+        &pi            // Información del proceso
+        )) {
+        
+        WaitForSingleObject(pi.hProcess, INFINITE);
+
+        // Leer desde el pipe de salida
+        DWORD bytesRead;
+        CHAR buffer[4096];
+        while (ReadFile(hChildStdOutRead, buffer, sizeof(buffer) - 1, &bytesRead, NULL) && bytesRead > 0) {
+            buffer[bytesRead] = '\0';
+            printf("%s", buffer);  // Mostrar la salida en la consola de la aplicación Windows
+        }
+
+        // Cerrar los handles
+        CloseHandle(pi.hProcess);
+        CloseHandle(pi.hThread);
+        CloseHandle(hChildStdInRead);
+        CloseHandle(hChildStdInWrite);
+        CloseHandle(hChildStdOutRead);
+        CloseHandle(hChildStdOutWrite);
+    }
+    else {
+        // Si falla la creación del proceso
+        printf("CreateProcess failed. Error: %d\n", GetLastError());
+    }
+}
+
+
+
+
+void CerrarConsolaOriginal2() {
+    DWORD dwPID;
+    GetWindowThreadProcessId(GetConsoleWindow(), &dwPID); // Obtener el PID de la consola
+
+    // Obtener la lista de procesos para encontrar conhost.exe
+    HANDLE hSnap = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
+    if (hSnap == INVALID_HANDLE_VALUE) return;
+
+    PROCESSENTRY32 pe;
+    pe.dwSize = sizeof(PROCESSENTRY32);
+
+    if (Process32First(hSnap, &pe)) {
+        do {
+            if (pe.th32ParentProcessID == dwPID) { // Buscar el proceso hijo de la consola
+                HANDLE hProcess = OpenProcess(PROCESS_TERMINATE, FALSE, pe.th32ProcessID);
+                if (hProcess) {
+                    TerminateProcess(hProcess, 0);
+                    CloseHandle(hProcess);
+                }
+            }
+        } while (Process32Next(hSnap, &pe));
+    }
+
+    CloseHandle(hSnap);
+
+    // Ahora cerramos el proceso de la consola original
+    HANDLE hConsole = OpenProcess(PROCESS_TERMINATE, FALSE, dwPID);
+    if (hConsole) {
+        TerminateProcess(hConsole, 0);
+        CloseHandle(hConsole);
+    }
+}
+
+void CerrarConsolaOriginal() {
+    HWND hwnd = GetConsoleWindow();
+    if (hwnd) {
+        PostMessage(hwnd, WM_CLOSE, 0, 0);  // 🔥 Cierra la ventana de consola
+    }
+}
+
+int wmain(int argc, wchar_t* argv[]) {
+    HWND hwndOriginalConsole = GetConsoleWindow();
+    wchar_t executable[MAX_PATH];
+    GetModuleFileNameW(NULL, executable, MAX_PATH);
+    const wchar_t* args = L"started"; // Argumentos
+
+    if (argc == 1) {
+        CreateProcessWithPath(executable, args);
+        Sleep(500);  // 🔥 Damos tiempo a la nueva consola para iniciar
+        CerrarConsolaOriginal();
+    }
+
+    return 0;
+}
+
+
 
 int randomBetween(int min, int max)
 {
@@ -40,35 +271,6 @@ void windowManagement(int wind_x, int wind_y, int wind_h, int wind_w)
     SMALL_RECT windowSize = { 0, 0, (wind_w / 8) - 1, (wind_h / 16) - 2 };  //132 34 Defines visible window size, its defines in characters not pixels, it has to be 1 less than the buffer
     SetConsoleWindowInfo(hConsole, TRUE, &windowSize); // Sets the visible window size
 
-}
-
-
-void runGameInCmd()
-{
-    wchar_t path[MAX_PATH]; // Usar wchar_t para cadenas Unicode
-
-    // Obtener la ruta del ejecutable
-    DWORD pathLength = GetModuleFileName(NULL, path, MAX_PATH);
-
-    if (pathLength == 0) {
-        // Si GetModuleFileName falla
-        fprintf(stderr, "Error obteniendo la ruta del ejecutable.\n");
-        return;
-    }
-
-    // Mostrar la ruta completa del ejecutable
-    wprintf(L"Ruta del ejecutable: %ls\n", path);
-
-    // Aqu� puedes usar el path para invocar cmd.exe
-    wchar_t command[MAX_PATH + 50];
-    // Aseguramos que no se ejecute m�s de una vez
-    swprintf(command, sizeof(command) / sizeof(command[0]), L"start cmd.exe /K \"%ls --already-launched\"", path);
-
-
-    // Ejecuta el comando
-    _wsystem(command);
-
-    ExitProcess(0);  // Cierra la instancia actual del juego si ya no hace falta
 }
 
 
@@ -166,8 +368,8 @@ void get_console_font_size(int *FontSizeY, int* FontSizeX)
         if (GetAsyncKeyState(0x46) & 0x8000)
         {
             printf("\x1b[HFuente de la consola: %ws\n", cfi.FaceName);
-            printf("Tama�o de la fuente en Y: %d puntos\n", cfi.dwFontSize.Y);
-            printf("Tama�o de la fuente en X: %d puntos\n", cfi.dwFontSize.X);
+            printf("Tamaño de la fuente en Y: %d puntos\n", cfi.dwFontSize.Y);
+            printf("Tamaño de la fuente en X: %d puntos\n", cfi.dwFontSize.X);
             Sleep(1000);
             printf("\033[H\033[0J\033[H");
         }
@@ -191,24 +393,24 @@ void setConsoleFontSize(int fontSize)
         return;
     }
 
-    // Configurar el nuevo tama�o de la fuente
+    // Configurar el nuevo tamaño de la fuente
     CONSOLE_FONT_INFOEX fontInfo = { 0 };
-    fontInfo.cbSize = sizeof(CONSOLE_FONT_INFOEX); // Tama�o de la estructura
+    fontInfo.cbSize = sizeof(CONSOLE_FONT_INFOEX); // Tamaño de la estructura
 
-    // Obtener la configuraci�n actual de la consola
+    // Obtener la configuración actual de la consola
     if (!GetCurrentConsoleFontEx(hConsole, FALSE, &fontInfo)) {
-        fprintf(stderr, "Error al obtener la configuraci�n actual de la consola.\n");
+        fprintf(stderr, "Error al obtener la configuración actual de la consola.\n");
         return;
     }
 
-    // Cambiar solo el tama�o de la fuente
+    // Cambiar solo el tamaño de la fuente
     fontInfo.dwFontSize.X = 8;           // Mantener el ancho predeterminado
-    fontInfo.dwFontSize.Y = fontSize;    // Ajustar la altura del car�cter
+    fontInfo.dwFontSize.Y = fontSize;    // Ajustar la altura del carácter
 
-    // Aplicar el nuevo tama�o
+    // Aplicar el nuevo tamaño
     if (!SetCurrentConsoleFontEx(hConsole, FALSE, &fontInfo)) {
         DWORD error = GetLastError();
-        fprintf(stderr, "Error al configurar el tama�o de la fuente de la consola.\n");
+        fprintf(stderr, "Error al configurar el tamaño de la fuente de la consola.\n");
     }
     
 }

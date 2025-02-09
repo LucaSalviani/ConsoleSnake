@@ -17,40 +17,8 @@
 //int main(int argc, char* argv[])
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
-   // int argc;
-   // LPWSTR* argv = CommandLineToArgvW(GetCommandLineW(), &argc);
-
-   // HWND hwndOriginalConsole = GetConsoleWindow();
-   // //AttachConsole(ATTACH_PARENT_PROCESS);
     bool pause = false;
-   // 
-
-   //// consoleMadness();
-   // //restartWithNewConsole();
-   // //const wchar_t* executable = L"D:\\Users\\Luca\\Desktop\\Archivos\\Proyectos\\ConsoleSnake_1.0\\ConsoleSnake_1.0\\x64\\Release\\ConsoleSnake.exe";
-   // wchar_t executable[MAX_PATH];
-   // GetModuleFileNameW(NULL, executable, MAX_PATH);
-   // const wchar_t* args = L"started"; // Argumentos que deseas pasar
-   // // Verificar si el archivo existe
-   // if (PathFileExistsW(executable)) {
-   //     if (argc == 1)
-   //     {
-   //         // Llamar a la función para crear el proceso
-   //        
-   //        // CreateProcessWithPath(executable, args);
-   //         Sleep(500);
-   //        // CerrarConsolaOriginal2();
-   //         
-   //           
-   //         
-   //         //exit(0);
-   //     }
-   // }
-   // else {
-   //     wprintf(L"El archivo no se encuentra en la ruta especificada: %s\n", executable);
-   // }
-
-
+ 
     AllocConsole();
     freopen("CONIN$", "r", stdin);
     freopen("CONOUT$", "w", stdout);
@@ -65,9 +33,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     configureConsoleForGame(); // Puts console in Raw mode and disables quick edit.
     windowManagement(410, 240, consoleHeight, consoleWidth);//Manages console position and size
     printf("\033[40m\033[2J");//Cleans the console and sets the background to black
-    
-    
-    
+  
     SetConsoleTitleA("SNAKE");
     enableAnsiEscapeCodes();
     

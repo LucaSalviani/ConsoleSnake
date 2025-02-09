@@ -15,4 +15,7 @@ void clearBuffer();
 void disableResizeAndMaximize();
 void configureConsoleForGame();
 void enableAnsiEscapeCodes();
+void setConsoleFontSize(int fontSize);
+void runGameInCmd();
+
 #endif // UTILS_H

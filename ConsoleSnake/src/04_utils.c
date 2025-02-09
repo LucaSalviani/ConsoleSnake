@@ -24,7 +24,7 @@ void windowManagement(int wind_x, int wind_y, int wind_h, int wind_w)
     // Changes the background color of the console itself for older consoles like powershell
     WORD color = (0x00 << 4) | (csbi.wAttributes & 0x0F);
     //This gives the console its position and its absolute size, the absolute size is determined in pixels
-    MoveWindow(consoleWindow, wind_x, wind_y, wind_w, wind_h, TRUE);
+   // MoveWindow(consoleWindow, wind_x, wind_y, wind_w, wind_h, TRUE);
 
 
     // Defines the consoles buffer, its determined in characters
@@ -41,6 +41,38 @@ void windowManagement(int wind_x, int wind_y, int wind_h, int wind_w)
     SetConsoleWindowInfo(hConsole, TRUE, &windowSize); // Sets the visible window size
 
 }
+
+
+void runGameInCmd()
+{
+    wchar_t path[MAX_PATH]; // Usar wchar_t para cadenas Unicode
+
+    // Obtener la ruta del ejecutable
+    DWORD pathLength = GetModuleFileName(NULL, path, MAX_PATH);
+
+    if (pathLength == 0) {
+        // Si GetModuleFileName falla
+        fprintf(stderr, "Error obteniendo la ruta del ejecutable.\n");
+        return;
+    }
+
+    // Mostrar la ruta completa del ejecutable
+    wprintf(L"Ruta del ejecutable: %ls\n", path);
+
+    // Aquí puedes usar el path para invocar cmd.exe
+    wchar_t command[MAX_PATH + 50];
+    // Aseguramos que no se ejecute más de una vez
+    swprintf(command, sizeof(command) / sizeof(command[0]), L"start cmd.exe /K \"%ls --already-launched\"", path);
+
+
+    // Ejecuta el comando
+    _wsystem(command);
+
+    ExitProcess(0);  // Cierra la instancia actual del juego si ya no hace falta
+}
+
+
+
 
 
 void enableAnsiEscapeCodes() 
@@ -148,6 +180,37 @@ void get_console_font_size(int *FontSizeY, int* FontSizeX)
         Sleep(1000);
         printf("\033[J\033[H");
     }
+}
+
+void setConsoleFontSize(int fontSize)
+{
+    // Obtener el handle de la consola
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    if (hConsole == INVALID_HANDLE_VALUE) {
+        fprintf(stderr, "Error al obtener el handle de la consola.\n");
+        return;
+    }
+
+    // Configurar el nuevo tamaño de la fuente
+    CONSOLE_FONT_INFOEX fontInfo = { 0 };
+    fontInfo.cbSize = sizeof(CONSOLE_FONT_INFOEX); // Tamaño de la estructura
+
+    // Obtener la configuración actual de la consola
+    if (!GetCurrentConsoleFontEx(hConsole, FALSE, &fontInfo)) {
+        fprintf(stderr, "Error al obtener la configuración actual de la consola.\n");
+        return;
+    }
+
+    // Cambiar solo el tamaño de la fuente
+    fontInfo.dwFontSize.X = 8;           // Mantener el ancho predeterminado
+    fontInfo.dwFontSize.Y = fontSize;    // Ajustar la altura del carácter
+
+    // Aplicar el nuevo tamaño
+    if (!SetCurrentConsoleFontEx(hConsole, FALSE, &fontInfo)) {
+        DWORD error = GetLastError();
+        fprintf(stderr, "Error al configurar el tamaño de la fuente de la consola.\n");
+    }
+    
 }
 
 void textColorRandomizer(int ticks)

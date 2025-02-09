@@ -22,7 +22,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     configureConsoleForGame(); // Puts console in Raw mode and disables quick edit.
     windowManagement(410, 240, consoleHeight, consoleWidth);//Manages console position and size
     SetConsoleTitleA("SNAKE");
-   enableAnsiEscapeCodes();
+    enableAnsiEscapeCodes();
     while (1)
     {
 

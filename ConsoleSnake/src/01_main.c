@@ -8,21 +8,27 @@
 #include <math.h>
 
 
+
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
     bool pause = false;
-
+ 
     AllocConsole();
-        freopen("CONIN$", "r", stdin);
-        freopen("CONOUT$", "w", stdout);
-        freopen("CONOUT$", "w", stderr);
+    freopen("CONIN$", "r", stdin);
+    freopen("CONOUT$", "w", stdout);
+    freopen("CONOUT$", "w", stderr);
 
     const int consoleWidth = 1064;//1100
     const int consoleHeight = 576;//576
     disableResizeAndMaximize(); // Self explanatory
+    setConsoleFontSize(18);
     configureConsoleForGame(); // Puts console in Raw mode and disables quick edit.
     windowManagement(410, 240, consoleHeight, consoleWidth);//Manages console position and size
+    printf("\033[40m\033[2J");//Cleans the console and sets the background to black
+  
     SetConsoleTitleA("SNAKE");
     enableAnsiEscapeCodes();
+    
+    
     while (1)
     {
 
@@ -53,7 +59,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
         // Random food position
         int x_food = randomBetween(3, 47);
         int y_food = randomBetween(3, 27);
-        bool pause = false;
+       
 
         //Starts random seed
         initializeRandomSeed();
@@ -94,12 +100,12 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
         while (gameStart(&snakeDirection))
         {
            
-            //printf("\x1b[13;1H \x1b[22m  %s %s", ANSI_COLOR_DARK_ORANGE, SNAKE_LOGO);//Title
-            //printf("\033[35;110H%sCreator:Luca Salviani ", ANSI_COLOR_GREY);//Signature
-           // printf("\033[35;90H%sConsole_snake: 1.0", ANSI_COLOR_GREY);//Version
-            //textPositioning(controls_text, 27, 3);//Controls
+            printf("\x1b[13;1H \x1b[22m  %s %s", ANSI_COLOR_DARK_ORANGE, SNAKE_LOGO);//Title
+            printf("\033[35;110H%sCreator:Luca Salviani ", ANSI_COLOR_GREY);//Signature
+            printf("\033[35;90H%sConsole_snake: 1.0", ANSI_COLOR_GREY);//Version
+            textPositioning(controls_text, 27, 3);//Controls
             printf("%s", ANSI_COLOR_DARK_RED);
-            //textPositioning(game_keys, 70, 1);
+            textPositioning(game_keys, 70, 1);
             printf("\033[11;75H MOVEMENT     PAUSE GAME");
 
             printf("\x1b[23;55H%s Hold the arrows to play %s", ANSI_COLOR_DARK_ORANGE, ANSI_RESET_STYLE);//Start buttons
@@ -116,14 +122,14 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
         ///////////////GAME SETUP
         titleErasser();
-        /*
+        
         printf("\033[40m\033[2J"); //Cleans the console and sets the background to black
         printf("%s", ANSI_COLOR_DARK_ORANGE);
         textPositioning(arenaPiece1, 1, 1);
         textPositioning(arenaPiece3, 1, 3);
         textPositioning(arenaPiece2, 1, 34);
         textPositioning(arenaPiece4, 93, 1);
-        */
+        
 
         textPositioning(points_art, 97, 3);//Prints the points text.
         
@@ -141,15 +147,15 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
         ////////////////GAME
         while (1)
         {
-            /*
-            if (ticks % 300 == 0)
+            
+            if (ticks % 300 == 0) // repairs map
             {
                 printf("%s", ANSI_COLOR_DARK_ORANGE);
                 textPositioning(arenaPiece1, 1, 1);
                 textPositioning(arenaPiece3, 1, 3);
                 textPositioning(arenaPiece2, 1, 34);
             }
-            */
+            
             //The buffer follows the snakes head
             x_buffer = segmentPtr->x_pos;
             y_buffer = segmentPtr->y_pos;

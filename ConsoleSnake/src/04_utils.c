@@ -1,10 +1,13 @@
-#include "utils.h"
+ï»¿#include "utils.h"
 #include "art.h"
 #include <windows.h>
 #include <stdlib.h>
 #include <math.h>
 #include <stdio.h>
 #include <stdbool.h>
+
+
+
 
 int randomBetween(int min, int max)
 {
@@ -41,38 +44,6 @@ void windowManagement(int wind_x, int wind_y, int wind_h, int wind_w)
     SetConsoleWindowInfo(hConsole, TRUE, &windowSize); // Sets the visible window size
 
 }
-
-
-void runGameInCmd()
-{
-    wchar_t path[MAX_PATH]; // Usar wchar_t para cadenas Unicode
-
-    // Obtener la ruta del ejecutable
-    DWORD pathLength = GetModuleFileName(NULL, path, MAX_PATH);
-
-    if (pathLength == 0) {
-        // Si GetModuleFileName falla
-        fprintf(stderr, "Error obteniendo la ruta del ejecutable.\n");
-        return;
-    }
-
-    // Mostrar la ruta completa del ejecutable
-    wprintf(L"Ruta del ejecutable: %ls\n", path);
-
-    // Aquí puedes usar el path para invocar cmd.exe
-    wchar_t command[MAX_PATH + 50];
-    // Aseguramos que no se ejecute más de una vez
-    swprintf(command, sizeof(command) / sizeof(command[0]), L"start cmd.exe /K \"%ls --already-launched\"", path);
-
-
-    // Ejecuta el comando
-    _wsystem(command);
-
-    ExitProcess(0);  // Cierra la instancia actual del juego si ya no hace falta
-}
-
-
-
 
 
 void enableAnsiEscapeCodes() 
@@ -166,8 +137,8 @@ void get_console_font_size(int *FontSizeY, int* FontSizeX)
         if (GetAsyncKeyState(0x46) & 0x8000)
         {
             printf("\x1b[HFuente de la consola: %ws\n", cfi.FaceName);
-            printf("Tamaño de la fuente en Y: %d puntos\n", cfi.dwFontSize.Y);
-            printf("Tamaño de la fuente en X: %d puntos\n", cfi.dwFontSize.X);
+            printf("TamaÃ±o de la fuente en Y: %d puntos\n", cfi.dwFontSize.Y);
+            printf("TamaÃ±o de la fuente en X: %d puntos\n", cfi.dwFontSize.X);
             Sleep(1000);
             printf("\033[H\033[0J\033[H");
         }
@@ -191,24 +162,24 @@ void setConsoleFontSize(int fontSize)
         return;
     }
 
-    // Configurar el nuevo tamaño de la fuente
+    // Configurar el nuevo tamaÃ±o de la fuente
     CONSOLE_FONT_INFOEX fontInfo = { 0 };
-    fontInfo.cbSize = sizeof(CONSOLE_FONT_INFOEX); // Tamaño de la estructura
+    fontInfo.cbSize = sizeof(CONSOLE_FONT_INFOEX); // TamaÃ±o de la estructura
 
-    // Obtener la configuración actual de la consola
+    // Obtener la configuraciÃ³n actual de la consola
     if (!GetCurrentConsoleFontEx(hConsole, FALSE, &fontInfo)) {
-        fprintf(stderr, "Error al obtener la configuración actual de la consola.\n");
+        fprintf(stderr, "Error al obtener la configuraciÃ³n actual de la consola.\n");
         return;
     }
 
-    // Cambiar solo el tamaño de la fuente
+    // Cambiar solo el tamaÃ±o de la fuente
     fontInfo.dwFontSize.X = 8;           // Mantener el ancho predeterminado
-    fontInfo.dwFontSize.Y = fontSize;    // Ajustar la altura del carácter
+    fontInfo.dwFontSize.Y = fontSize;    // Ajustar la altura del carÃ¡cter
 
-    // Aplicar el nuevo tamaño
+    // Aplicar el nuevo tamaÃ±o
     if (!SetCurrentConsoleFontEx(hConsole, FALSE, &fontInfo)) {
         DWORD error = GetLastError();
-        fprintf(stderr, "Error al configurar el tamaño de la fuente de la consola.\n");
+        fprintf(stderr, "Error al configurar el tamaÃ±o de la fuente de la consola.\n");
     }
     
 }

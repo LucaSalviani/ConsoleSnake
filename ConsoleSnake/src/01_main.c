@@ -9,7 +9,7 @@
 
 
 
-int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
+int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, int nCmdShow) {
     bool pause = false;
  
     AllocConsole();
@@ -102,7 +102,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
            
             printf("\x1b[13;1H \x1b[22m  %s %s", ANSI_COLOR_DARK_ORANGE, SNAKE_LOGO);//Title
             printf("\033[35;110H%sCreator:Luca Salviani ", ANSI_COLOR_GREY);//Signature
-            printf("\033[35;90H%sConsole_snake: 1.0", ANSI_COLOR_GREY);//Version
+            printf("\033[35;90H%sConsole_snake: 1.2", ANSI_COLOR_GREY);//Version
             textPositioning(controls_text, 27, 3);//Controls
             printf("%s", ANSI_COLOR_DARK_RED);
             textPositioning(game_keys, 70, 1);
@@ -244,7 +244,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
             // Asks the user if he/she wants to add a record to the records files
             if (recordSaved == false)
             {
-                printf("\033[16;95H\033[38;2;105;105;105mPress enter to submit a score.");
+                printf("\033[16;95H%sPress %sENTER%s to submit a score.",ANSI_COLOR_GREY,ANSI_COLOR_DARK_RED, ANSI_COLOR_GREY);
                 printf("\033[17;95H%sPLAYER:_______________ SCORE:%4i", ANSI_COLOR_DARK_RED, points);
             }
 
